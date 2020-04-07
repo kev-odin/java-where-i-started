@@ -1,0 +1,75 @@
+When more than one operator appears in an expression, they are evaluated
+according to the order of operations. Generally speaking, Java evaluates
+operators from left to right (as we saw in the previous section). But for numeric
+operators, Java follows mathematical conventions:
+
+• Multiplication and division take “precedence” over addition and subtrac-
+tion, which means they happen first. So 1 + 2 * 3 yields 7, not 9, and
+2 + 4 / 2 yields 4, not 3.
+
+• If the operators have the same precedence, they are evaluated from left
+to right. So in the expression minute * 100 / 60, the multiplication
+happens first; if the value of minute is 59, we get 5900 / 60, which
+yields 98. If these same operations had gone from right to left, the result
+would have been 59 * 1, which is incorrect.
+
+• Any time you want to override the order of operations (or you are not
+sure what it is) you can use parentheses. Expressions in parentheses
+are evaluated first, so (1 + 2) * 3 is 9. You can also use parentheses
+to make an expression easier to read, as in (minute * 100) / 60, even
+though it doesn’t change the result.
+
+Vocabulary - Chapter 2
+
+variable: A named storage location for values. All variables have a type, 
+which is declared when the variable is created.
+
+value: A number, string, or other data that can be stored in a variable. Every
+value belongs to a type (for example, int or String).
+
+type: Mathematically speaking, a set of values. The type of a variable deter-
+mines which values it can have.
+
+declaration: A statement that creates a new variable and specifies its type.
+keyword: A reserved word used by the compiler to analyze programs. You
+cannot use keywords (like public, class, and void) as variable names.
+
+assignment: A statement that gives a value to a variable.
+
+initialize: To assign a variable for the first time.
+
+state: The variables in a program and their current values.
+
+memory diagram: A graphical representation of the state of a program at
+a point in time.
+
+operator: A symbol that represents a computation like addition, multiplica-
+tion, or string concatenation.
+
+operand: One of the values on which an operator operates. Most operators
+in Java require two operands.
+
+expression: A combination of variables, operators, and values that repre-
+sents a single value. Expressions also have types, as determined by their
+operators and operands.
+
+floating-point: A data type that represents numbers with an integer part
+and a fractional part. In Java, the default floating-point type is double.
+
+rounding error: The difference between the number we want to represent
+and the nearest floating-point number.
+
+concatenate: To join two values, often strings, end-to-end.
+
+order of operations: The rules that determine in what order expressions are
+evaluated. Also known as “operator precedence”.
+
+compile-time error: An error in the source code that makes it impossible
+to compile. Also called a “syntax error”.
+
+parse: To analyze the structure of a program; what the compiler does first.
+run-time error: An error in a program that makes it impossible to run to
+completion. Also called an “exception”.
+
+logic error: An error in a program that makes it do something other than
+what the programmer intended.
