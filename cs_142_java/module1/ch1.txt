@@ -19,6 +19,7 @@ programming: The application of problem solving to creating executable
 computer programs.
 
 statement: Part of a program that specifies one step of an algorithm.
+
 print statement: A statement that causes output to be displayed on the
 screen.
 
