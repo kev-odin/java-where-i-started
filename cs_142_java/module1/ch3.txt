@@ -1,0 +1,112 @@
+Beginners often wonder why it’s worth the trouble to write other methods,
+when they could just do everything in main. The NewLine example demon-
+strates a few reasons:
+
+• Creating a new method allows you to name a block of statements, which
+makes the code easier to read and understand.
+
+• Introducing new methods can make the program shorter by eliminating
+repetitive code. For example, to display nine consecutive newlines, you
+could invoke threeLine three times.
+
+• A common problem-solving technique is to break problems down into sub-
+problems. Methods allow you to focus on each sub-problem in isolation,
+and then compose them into a complete solution.
+
+Perhaps most importantly, organizing your code into multiple methods allows
+you to test individual parts of your program separately. It’s easier to get a
+complex program working if you know that each method works correctly.
+
+public class PrintTwice {
+    public static void printTwice(String s) {
+    System.out.println(s);
+    System.out.println(s);
+    }
+
+public static void main(String[] args) {
+    printTwice("Don't make me say this twice!");
+    }
+}
+
+Parameter when using the printTwice method named s with type String.
+
+Page 50 - 51
+Here is an example of a method that takes two parameters:
+public static void printTime(int hour, int minute) {
+    System.out.print(hour);
+    System.out.print(":");
+    System.out.println(minute);
+}
+
+To call this method, we have to provide two integers as arguments:
+    int hour = 11;
+    int minute = 59;
+    printTime(hour, minute);
+
+public class PrintTime {
+    public static void printTime(int hour, int minute) {
+        System.out.print(hour);
+        System.out.print(":");
+        System.out.println(minute);
+}
+    public static void main(String[] args) {
+        int hour = 11;
+        int minute = 59;
+        printTime(hour, minute);
+    }
+}
+
+Compared to void methods, value-returning methods differ in two ways:
+• They declare the type of the return value (the return type);
+• They use at least one return statement to provide a return value.
+
+The key aspects of incremental development are:
+• Start with a working program and make small, incremental changes. At
+any point, if there is an error, you will know where to look.
+• Use variables to hold intermediate values so you can check them, either
+with print statements or by using a debugger.
+• Once the program is working, you can consolidate multiple statements
+into compound expressions (but only if it does not make the program
+more difficult to read).
+
+3.9 Vocabulary
+argument: A value that you provide when you call a method. This value
+must have the type that the method expects.
+
+composition: The ability to combine simple expressions and statements into
+compound expressions and statements.
+
+invoke: To cause a method to execute. Also known as “calling” a method.
+
+flow of execution: The order in which Java executes methods and state-
+ments. It may not necessarily be from top to bottom in the source file.
+
+parameter: A piece of information that a method requires before it can run.
+Parameters are variables: they contain values and have types.
+
+parameter passing: The process of assigning an argument value to a pa-
+rameter variable.
+
+local variable: A variable declared inside a method. Local variables cannot
+be accessed from outside their method.
+
+stack diagram: A graphical representation of the variables belonging to each
+method. The method calls are “stacked” from top to bottom, in the flow
+of execution.
+
+frame: In a stack diagram, a representation of the variables and parameters
+for a method, along with their current values.
+
+return type: The type of value a method returns.
+
+return value: The value provided as the result of a method invocation.
+
+temporary variable: A short-lived variable, often used for debugging.
+
+incremental development: A process for creating programs by writing a
+few lines at a time, compiling, and testing.
+
+stub: A placeholder for an incomplete method so that the class will compile.
+
+scaffolding: Code that is used during program development but is not part
+of the final version.

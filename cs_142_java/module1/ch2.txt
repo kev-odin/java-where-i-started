@@ -31,6 +31,7 @@ type: Mathematically speaking, a set of values. The type of a variable deter-
 mines which values it can have.
 
 declaration: A statement that creates a new variable and specifies its type.
+
 keyword: A reserved word used by the compiler to analyze programs. You
 cannot use keywords (like public, class, and void) as variable names.
 
