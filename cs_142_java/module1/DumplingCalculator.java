@@ -20,27 +20,37 @@
  */
 
 public class DumplingCalculator {
-
+	
+	// quantity for single dozen dumplings
+	public static double wholeWheatFlour = (2.0 / 3.0) / 2.0;
+	public static double whiteFlour = (2.0 / 3.0) / 2.0;
+	public static double cornFlour = (1.0) / 2.0;
+	public static double salt = (1.0 / 2.0) / 2.0;
+	public static double soyMilk = (2.25) / 2.0;
 	
 	public static double cupsWholeWheat(double dozenDumplings) {
-		return 0.0;
+		double amount = wholeWheatFlour * dozenDumplings;
+		return amount;
 	}
 	
 	public static double cupsWhite(double dozenDumplings) {
-		return 0.0;
+		double amount = whiteFlour * dozenDumplings;
+		return amount;
 	}
 	
 	public static double cupsCorn(double dozenDumplings) {
-		return 0.0;
+		double amount = cornFlour * dozenDumplings;
+		return amount;
 	}
 	
 	public static double tspSalt(double dozenDumplings) {
-		return 0.0;
+		double amount = salt * dozenDumplings;
+		return amount;
 	}
 	
-	
 	public static double cupsMilk(double dozenDumplings) {
-		return 0.0;
+		double amount = soyMilk * dozenDumplings;
+		return amount;
 	}
 	// The amount (in cups) of milk shouldn't be too complicated, but the cartons of milk required
 	// is a bit trickier. Remember you can use Math.ceil(number) to round a number up, and then 
@@ -53,19 +63,21 @@ public class DumplingCalculator {
 		return 0.0;
 	}
 	
-	
 	public static void main(String[] args) {
 		/*Give dd (for "dozen dumplings") a value to test your program. I would start with 
 		dd = 2.0 and see if you get the given recipe back. Then try a larger amount and a smaller one.
 		*/
-		double dd = 2.0; 
+		double dd = 20.0;
 		// ingredient costs:
 		double costFlourPerCup = 35;
 		double costMilkPerCarton = 250;
-		
-		
+		// testing zone
+		System.out.println("For " + dd + " dozen dumplings, you will need: ");
+		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
+		System.out.println(cupsWhite(dd) + " cups of white flour");
+		System.out.println(cupsCorn(dd) + " cups of corn flour");
+		System.out.println(tspSalt(dd) + " tsp of salt");
+		System.out.println(cupsMilk(dd)+ " cups of soy milk");
+
 	}
-	
-
-
 }
