@@ -21,42 +21,46 @@
 
 public class DumplingCalculator {
 	
-	// quantity for single dozen dumplings
+	// recipe for single dozen dumplings of Jon's Cornbread
 	public static double wholeWheatFlour = (2.0 / 3.0) / 2.0;
 	public static double whiteFlour = (2.0 / 3.0) / 2.0;
 	public static double cornFlour = (1.0) / 2.0;
 	public static double salt = (1.0 / 2.0) / 2.0;
 	public static double soyMilk = (2.25) / 2.0;
 	
+	// calculate the cups of whole wheat flower
 	public static double cupsWholeWheat(double dozenDumplings) {
 		double amount = wholeWheatFlour * dozenDumplings;
 		return amount;
 	}
 	
+	// calculate the cups of white flower
 	public static double cupsWhite(double dozenDumplings) {
 		double amount = whiteFlour * dozenDumplings;
 		return amount;
 	}
 	
+	// calculate the cups of corn flour
 	public static double cupsCorn(double dozenDumplings) {
 		double amount = cornFlour * dozenDumplings;
 		return amount;
 	}
 	
+	// calculate the cups of salt
 	public static double tspSalt(double dozenDumplings) {
 		double amount = salt * dozenDumplings;
 		return amount;
 	}
 	
+	// calculate the cups of milk
 	public static double cupsMilk(double dozenDumplings) {
 		double amount = soyMilk * dozenDumplings;
 		return amount;
 	}
-	// The amount (in cups) of milk shouldn't be too complicated, but the cartons of milk required
-	// is a bit trickier. Remember you can use Math.ceil(number) to round a number up, and then 
-	// you can cast it to an int.
+	
+	// calculate the cartons of milk, partial count is rounded up for the whole number
 	public static int cartonsMilk(double cupsMilk) {
-		double cartonCount = cupsMilk / 4.0;
+		double cartonCount = (double) (cupsMilk / 4.0);
 		double roundCount = Math.ceil(cartonCount);
 		return (int) roundCount;
 	}
@@ -74,7 +78,8 @@ public class DumplingCalculator {
 		double costFlourPerCup = 35;
 		double costMilkPerCarton = 250;
 		double flourCost = (cupsWholeWheat(dd) + cupsWhite(dd) + cupsCorn(dd)) * costFlourPerCup;
-		double milkCost = cartonsMilk(dd) * costMilkPerCarton;
+		double milkCost = cartonsMilk(cupsMilk(dd)) * costMilkPerCarton;
+
 		// testing zone
 		System.out.println("For " + dd + " dozen dumplings, you will need: ");
 		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
@@ -83,8 +88,6 @@ public class DumplingCalculator {
 		System.out.println(tspSalt(dd) + " tsp of salt");
 		System.out.println(cupsMilk(dd) + " cups of soy milk");
 		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
-
-		System.out.println(flourCost);
-		System.out.println(milkCost);
+		System.out.println(flourCost + milkCost + " cents.");
 	}
 }
