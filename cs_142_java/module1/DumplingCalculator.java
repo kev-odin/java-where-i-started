@@ -56,10 +56,12 @@ public class DumplingCalculator {
 	// is a bit trickier. Remember you can use Math.ceil(number) to round a number up, and then 
 	// you can cast it to an int.
 	public static int cartonsMilk(double cupsMilk) {
-		return 0;
+		double cartonCount = cupsMilk / 4.0;
+		double roundCount = Math.ceil(cartonCount);
+		return (int) roundCount;
 	}
 	
-	public static double totalCost(double dozenDumplings) {
+	public static double totalCost(double dozenDumplings) { 
 		return 0.0;
 	}
 	
@@ -67,17 +69,22 @@ public class DumplingCalculator {
 		/*Give dd (for "dozen dumplings") a value to test your program. I would start with 
 		dd = 2.0 and see if you get the given recipe back. Then try a larger amount and a smaller one.
 		*/
-		double dd = 20.0;
+		double dd = 2.0;
 		// ingredient costs:
 		double costFlourPerCup = 35;
 		double costMilkPerCarton = 250;
+		double flourCost = (cupsWholeWheat(dd) + cupsWhite(dd) + cupsCorn(dd)) * costFlourPerCup;
+		double milkCost = cartonsMilk(dd) * costMilkPerCarton;
 		// testing zone
 		System.out.println("For " + dd + " dozen dumplings, you will need: ");
 		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
 		System.out.println(cupsWhite(dd) + " cups of white flour");
 		System.out.println(cupsCorn(dd) + " cups of corn flour");
 		System.out.println(tspSalt(dd) + " tsp of salt");
-		System.out.println(cupsMilk(dd)+ " cups of soy milk");
+		System.out.println(cupsMilk(dd) + " cups of soy milk");
+		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
 
+		System.out.println(flourCost);
+		System.out.println(milkCost);
 	}
 }
