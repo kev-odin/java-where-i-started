@@ -29,14 +29,14 @@ public class DumplingCalculator {
 	public static double soyMilk = (2.25) / 2.0;
 
 	// store prices for ingredients
-	public static double costFlourPerCup = 35;
-	public static double costMilkPerCarton = 250;
+	public static double costFlourPerCup = 35.0;
+	public static double costMilkPerCarton = 250.0;
 	
 	public static void main(String[] args) {
 		// Enter dozen dumpling amount to make for class
-		double dd = 1.0;
+		double dd = 4.0;
 		// testing zone
-		System.out.println("For " + dd + " dozen dumplings, you will need: ");
+		System.out.println("To make " + dd + " dozen delicious dumplings, you will need:");
 		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
 		System.out.println(cupsWhite(dd) + " cups of white flour");
 		System.out.println(cupsCorn(dd) + " cups of corn flour");
@@ -44,6 +44,7 @@ public class DumplingCalculator {
 		System.out.println(cupsMilk(dd) + " cups of soy milk");
 		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
 		System.out.println(totalCost(dd) + " cents.");
+		System.out.printf("Or if you are tired of counting pennies, you can spend this much cold hard cash: $ %.2f USD.\n", dollarCost(dd));
 	}
 
 	// calculate the cups of whole wheat flower
@@ -78,17 +79,20 @@ public class DumplingCalculator {
 	
 	// calculate the cartons of milk, partial count is rounded up for a whole number
 	public static int cartonsMilk(double cupsMilk) {
-		double cartonCount = (double) (cupsMilk / 4.0);
+		double cartonCount = (cupsMilk / 4.0);
 		double roundCount = Math.ceil(cartonCount);
 		return (int) roundCount;
 	}
 	
 	// calulate the total cost of ingredients from the store
 	public static double totalCost(double dozenDumplings) { 
-		// ingredient costs:
 		double flourCost = (cupsWholeWheat(dozenDumplings) + cupsWhite(dozenDumplings) + cupsCorn(dozenDumplings)) * costFlourPerCup;
 		double milkCost = cartonsMilk(cupsMilk(dozenDumplings)) * costMilkPerCarton;
 		return flourCost + milkCost;
 	}
-	
+	// extra credit - convert the cent amount to US dollars
+	public static double dollarCost(double dozenDumplings) {
+		double dollarCostUSD = totalCost(dozenDumplings) / 100;
+		return dollarCostUSD;
+	}
 }
