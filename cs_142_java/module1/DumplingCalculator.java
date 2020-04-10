@@ -21,13 +21,31 @@
 
 public class DumplingCalculator {
 	
-	// recipe for single dozen dumplings of Jon's Cornbread
+	// recipe amounts for a single dozen dumplings of Jon's Cornbread
 	public static double wholeWheatFlour = (2.0 / 3.0) / 2.0;
 	public static double whiteFlour = (2.0 / 3.0) / 2.0;
 	public static double cornFlour = (1.0) / 2.0;
 	public static double salt = (1.0 / 2.0) / 2.0;
 	public static double soyMilk = (2.25) / 2.0;
+
+	// store prices for ingredients
+	public static double costFlourPerCup = 35;
+	public static double costMilkPerCarton = 250;
 	
+	public static void main(String[] args) {
+		// Enter dozen dumpling amount to make for class
+		double dd = 1.0;
+		// testing zone
+		System.out.println("For " + dd + " dozen dumplings, you will need: ");
+		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
+		System.out.println(cupsWhite(dd) + " cups of white flour");
+		System.out.println(cupsCorn(dd) + " cups of corn flour");
+		System.out.println(tspSalt(dd) + " tsp of salt");
+		System.out.println(cupsMilk(dd) + " cups of soy milk");
+		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
+		System.out.println(totalCost(dd) + " cents.");
+	}
+
 	// calculate the cups of whole wheat flower
 	public static double cupsWholeWheat(double dozenDumplings) {
 		double amount = wholeWheatFlour * dozenDumplings;
@@ -58,36 +76,19 @@ public class DumplingCalculator {
 		return amount;
 	}
 	
-	// calculate the cartons of milk, partial count is rounded up for the whole number
+	// calculate the cartons of milk, partial count is rounded up for a whole number
 	public static int cartonsMilk(double cupsMilk) {
 		double cartonCount = (double) (cupsMilk / 4.0);
 		double roundCount = Math.ceil(cartonCount);
 		return (int) roundCount;
 	}
 	
+	// calulate the total cost of ingredients from the store
 	public static double totalCost(double dozenDumplings) { 
-		return 0.0;
+		// ingredient costs:
+		double flourCost = (cupsWholeWheat(dozenDumplings) + cupsWhite(dozenDumplings) + cupsCorn(dozenDumplings)) * costFlourPerCup;
+		double milkCost = cartonsMilk(cupsMilk(dozenDumplings)) * costMilkPerCarton;
+		return flourCost + milkCost;
 	}
 	
-	public static void main(String[] args) {
-		/*Give dd (for "dozen dumplings") a value to test your program. I would start with 
-		dd = 2.0 and see if you get the given recipe back. Then try a larger amount and a smaller one.
-		*/
-		double dd = 2.0;
-		// ingredient costs:
-		double costFlourPerCup = 35;
-		double costMilkPerCarton = 250;
-		double flourCost = (cupsWholeWheat(dd) + cupsWhite(dd) + cupsCorn(dd)) * costFlourPerCup;
-		double milkCost = cartonsMilk(cupsMilk(dd)) * costMilkPerCarton;
-
-		// testing zone
-		System.out.println("For " + dd + " dozen dumplings, you will need: ");
-		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
-		System.out.println(cupsWhite(dd) + " cups of white flour");
-		System.out.println(cupsCorn(dd) + " cups of corn flour");
-		System.out.println(tspSalt(dd) + " tsp of salt");
-		System.out.println(cupsMilk(dd) + " cups of soy milk");
-		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
-		System.out.println(flourCost + milkCost + " cents.");
-	}
 }
