@@ -34,7 +34,7 @@ public class DumplingCalculator {
 	
 	public static void main(String[] args) {
 		// Enter dozen dumpling amount to make for class
-		double dd = 2.0;
+		double dd = 4.0;
 		// Print recipe and total amounts
 		System.out.println("To make " + dd + " dozen delicious dumplings, you will need:");
 		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
@@ -42,7 +42,7 @@ public class DumplingCalculator {
 		System.out.println(cupsCorn(dd) + " cups of corn flour");
 		System.out.println(tspSalt(dd) + " tsp of salt");
 		System.out.println(cupsMilk(dd) + " cups of soy milk");
-		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of milk");
+		System.out.println(cartonsMilk(cupsMilk(dd)) + " cartons of soy milk");
 		System.out.println("The cost of these ingredients will be " + totalCost(dd) + " cents.");
 		System.out.printf("Or if you are tired of counting pennies, you can spend this much cold hard cash: $ %.2f USD.\n", dollarCost(dd));
 	}
