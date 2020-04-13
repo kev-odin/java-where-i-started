@@ -21,12 +21,6 @@ Plan of attack: input the
 
 public class BakingCalculator {
 
-	public static void main(String [] args) {
-		// Quick test main
-		System.out.println(bagsOfFlour(48, 1));
-		System.out.println(containersOfSalt(48, 1));
-	}
-
 	public static int bagsOfFlour(int cookieCount, int loafCount) {
 		// Recipe amounts given per 48 cookies and 1 banana bread loaf
 		double cupsFlourPer48Cookies = 2.25 / 48.0;
@@ -180,7 +174,32 @@ public class BakingCalculator {
 	}
 
 	public static double totalCost(int cookieCount, int loafCount) {
-		return 0;
+		// prices given from problem
+		double priceBagOfFlour = 1.79;
+		double priceContainerOfSalt = 1.09;
+		double priceOfBakingSoda = 1.09;
+		double priceOfVanilla = 3.99;
+		double priceOfDozenEggs = 2.19;
+		double priceBagOfSugar = 1.99;
+		double priceOfButter = 4.49;
+		double priceOfBanana = 0.32;
+		double priceBagOfChips = 3.29;
+
+		// total price for each component
+		double totalPriceFlour = (double) (priceBagOfFlour * bagsOfFlour(cookieCount, loafCount));
+		double totalPriceSalt = (double) (priceContainerOfSalt * containersOfSalt(cookieCount, loafCount));
+		double totalPriceBakingSoda = (double) (priceOfBakingSoda * boxesOfBakingSoda(cookieCount, loafCount));
+		double totalPriceVanilla = (double) (priceOfVanilla * bottlesOfVanilla(cookieCount, loafCount));
+		double totalPriceDozenEggs = (double) (priceOfDozenEggs * cartonsOfEggs(cookieCount, loafCount));
+		double totalPriceBagsOfSugar = (double) (priceBagOfSugar * bagsOfSugar(cookieCount, loafCount));
+		double totalPriceOfButter = (double) (priceOfButter * packagesOfButter(cookieCount, loafCount));
+		double totalPriceOfBanana = (double) (priceOfBanana * bananas(cookieCount, loafCount));
+		double totalPriceBagOfChips = (double) (priceBagOfChips * bagsOfChocolateChips(cookieCount, loafCount));
+
+		// total cost of ingredients
+		double sumTotal = totalPriceFlour + totalPriceSalt + totalPriceBakingSoda + totalPriceVanilla + totalPriceDozenEggs + totalPriceBagsOfSugar + totalPriceOfButter + totalPriceOfBanana + totalPriceBagOfChips;
+
+		return sumTotal;
 	}
 
 	// flour cups to pounds conversion
@@ -190,6 +209,7 @@ public class BakingCalculator {
 		return poundAmount; 
 	}
 
+	// sugar cups to pounds conversion
 	public static double convertSugarCupToPound (double sugarCupAmount) {
 		final double SUGAR_CUPS_TO_POUND_RATIO = 2.0 / 1.0;
 		double sugarPoundAmount = sugarCupAmount / SUGAR_CUPS_TO_POUND_RATIO;
