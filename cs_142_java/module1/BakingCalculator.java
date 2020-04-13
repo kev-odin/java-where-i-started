@@ -122,7 +122,7 @@ public class BakingCalculator {
 		double poundsForBatch = convertSugarCupToPound(sugarCupAmount);
 
 		// Calculate the number of containers to buy
-		double bagsPerPound = 1.0 / 2.0;
+		double bagsPerPound = 1.0;
 		double bagsOfSugar = Math.ceil(poundsForBatch * bagsPerPound);
 		
 		return (int) bagsOfSugar;
@@ -131,7 +131,7 @@ public class BakingCalculator {
 	public static int packagesOfButter(int cookieCount, int loafCount) {
 		// Recipe amounts given per 48 cookies and 1 banana bread loaf
 		double cupsOfButterPer48Cookies = 1.0 / 48.0;
-		double cupsOfButterPerBananaLoaf = (1.0 / 3.0) / 1.0;
+		double cupsOfButterPerBananaLoaf = 1.0 / 3.0;
 
 		// Calculate tsp of flour needed per every batch of baked items and convert tsp to ounces
 		double cookieButterCupAmount = (double) (cookieCount * cupsOfButterPer48Cookies);
@@ -139,7 +139,7 @@ public class BakingCalculator {
 		double butterCupAmount = cookieButterCupAmount + loafButterCupAmount;
 
 		// Calculate the number of containers to buy
-		double packagesPerCupButter = 1.0 / 4.0;
+		double packagesPerCupButter = 1.0 / 2.0;
 		double packagesOfButter = Math.ceil(butterCupAmount * packagesPerCupButter);
 
 		return (int) packagesOfButter;
@@ -161,12 +161,12 @@ public class BakingCalculator {
 	}
 
 	public static int bagsOfChocolateChips(int cookieCount, int loafCount) {
-		// Recipe amounts given per 48 cookies and 1 banana bread loaf
-		double cupsOfChipsPer48Cookies = 2.5 / 48.0;
+		// Recipe amounts given per 48 cookies and 1 banana bread loaf, added cookieCount into calculation
+		double cupsOfChipsPer48Cookies = (double) (2.5 / 48.0 * cookieCount);
 		double cupsOfChipsPerBananaLoaf = 0.0;
 
 		// Calculate tsp of flour needed per every batch of baked items and convert tsp to ounces
-		double cupsOfChipsPerBag = 2.0 / 1.0;
+		double cupsOfChipsPerBag = 1.0 / 2.0;
 		double bagsOfChocolateChips = Math.ceil(cupsOfChipsPer48Cookies * cupsOfChipsPerBag);
 
 		// Calculate the number of containers to buy
@@ -211,8 +211,8 @@ public class BakingCalculator {
 
 	// sugar cups to pounds conversion
 	public static double convertSugarCupToPound (double sugarCupAmount) {
-		final double SUGAR_CUPS_TO_POUND_RATIO = 2.0 / 1.0;
-		double sugarPoundAmount = sugarCupAmount / SUGAR_CUPS_TO_POUND_RATIO;
+		final double SUGAR_CUPS_TO_POUND_RATIO = 1.0 / 2.0;
+		double sugarPoundAmount = sugarCupAmount * SUGAR_CUPS_TO_POUND_RATIO;
 		return sugarPoundAmount;
 	}
 	
