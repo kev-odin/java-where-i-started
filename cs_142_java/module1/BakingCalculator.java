@@ -1,7 +1,7 @@
-
 // Kevin Chung
 
 public class BakingCalculator {
+	// given conversion factors from problem
 	final static double CUPS_TO_POUND_RATIO = 10.0 / 3.0;
 	final static double SUGAR_CUPS_TO_POUND_RATIO = 1.0 / 2.0;
 	final static double TSP_TO_OUNCES_RATIO = 1.0 / 6.0;
@@ -15,8 +15,7 @@ public class BakingCalculator {
 		// Calculate cups of flour needed per every batch order of baked items and convert cup to pounds of flour
 		double cookieCupAmount = (double) (cookieCount * cupsFlourPer48Cookies);
 		double loafCupAmount = (double) (loafCount * cupsFlourPerBananaLoaf);
-		double flourCupAmount = cookieCupAmount + loafCupAmount;
-		double poundsFlourForBatch = convertFlourCupToPound(flourCupAmount);
+		double poundsFlourForBatch = convertFlourCupToPound(cookieCupAmount, loafCupAmount);
 
 		// Calculate the number of bags to buy
 		double bagsOfFlour = Math.ceil(poundsFlourForBatch * bagsPerPoundFlour);
@@ -33,8 +32,7 @@ public class BakingCalculator {
 		// Calculate tsp of salt needed per every batch of baked items and convert tsp to ounces
 		double cookieTspAmount = (double) (cookieCount * tspSaltPer48Cookies);
 		double loafTspAmount = (double) (loafCount * tspSaltPerBananaLoaf);
-		double saltTspAmount = cookieTspAmount + loafTspAmount;
-		double ouncesForBatch = convertTspToOunces(saltTspAmount);
+		double ouncesForBatch = convertTspToOunces(cookieTspAmount, loafTspAmount);
 
 		// Calculate the number of containers to buy
 		double containersOfSalt = Math.ceil(ouncesForBatch * containerPerOunces);
@@ -51,8 +49,7 @@ public class BakingCalculator {
 		// Calculate tsp of baking soda needed per every batch of baked items and convert tsp to ounces
 		double cookieTspAmount = (double) (cookieCount * tspBakingSodaPer48Cookies);
 		double loafTspAmount = (double) (loafCount * tspBakingSodaPerBananaLoaf);
-		double bakingSodaTspAmount = cookieTspAmount + loafTspAmount;
-		double ouncesForBatch = convertTspToOunces(bakingSodaTspAmount);
+		double ouncesForBatch = convertTspToOunces(cookieTspAmount, loafTspAmount);
 
 		// Calculate the number of boxes to buy
 		double boxesOfBakingSoda = Math.ceil(ouncesForBatch * boxPerOunces);
@@ -69,8 +66,7 @@ public class BakingCalculator {
 		// Calculate tsp of vanilla needed per every batch of baked items and convert tsp to ounces
 		double cookieTspAmount = (double) (cookieCount * tspVanillaPer48Cookies);
 		double loafTspAmount = (double) (loafCount * tspVanillaPerBananaLoaf);
-		double vanillaTspAmount = cookieTspAmount + loafTspAmount;
-		double ouncesForBatch = convertTspToOunces(vanillaTspAmount);
+		double ouncesForBatch = convertTspToOunces(cookieTspAmount, loafTspAmount);
 
 		// Calculate the number of bottles to buy
 		double bottlesOfVanilla = Math.ceil(ouncesForBatch * bottlesPerOunces);
@@ -89,7 +85,7 @@ public class BakingCalculator {
 		double loafEggAmount = (double) (loafCount *eggsPerBananaLoaf);
 		double eggsAmount = cookieEggAmount + loafEggAmount;
 
-		// Calculate the number of containers to buy
+		// Calculate the number of cartons to buy
 		double cartonsOfEggs = Math.ceil(eggsAmount * cartonsPerDozen);
 
 		return (int) cartonsOfEggs;
@@ -104,10 +100,9 @@ public class BakingCalculator {
 		// Calculate cups of sugar needed per every batch of baked items and convert cups to pound
 		double cookieSugarCupAmount = (double) (cookieCount * cupsSugarPer48Cookies);
 		double loafSugarCupAmount = (double) (loafCount * cupsSugarPerBananaLoaf);
-		double sugarCupAmount = cookieSugarCupAmount + loafSugarCupAmount;
-		double poundsForBatch = convertSugarCupToPound(sugarCupAmount);
+		double poundsForBatch = convertSugarCupToPound(cookieSugarCupAmount, loafSugarCupAmount);
 
-		// Calculate the number of containers to buy
+		// Calculate the number of bags to buy
 		double bagsOfSugar = Math.ceil(poundsForBatch * bagsPerPound);
 		
 		return (int) bagsOfSugar;
@@ -124,7 +119,7 @@ public class BakingCalculator {
 		double loafButterCupAmount = (double) (loafCount * cupsButterPerBananaLoaf);
 		double butterCupAmount = cookieButterCupAmount + loafButterCupAmount;
 
-		// Calculate the number of containers to buy
+		// Calculate the number of packages to buy
 		double packagesOfButter = Math.ceil(butterCupAmount * packagesPerCupButter);
 
 		return (int) packagesOfButter;
@@ -143,8 +138,8 @@ public class BakingCalculator {
 	}
 
 	public static int bagsOfChocolateChips(int cookieCount, int loafCount) {
-		// Recipe amounts given per 48 cookies and 1 banana bread loaf, added cookieCount into calculation
-		double cupsChipsPer48Cookies = (2.5 / 48.0);
+		// Recipe amounts given per 48 cookies and 1 banana bread loaf
+		double cupsChipsPer48Cookies = 2.5 / 48.0;
 		double bagsPerCupChips = 1.0 / 2.0;
 
 		// Calculate tsp of flour needed per every batch of baked items and convert tsp to ounces
@@ -183,21 +178,23 @@ public class BakingCalculator {
 
 		return sumTotal;
 	}
-
 	// flour cups to pounds conversion
-	public static double convertFlourCupToPound (double flourCupAmount) {
+	public static double convertFlourCupToPound (double cookieCupAmount, double loafCupAmount) {
+		double flourCupAmount = cookieCupAmount + loafCupAmount;
 		double poundAmount = flourCupAmount / CUPS_TO_POUND_RATIO;
 		return poundAmount; 
 	}
 
 	// sugar cups to pounds conversion
-	public static double convertSugarCupToPound (double sugarCupAmount) {
+	public static double convertSugarCupToPound (double cookieSugarCupAmount, double loafSugarCupAmount) {
+		double sugarCupAmount = cookieSugarCupAmount + loafSugarCupAmount;
 		double sugarPoundAmount = sugarCupAmount * SUGAR_CUPS_TO_POUND_RATIO;
 		return sugarPoundAmount;
 	}
 	
 	// teaspoon to ounces conversion
-	public static double convertTspToOunces (double tspAmount) {
+	public static double convertTspToOunces (double cookieTspAmount, double loafTspAmount) {
+		double tspAmount = cookieTspAmount + loafTspAmount;
 		double ouncesAmount = tspAmount * TSP_TO_OUNCES_RATIO;
 		return ouncesAmount;
 	}
