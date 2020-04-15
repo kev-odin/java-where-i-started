@@ -12,3 +12,41 @@ if (x == 0 && y == 0) {
 }
 
 Likewise, the || operator can simplify chained if statements. Since the branches are the same, there is no need to duplicate that code.
+
+if (x == 0) {
+    System.out.println("Either x or y is zero");
+} else if (y == 0) {
+    System.out.println("Either x or y is zero");
+}
+// combined
+if (x == 0 || y == 0) { 
+    System.out.println("Either x or y is zero");
+}
+
+Of course if the statements in the branches were different, we could not combine them into one block. But it’s useful to explore different ways of representing the same logic, especially when it’s complex.
+Logical operators evaluate the second expression only when necessary. For example, true || anything is always true, so Java does not need to evaluate the expression anything. Likewise, false && anything is always false.
+Ignoring the second operand, when possible, is called short circuit evaluation, by analogy with an electrical circuit. Short circuit evaluation can save time, especially if anything takes a long time to evaluate. It can also avoid unnecessary errors, if anything might fail.
+
+4.9 Vocabulary
+boolean: A data type with only two possible values, true and false.
+
+relational operator: An operator that compares two values and produces a boolean indicating the relationship between them.
+
+conditional statement: A statement that uses a condition to determine which statements to execute.
+
+block: A sequence of statements, surrounded by braces, that generally runs as the result of a condition.
+
+branch: One of the alternative blocks after a conditional statement. For example, an if-else statement has two branches.
+
+chaining: A way of joining several conditional statements in sequence. nesting: Putting a conditional statement inside one or both branches of an-
+other conditional statement.
+
+logical operator: An operator that combines boolean values and produces a boolean value.
+
+short circuit: A way of evaluating logical operators that only evaluates the second operand if necessary.
+
+De Morgan’s laws: Mathematical rules that show how to negate a logical expression.
+f
+lag: A variable (usually boolean) that represents a condition or status.
+
+transaction: An action that either completely succeeds or completely fails (does not partially execute).
