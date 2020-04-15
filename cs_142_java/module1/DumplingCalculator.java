@@ -34,7 +34,7 @@ public class DumplingCalculator {
 	
 	public static void main(String[] args) {
 		// Enter dozen dumpling amount to make for class
-		double dd = 4.0;
+		double dd = 2.0;
 		// Print recipe and total amounts
 		System.out.println("To make " + dd + " dozen delicious dumplings, you will need:");
 		System.out.println(cupsWholeWheat(dd) + " cups of whole wheat flour");
