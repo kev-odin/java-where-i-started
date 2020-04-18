@@ -3,9 +3,10 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(0, 0, 0, 0, 0, false);
+		double score = weightedAverage(100, 100, 100, 100, 100, true);
 		System.out.println("Your weighted average is: " + score);
-		// Prints corresponding letter grade with the score
+
+		// Prints corresponding letter grade with the score - extra credit
 		letterGrade(score);
 	}
 	
