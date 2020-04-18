@@ -3,10 +3,10 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(100, 100, 100, 100, 100, true); //Change these values to test your code.
+		double score = weightedAverage(0, 0, 0, 0, 0, false);
 		System.out.println("Your weighted average is: " + score);
-
-		letterGrade(score); //This is just for the extra credit. Completely optional.
+		// Prints corresponding letter grade with the score
+		letterGrade(score);
 	}
 	
 	public static double weightedAverage(int quiz1, int quiz2, int quiz3, int exam1, int exam2, boolean hadGoodAttendance) {
@@ -72,6 +72,20 @@ public class GradeCalculator {
 	public static void letterGrade(double score) {
 		//prints a sentence describing a letter grade, based on the input score
 		//this is optional, and is just for the extra credit.
-		
+		if (score < 60.0 && score >= 0.0) {
+			System.out.println("Your letter grade is a E");
+		}
+		if (score >= 60.0 && score < 70.0) {
+			System.out.println("Your letter grade is a D");
+		}
+		if (score >= 70.0 && score < 80.0) {
+			System.out.println("Your letter grade is a C");
+		}
+		if (score >= 80.0 && score < 90.0) {
+			System.out.println("Your letter grade is a B");
+		}
+		if (score >= 90) {
+			System.out.println("Your letter grade is a A");
+		}
 	}
 }
