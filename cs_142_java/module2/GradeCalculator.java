@@ -3,7 +3,7 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(75, 85, 95, 95, 95, true); //Change these values to test your code.
+		double score = weightedAverage(100, 100, 100, 100, 100, true); //Change these values to test your code.
 		System.out.println("Your weighted average is: " + score);
 
 		letterGrade(score); //This is just for the extra credit. Completely optional.
