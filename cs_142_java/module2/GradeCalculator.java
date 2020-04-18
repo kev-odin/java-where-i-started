@@ -3,15 +3,14 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(100, 100, 100, 100, 100, true); //Change these values to test your code.
-		//System.out.println("Your weighted average is: " + score);
+		double score = weightedAverage(75, 85, 95, 95, 95, true); //Change these values to test your code.
+		System.out.println("Your weighted average is: " + score);
 
 		letterGrade(score); //This is just for the extra credit. Completely optional.
 	}
 	
 	public static double weightedAverage(int quiz1, int quiz2, int quiz3, int exam1, int exam2, boolean hadGoodAttendance) {
-		// Lowest quiz gets dropped. Each remaining quiz is worth 20%, so quizzes all together are 40%
-		// If hadGoodAttendance is true, higher exam is worth 40% and lower exam is worth 20%. Otherwise each exam is worth 30%.
+		// Given score weights
 		double poorAttendance = 0.30;
 		double quizWeight = 0.20;
 		double goodAttendanceHigher = 0.40;
@@ -30,12 +29,12 @@ public class GradeCalculator {
 
 		// Subtract the minimum of the three quizzes from the sum total
 		double quizAdjustedTotal = quizWeightedSum - droppedQuizWeighted;
-		System.out.println("Your quiz adjusted score is: " + quizAdjustedTotal + " out of 40.0 points.");
 
 		// Poor attendance weighted average
 		if (hadGoodAttendance != true) {
 			double poorAttendanceExam = (double) (exam1 + exam2) * poorAttendance;
-			System.out.println("Your adjusted score is: " + poorAttendanceExam + " out of 60.0 points. Stop cutting class, and apply yourself!");
+			double weightedScore = poorAttendanceExam + quizAdjustedTotal;
+			return weightedScore;
 		}
 		// Good attendance weighted average
 		if (hadGoodAttendance == true) {
@@ -44,19 +43,19 @@ public class GradeCalculator {
 				double examHigher = (double) (exam1 * goodAttendanceHigher);
 				double examLower = (double) (exam2 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
-				System.out.println("Exam 1 scored higher, it will be worth more.");
-				System.out.println("Your adjusted score is: " + goodAttendanceExam + " out of 60.0 points. Good work!");
+				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
+				return weightedScore;
 			}
 			// If exam 2 is greater than exam 1
 			else {
 				double examHigher = (double) (exam2 * goodAttendanceHigher);
 				double examLower = (double) (exam1 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
-				System.out.println("Exam 2 scored higher, it will be worth more.");
-				System.out.println("Your adjusted score is: " + goodAttendanceExam + " out of 60.0 points. Good work!");
+				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
+				return weightedScore;
 			}
 		}
-	return 0.0;
+		return 0.0;
 	}
 	
 	public static int minOfThree(int number1, int number2, int number3) {
@@ -75,5 +74,4 @@ public class GradeCalculator {
 		//this is optional, and is just for the extra credit.
 		
 	}
-
 }
