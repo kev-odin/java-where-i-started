@@ -50,8 +50,8 @@ public class GradeCalculator {
 			}
 			// If exam 2 is greater than exam 1
 			else {
-				double examHigher = (double) (exam2 * goodAttendanceHigher);
-				double examLower = (double) (exam1 * goodAttendanceLower);
+				double examHigher = (exam2 * goodAttendanceHigher);
+				double examLower = (exam1 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
 				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
 				return weightedScore;
