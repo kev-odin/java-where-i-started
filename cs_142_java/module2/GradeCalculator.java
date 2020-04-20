@@ -19,31 +19,31 @@ public class GradeCalculator {
 		double goodAttendanceLower = 0.20;
 
 		// Quiz weighted scores			
-		double quizWeighted1 = (double) (quiz1 * quizWeight);
-		double quizWeighted2 = (double) (quiz2 * quizWeight);
-		double quizWeighted3 = (double) (quiz3 * quizWeight);
+		double quizWeighted1 = quiz1 * quizWeight;
+		double quizWeighted2 = quiz2 * quizWeight;
+		double quizWeighted3 = quiz3 * quizWeight;
 
 		double quizWeightedSum = quizWeighted1 + quizWeighted2 + quizWeighted3;
 		
 		// Lowest quiz dropped and casted to a double
 		int droppedQuiz = minOfThree(quiz1, quiz2, quiz3);
-		double droppedQuizWeighted = (double) (droppedQuiz * quizWeight);
+		double droppedQuizWeighted = droppedQuiz * quizWeight;
 
 		// Subtract the minimum of the three quizzes from the sum total
 		double quizAdjustedTotal = quizWeightedSum - droppedQuizWeighted;
 
 		// Poor attendance weighted average
-		if (hadGoodAttendance != true) {
-			double poorAttendanceExam = (double) (exam1 + exam2) * poorAttendance;
+		if (!hadGoodAttendance) {
+			double poorAttendanceExam = (exam1 + exam2) * poorAttendance;
 			double weightedScore = poorAttendanceExam + quizAdjustedTotal;
 			return weightedScore;
 		}
 		// Good attendance weighted average
-		if (hadGoodAttendance == true) {
+		if (hadGoodAttendance) {
 			// If exam 1 is greater than exam 2
 			if (exam1 >= exam2) {
-				double examHigher = (double) (exam1 * goodAttendanceHigher);
-				double examLower = (double) (exam2 * goodAttendanceLower);
+				double examHigher = (exam1 * goodAttendanceHigher);
+				double examLower = (exam2 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
 				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
 				return weightedScore;
