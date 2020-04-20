@@ -4,7 +4,7 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(0, 0, 0, 0, 0, true);
+		double score = weightedAverage(100, 100, 100, 100, 100, true);
 		System.out.println("Your weighted average is: " + score);
 
 		// Prints corresponding letter grade with the score - extra credit
@@ -29,7 +29,7 @@ public class GradeCalculator {
 		int droppedQuiz = minOfThree(quiz1, quiz2, quiz3);
 		double droppedQuizWeighted = droppedQuiz * quizWeight;
 
-		// Subtract the minimum of the three quizzes from the sum total
+		// Subtract the minimum of the three quizzes from the sum total and setup for weightedScore
 		double quizAdjustedTotal = quizWeightedSum - droppedQuizWeighted;
 		double weightedScore;
 
