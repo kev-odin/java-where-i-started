@@ -1,3 +1,4 @@
+// Kevin Chung
 
 public class GradeCalculator {
 
@@ -56,7 +57,7 @@ public class GradeCalculator {
 				return weightedScore;
 			}
 		}
-		return 0.0;
+		return 0.0; // Question about this return 0.0;
 	}
 	
 	public static int minOfThree(int number1, int number2, int number3) {
