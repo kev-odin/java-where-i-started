@@ -4,7 +4,7 @@ public class GradeCalculator {
 
 	public static void main(String[] args) {
 		//you shouldn't need to put any new code in the main method. Just the other methods below.
-		double score = weightedAverage(100, 100, 100, 100, 100, true);
+		double score = weightedAverage(0, 0, 0, 0, 0, true);
 		System.out.println("Your weighted average is: " + score);
 
 		// Prints corresponding letter grade with the score - extra credit
@@ -31,33 +31,31 @@ public class GradeCalculator {
 
 		// Subtract the minimum of the three quizzes from the sum total
 		double quizAdjustedTotal = quizWeightedSum - droppedQuizWeighted;
+		double weightedScore;
 
 		// Poor attendance weighted average
 		if (!hadGoodAttendance) {
 			double poorAttendanceExam = (exam1 + exam2) * poorAttendance;
-			double weightedScore = poorAttendanceExam + quizAdjustedTotal;
-			return weightedScore;
+			weightedScore = poorAttendanceExam + quizAdjustedTotal;
 		}
 		// Good attendance weighted average
-		if (hadGoodAttendance) {
+		else {
 			// If exam 1 is greater than exam 2
 			if (exam1 >= exam2) {
 				double examHigher = (exam1 * goodAttendanceHigher);
 				double examLower = (exam2 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
-				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
-				return weightedScore;
+				weightedScore = goodAttendanceExam + quizAdjustedTotal;
 			}
 			// If exam 2 is greater than exam 1
 			else {
 				double examHigher = (exam2 * goodAttendanceHigher);
 				double examLower = (exam1 * goodAttendanceLower);
 				double goodAttendanceExam = examHigher + examLower;
-				double weightedScore = goodAttendanceExam + quizAdjustedTotal;
-				return weightedScore;
+				weightedScore = goodAttendanceExam + quizAdjustedTotal;
 			}
 		}
-		return 0.0; // Question about this return 0.0;
+		return weightedScore;
 	}
 	
 	public static int minOfThree(int number1, int number2, int number3) {
