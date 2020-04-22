@@ -1,46 +1,44 @@
 // Kevin Chung
 public class ManagersCrossing {
     public static void main(String[] args) {
-        isPositionOkay(1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
-        isBoatMoving(1, 2);
-        isMoveLegal(2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2);
+
     }
 
     public static boolean isMoveOkay(int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         return true; //fake true
     }
-    // Method to check position integers are between 1 and 2
-    public static boolean isPositionOkay (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
-        if (boatBefore > 0 && boatBefore <= 2) {
-            if (boatAfter > 0 && boatAfter <= 2)
-            return true;
+    // Method to check position integers are 1 or 2
+    public static boolean isPositionLegal (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+        if (boatBefore != 1 && boatBefore != 2 || boatAfter != 1 && boatAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (managerABefore > 0 && managerABefore <= 2) {
-            if (managerAAfter > 0 && managerAAfter <= 2)
-            return true;
+        if (managerABefore != 1 && managerABefore != 2 || managerAAfter != 1 && managerAAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (managerBBefore > 0 && managerBBefore <= 2) {
-            if (managerBAfter > 0 && managerBAfter <= 2)
-            return true;
+        if (managerBBefore != 1 && managerBBefore > 2 || managerBAfter != 1 && managerBAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (managerCBefore > 0 && managerCBefore <= 2) {
-            if (managerCAfter > 0 && managerCAfter <= 2)
-            return true;
+        if (managerCBefore != 1 && managerCBefore > 2 || managerCAfter != 1 && managerCAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (engineerABefore > 0 && engineerABefore <= 2 ) {
-            if (engineerAAfter > 0 && engineerAAfter <= 2)
-            return true;
+        if (engineerABefore != 1 && engineerABefore > 2 || engineerAAfter != 1 && engineerAAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (engineerBBefore > 0 && engineerBBefore <= 2) {
-            if (engineerBAfter > 0 && engineerBAfter <= 2)
-            return true;
+        if (engineerBBefore != 1 && engineerBBefore > 2 || engineerBAfter != 1 && engineerBAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
         }
-        if (engineerCBefore > 0 && engineerCBefore <= 2) {
-            if (engineerCAfter > 0 && engineerCAfter <= 2)
-            return true;
-        } 
-        System.out.println("All positions must be 1 or 2!");
-        return false;
+        if (engineerCBefore != 1 && engineerCBefore > 2 || engineerCAfter != 1 && engineerCAfter != 2) {
+            System.out.println("All positions must be 1 or 2!");
+            return false;
+        }
+        System.out.println("Yes! All positions are legal!");
+        return true;
     }
 
     // Method to check that that boat is moving
