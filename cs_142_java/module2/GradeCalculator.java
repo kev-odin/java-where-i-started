@@ -72,20 +72,20 @@ public class GradeCalculator {
 	public static void letterGrade(double score) {
 		//prints a sentence describing a letter grade, based on the input score
 		//this is optional, and is just for the extra credit.
-		if (score < 60.0 && score >= 0.0) {
-			System.out.println("Your letter grade is a E");
+		if (score >= 90.0) {
+			System.out.println("Your letter grade is a A");
 		}
-		if (score >= 60.0 && score < 70.0) {
-			System.out.println("Your letter grade is a D");
-		}
-		if (score >= 70.0 && score < 80.0) {
-			System.out.println("Your letter grade is a C");
-		}
-		if (score >= 80.0 && score < 90.0) {
+		else if (score >= 80.0 && score < 90.0) {
 			System.out.println("Your letter grade is a B");
 		}
-		if (score >= 90) {
-			System.out.println("Your letter grade is a A");
+		else if (score >= 70.0 && score < 80.0) {
+			System.out.println("Your letter grade is a C");
+		}
+		else if (score >= 60.0 && score < 70.0) {
+			System.out.println("Your letter grade is a D");
+		}
+		else if (score >= 0.0 && score < 60.0) {
+			System.out.println("Your letter grade is a E");
 		}
 	}
 }
