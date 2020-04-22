@@ -41,7 +41,7 @@ public class ManagersCrossing {
         return true;
     }
 
-    // Method to check that that boat is moving
+    // Method to check that that boat is moving, needs to be true, part of isMoveLegal method
     public static boolean isBoatMoving (int boatBefore, int boatAfter) {
         if (boatAfter != boatBefore) {
             System.out.println("The boat moved.");
@@ -52,9 +52,14 @@ public class ManagersCrossing {
     }
 
     // Method to check that the boat does not carry more than 2 people across the river, otherwise it will sink :( 
-    public static boolean isMoveLegal (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+    public static boolean isMoveLegal (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+        // Boat needs to move!
+        if (!isBoatMoving(boatBefore, boatAfter)) {
+            return false;
+        }
 
         int peopleMoved = 0;
+        // Manager A moved
         if (managerAAfter != managerABefore) {
             peopleMoved++;
             if (boatBefore != managerABefore) {
@@ -62,6 +67,7 @@ public class ManagersCrossing {
                 return false;
             }
         }
+        // Manager B moved
         if (managerBAfter != managerBBefore) {
             peopleMoved++;
             if (boatBefore != managerBBefore) {
@@ -69,6 +75,7 @@ public class ManagersCrossing {
                 return false;
             }
         }
+        // Manager C moved
         if (managerCAfter != managerCBefore) {
             peopleMoved++;
             if (boatBefore != managerCBefore) {
@@ -76,6 +83,7 @@ public class ManagersCrossing {
                 return false;
             }
         }
+        // Engineer A moved
         if (engineerAAfter != engineerABefore) {
             peopleMoved++;
             if (boatBefore != engineerABefore) {
@@ -83,6 +91,7 @@ public class ManagersCrossing {
                 return false;
             }
         }
+        // Engineer B moved
         if (engineerBAfter != engineerBBefore) {
             peopleMoved++;
             if (boatBefore != engineerBBefore) {
@@ -90,6 +99,7 @@ public class ManagersCrossing {
                 return false;
             }
         }
+        // Engineer C moved
         if (engineerCAfter != engineerCBefore) {
             peopleMoved++;
             if (boatBefore != engineerCBefore) {
@@ -101,7 +111,12 @@ public class ManagersCrossing {
             System.out.println("You must move one or two people.");
             return false;
         }
-        System.out.println("The boat made it across! Yay!");
+        System.out.println("LEGAL MOVE! The boat made it across! Yay!");
         return true;
     }
-}
+
+    // Method to check that the engineer is safe and not eaten
+    public static boolean isEngineerSafe () {
+        return true;
+    }
+} // Class bracket
