@@ -71,7 +71,6 @@ public class GradeCalculator {
 	
 	public static void letterGrade(double score) {
 		//prints a sentence describing a letter grade, based on the input score
-		//this is optional, and is just for the extra credit.
 		if (score >= 90.0) {
 			System.out.println("Your letter grade is a A");
 		}
