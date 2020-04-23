@@ -2,8 +2,7 @@
 public class ManagersCrossing {
 
     public static void main(String[] args) {
-    isMoveOkay(1, 1, 1, 1, 1, 1, 1, 2, 1, 3, 1, 1, 1, 1); // test values from the Test program
-    isPositionLegal(1, 1, 1, 1, 1, 1, 1, 2, 1, 3, 1, 1, 1, 1); // position check portion
+    isMoveOkay(2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 2); // test values from the Test program
     }
 
 
@@ -19,12 +18,14 @@ public class ManagersCrossing {
         }
 
         int peopleMoved = 0;
+        String boatError = "You may not move a person who is not with the boat!";
+
         // Manager A moved
         if (managerAAfter != managerABefore) {
             //System.out.println("Manager A moved across the river.");
             peopleMoved++;
             if (boatBefore != managerABefore) {
-                System.out.println("You may not move Manager A who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
@@ -33,7 +34,7 @@ public class ManagersCrossing {
             //System.out.println("Manager B moved across the river.");
             peopleMoved++;
             if (boatBefore != managerBBefore) {
-                System.out.println("You may not move Manager B who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
@@ -42,7 +43,7 @@ public class ManagersCrossing {
             //System.out.println("Manager C moved across the river.");
             peopleMoved++;
             if (boatBefore != managerCBefore) {
-                System.out.println("You may not move Manager C who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
@@ -51,7 +52,7 @@ public class ManagersCrossing {
             //System.out.println("Engineer A moved across the river.");
             peopleMoved++;
             if (boatBefore != engineerABefore) {
-                System.out.println("You may not move Engineer A who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
@@ -60,7 +61,7 @@ public class ManagersCrossing {
             //System.out.println("Engineer B moved across the river.");
             peopleMoved++;
             if (boatBefore != engineerBBefore) {
-                System.out.println("You may not move Engineer B who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
@@ -69,7 +70,7 @@ public class ManagersCrossing {
             //System.out.println("Engineer C moved across the river.");
             peopleMoved++;
             if (boatBefore != engineerCBefore) {
-                System.out.println("You may not move Engineer C who is not with the boat.");
+                System.out.println(boatError);
                 return false;
             }
         }
