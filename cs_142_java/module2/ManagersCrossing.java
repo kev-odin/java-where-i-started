@@ -1,10 +1,6 @@
 // Kevin Chung
 public class ManagersCrossing {
 
-    public static void main(String[] args) {
-    }
-
-
     // Method to check that the boat does not carry more than 2 people across the river and at least 1 person, otherwise it will not move :( 
     public static boolean isMoveOkay (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         
@@ -79,9 +75,10 @@ public class ManagersCrossing {
             return false;
         }
 
-        if (!isEngineerSafe(boatBefore, managerABefore, managerBBefore, managerCBefore, engineerABefore, engineerBBefore, engineerCBefore, boatAfter, managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
+        if (!isEngineerSafe(managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
             return false;
         }
+        areWeThereYet(managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter);
         return true;
     }
 
@@ -135,7 +132,7 @@ public class ManagersCrossing {
     }
 
     // Method to check that the engineer is safe and not eaten, still working on this section
-    public static boolean isEngineerSafe (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+    public static boolean isEngineerSafe (int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         
         String managerARecruited = "Manager A would try to recruit someone!";
         String managerBRecruited = "Manager B would try to recruit someone!";
@@ -186,4 +183,12 @@ public class ManagersCrossing {
         return true;
     }
 
+    // Method to check the win condition is satisfied
+    public static boolean areWeThereYet (int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+        if (managerAAfter == 2 && managerBAfter == 2 && managerCAfter == 2 && engineerAAfter == 2 && engineerBAfter == 2 && engineerCAfter == 2){
+            System.out.println("You solved the puzzle!");
+            return true;
+        }
+        return false;
+    }
 } // Class bracket
