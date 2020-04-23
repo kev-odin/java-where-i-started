@@ -2,7 +2,6 @@
 public class ManagersCrossing {
 
     public static void main(String[] args) {
-    isMoveOkay(2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 2); // test values from the Test program
     }
 
 
@@ -79,6 +78,10 @@ public class ManagersCrossing {
             System.out.println("You must move one or two people!");
             return false;
         }
+
+        if (!isEngineerSafe(boatBefore, managerABefore, managerBBefore, managerCBefore, engineerABefore, engineerBBefore, engineerCBefore, boatAfter, managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
+            return false;
+        }
         return true;
     }
 
@@ -133,17 +136,54 @@ public class ManagersCrossing {
 
     // Method to check that the engineer is safe and not eaten, still working on this section
     public static boolean isEngineerSafe (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
-        // Manager A protects Engineer A
-        if (engineerAAfter != managerAAfter || engineerABefore != managerABefore) {
-            System.out.println("Engineer A is not protected!");
-            return false;
+        
+        String managerARecruited = "Manager A would try to recruit someone!";
+        String managerBRecruited = "Manager B would try to recruit someone!";
+        String managerCRecruited = "Manager C would try to recruit someone!";
+
+        // Manager A would recruit engineer B if manager B was not present
+        if (managerAAfter == engineerBAfter) {
+            if (engineerBAfter != managerBAfter) {
+                System.out.println(managerARecruited);
+                return false;
+            }
         }
-        System.out.println("Engineer A and Manager A are on the same side.");
-
-        // Manager B protects Engineer B
-
-        // Manager C protects Engineer C
-
+        // Manager A would recruit engineer C if manager C was not present
+        if (managerAAfter == engineerCAfter) {
+            if (engineerCAfter != managerCAfter) {
+                System.out.println(managerARecruited);
+                return false;
+            }
+        }
+        // Manager B would recruit engineer A if manager A was not present
+        if (managerBAfter == engineerAAfter) {
+            if (engineerAAfter != managerAAfter) {
+                System.out.println(managerBRecruited);
+                return false;
+            }
+        }
+        // Manager B would recruit engineer C if manager C was not present
+        if (managerBAfter == engineerCAfter) {
+            if (engineerCAfter != managerCAfter) {
+                System.out.println(managerBRecruited);
+                return false;
+            }
+        }
+        // Manager C would recruit engineer A if manager A was not present
+        if (managerCAfter == engineerAAfter) {
+            if (engineerAAfter != managerAAfter) {
+                System.out.println(managerCRecruited);
+                return false;
+            }
+        }
+        // Manager C would recruit engineer B if manager B was not present
+        if (managerCAfter == engineerBAfter) {
+            if (engineerBAfter != managerBAfter) {
+                System.out.println(managerCRecruited);
+                return false;
+            }
+        }
         return true;
     }
+
 } // Class bracket
