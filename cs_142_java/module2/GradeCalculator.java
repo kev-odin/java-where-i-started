@@ -25,7 +25,7 @@ public class GradeCalculator {
 
 		double quizWeightedSum = quizWeighted1 + quizWeighted2 + quizWeighted3;
 		
-		// Lowest quiz dropped and casted to a double
+		// Lowest quiz dropped
 		int droppedQuiz = minOfThree(quiz1, quiz2, quiz3);
 		double droppedQuizWeighted = droppedQuiz * quizWeight;
 

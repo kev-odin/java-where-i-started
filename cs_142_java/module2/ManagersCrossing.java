@@ -1,83 +1,20 @@
 // Kevin Chung
 public class ManagersCrossing {
 
-    // Method to check that the boat does not carry more than 2 people across the river and at least 1 person, otherwise it will not move :( 
     public static boolean isMoveOkay (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         
         if (!isPositionLegal(boatBefore, managerABefore, managerBBefore, managerCBefore, engineerABefore, engineerBBefore, engineerCBefore, boatAfter, managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
             return false;
         }
         
-        if (!isBoatMoving(boatBefore, boatAfter)) {
-            return false;
-        }
-
-        int peopleMoved = 0;
-        String boatError = "You may not move a person who is not with the boat!";
-
-        // Manager A moved
-        if (managerAAfter != managerABefore) {
-            //System.out.println("Manager A moved across the river.");
-            peopleMoved++;
-            if (boatBefore != managerABefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // Manager B moved
-        if (managerBAfter != managerBBefore) {
-            //System.out.println("Manager B moved across the river.");
-            peopleMoved++;
-            if (boatBefore != managerBBefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // Manager C moved
-        if (managerCAfter != managerCBefore) {
-            //System.out.println("Manager C moved across the river.");
-            peopleMoved++;
-            if (boatBefore != managerCBefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // Engineer A moved
-        if (engineerAAfter != engineerABefore) {
-            //System.out.println("Engineer A moved across the river.");
-            peopleMoved++;
-            if (boatBefore != engineerABefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // Engineer B moved
-        if (engineerBAfter != engineerBBefore) {
-            //System.out.println("Engineer B moved across the river.");
-            peopleMoved++;
-            if (boatBefore != engineerBBefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // Engineer C moved
-        if (engineerCAfter != engineerCBefore) {
-            //System.out.println("Engineer C moved across the river.");
-            peopleMoved++;
-            if (boatBefore != engineerCBefore) {
-                System.out.println(boatError);
-                return false;
-            }
-        }
-        // More than 2 people can not be on the boat and if no people are on the boat it does not move.
-        if (peopleMoved <= 0 || peopleMoved > 2) {
-            System.out.println("You must move one or two people!");
+        if (!isBoatSinking(boatBefore, managerABefore, managerBBefore, managerCBefore, engineerABefore, engineerBBefore, engineerCBefore, boatAfter, managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
             return false;
         }
 
         if (!isEngineerSafe(managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter)) {
             return false;
         }
+
         areWeThereYet(managerAAfter, managerBAfter, managerCAfter, engineerAAfter, engineerBAfter, engineerCAfter);
         return true;
     }
@@ -87,7 +24,7 @@ public class ManagersCrossing {
         // If boatBefore does not equal 1 and boatBefore does not equal 2 OR boatAfter does not equal 1 and boatAfter does not equal 2. && > ||.
         
         String positionError = "All positions must be 1 or 2!";
-       
+
         if (boatBefore != 1 && boatBefore != 2 || boatAfter != 1 && boatAfter != 2) {
             System.out.println(positionError);
             return false;
@@ -116,22 +53,87 @@ public class ManagersCrossing {
             System.out.println(positionError);
             return false;
         }
-        //System.out.println("All positions are 1 or 2! Keep moving forward.");
         return true;
     }
 
-    // Method to check that that boat is moving, needs to be true, part of isMoveOkay method
+    // Method to check that that boat is moving, needs to be true, part of isBoatSinking method
     public static boolean isBoatMoving (int boatBefore, int boatAfter) {
         // If boatAfter is not the same as boatBefore, we have a destination
         if (boatAfter != boatBefore) {
-            //System.out.println("The boat is ready to be moved. Destination has been set.");
             return true;
         }
         System.out.println("The boat must move!");
         return false;
     }
 
-    // Method to check that the engineer is safe and not eaten, still working on this section
+    // Method to check that the boat does not carry more than 2 people across the river and at least 1 person, otherwise it will not move :( 
+    public static boolean isBoatSinking (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
+        
+        if (!isBoatMoving(boatBefore, boatAfter)) {
+            return false;
+        }
+        
+        int peopleMoved = 0;
+        String boatError = "You may not move a person who is not with the boat!";
+        String captainError = "You must move one or two people!";
+
+        // Manager A moved
+        if (managerAAfter != managerABefore) {
+            peopleMoved++;
+            if (boatBefore != managerABefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // Manager B moved
+        if (managerBAfter != managerBBefore) {
+            peopleMoved++;
+            if (boatBefore != managerBBefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // Manager C moved
+        if (managerCAfter != managerCBefore) {
+            peopleMoved++;
+            if (boatBefore != managerCBefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // Engineer A moved
+        if (engineerAAfter != engineerABefore) {
+            peopleMoved++;
+            if (boatBefore != engineerABefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // Engineer B moved
+        if (engineerBAfter != engineerBBefore) {
+            peopleMoved++;
+            if (boatBefore != engineerBBefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // Engineer C moved
+        if (engineerCAfter != engineerCBefore) {
+            peopleMoved++;
+            if (boatBefore != engineerCBefore) {
+                System.out.println(boatError);
+                return false;
+            }
+        }
+        // More than 2 people can not be on the boat and if no people are on the boat it does not move.
+        if (peopleMoved <= 0 || peopleMoved > 2) {
+            System.out.println(captainError);
+            return false;
+        }
+        return true;
+    }
+
+    // Method to check that the engineer is safe and not eaten
     public static boolean isEngineerSafe (int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         
         String managerARecruited = "Manager A would try to recruit someone!";
@@ -183,7 +185,7 @@ public class ManagersCrossing {
         return true;
     }
 
-    // Method to check the win condition is satisfied
+    // Method to check the win condition is satisfied,
     public static boolean areWeThereYet (int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
         if (managerAAfter == 2 && managerBAfter == 2 && managerCAfter == 2 && engineerAAfter == 2 && engineerBAfter == 2 && engineerCAfter == 2){
             System.out.println("You solved the puzzle!");
@@ -191,4 +193,5 @@ public class ManagersCrossing {
         }
         return false;
     }
+   
 } // Class bracket
