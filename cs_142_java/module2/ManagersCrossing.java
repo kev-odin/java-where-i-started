@@ -1,4 +1,5 @@
 // Kevin Chung
+
 public class ManagersCrossing {
 
     public static boolean isMoveOkay (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
@@ -21,7 +22,6 @@ public class ManagersCrossing {
 
     // Method to check position integers are 1 or 2, part of isMoveOkay method
     public static boolean isPositionLegal (int boatBefore, int managerABefore, int managerBBefore, int managerCBefore, int engineerABefore, int engineerBBefore, int engineerCBefore, int boatAfter, int managerAAfter, int managerBAfter, int managerCAfter, int engineerAAfter, int engineerBAfter, int engineerCAfter) {
-        // If boatBefore does not equal 1 and boatBefore does not equal 2 OR boatAfter does not equal 1 and boatAfter does not equal 2. && > ||.
         
         String positionError = "All positions must be 1 or 2!";
 
@@ -193,5 +193,5 @@ public class ManagersCrossing {
         }
         return false;
     }
-   
+
 } // Class bracket
