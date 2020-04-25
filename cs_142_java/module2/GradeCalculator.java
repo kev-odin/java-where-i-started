@@ -3,7 +3,7 @@
 public class GradeCalculator {
 
 	public static void main(String[] args) {
-		//you shouldn't need to put any new code in the main method. Just the other methods below.
+		//input scores to find the weightedAverage
 		double score = weightedAverage(100, 100, 100, 100, 100, true);
 		System.out.println("Your weighted average is: " + score);
 
@@ -57,9 +57,9 @@ public class GradeCalculator {
 		}
 		return weightedScore;
 	}
-	
+
+	//returns the minimum of the three inputs.
 	public static int minOfThree(int number1, int number2, int number3) {
-		//returns the minimum of the three inputs.
 		  if (number1 <= number2 && number1 <= number3) {
 			  return number1;
 		  }
@@ -68,9 +68,8 @@ public class GradeCalculator {
 		  }
 		return number3;
 	}
-	
+	//prints a sentence describing a letter grade, based on the input score
 	public static void letterGrade(double score) {
-		//prints a sentence describing a letter grade, based on the input score
 		if (score >= 90.0) {
 			System.out.println("Your letter grade is a A");
 		}
