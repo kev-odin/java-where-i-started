@@ -1,6 +1,29 @@
 
-// Put your name here.
+// Kevin Chung
 public class ExponentialCalculator {
+
+	public static void main(String[] args) {
+		
+		//Use Math.exp(2.5) to compute the true value.
+		double trueValue = Math.exp(2.5);
+
+		//Compute two estimates for e^2.5, one using n=5 and the other n=10.
+		double testValueA = myExp(2.5, 5);
+		double testValueB = myExp(2.5, 10);
+
+		//Calculate the difference between the test value and true value, BEFORE taking the absolute value!
+		double differenceBetweenA = testValueA - trueValue;
+		double differenceBetweenB = testValueB - trueValue;
+
+		//Compute the true relative errors between approximation and the true value. Both errors should be less than 0.05 (i.e. 5%)
+		double trueRelativeErrorA = Math.abs(differenceBetweenA) / trueValue;
+		double trueRelativeErrorB = Math.abs(differenceBetweenB) / trueValue;
+
+		//Print out a sentence for each showing the approximation and the error.
+		System.out.println("The true value of e^x is " + trueValue);
+		System.out.println("The value of my approximation using n = 5 is : " + testValueA + " and the true relative error was " + trueRelativeErrorA + ".");
+		System.out.println("The value of my approximation using n = 10 is : " + testValueB + " and the true relative error was " + trueRelativeErrorB + ".");
+	}
 
 	public static int factorial(int number) {
 		int result = 1;
@@ -21,27 +44,13 @@ public class ExponentialCalculator {
 	}
 	
 	public static double myExp(double x, int n) {
-		//Once you have the previous two methods coded, use the formula that approximates e^x. Namely,
-		//e^x=1+x/1!+x^2/2!+...+x^n/n!
-		
-		
-		return 1.0;
+		//Approximate the value of e^x. Namely using, e^x = 1 + x/1! + x^2/2! + ... + x^n/n!
+		double result = 0.0;
+		//For loop to calculate the summation of the series.
+		for(int i = 0; i <= n; i++) {
+			result = result + (power(x, i) / factorial (i));
+		}
+		return result;
 	}
 	
-	public static void main(String[] args) {
-		//Here is some code to test your factorial and power methods:
-		//System.out.println(factorial(4)); //should be 24
-		//System.out.println(factorial(7)); // should be 5040
-		//System.out.println(power(2,4)); // should be 16
-		//System.out.println(power(1.5,3)); //should be 3.375
-		
-		
-		//Compute two estimates for e^2.5, one using n=5 and the other n=10.
-		//Use Math.exp(2.5) to compute the true value.
-		//Compute the two true relative errors between your approximation and the true value.
-		//Print out a sentence for each showing the approximation and the error.
-		//Both errors should be less than 0.05 (i.e. 5%)
-
-	}
-
 }
