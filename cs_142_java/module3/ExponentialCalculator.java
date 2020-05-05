@@ -3,21 +3,21 @@
 public class ExponentialCalculator {
 
 	public static int factorial(int number) {
-		//Use a for loop to compute the factorial of number. Create a for loop starting at 1 and going to number. For each pass through the 
-		//for loop, multiply your result variable by the counting variable.
 		int result = 1;
-		//put your code here
-		
+		//For loop to calculate the factorial, increment until the number is equal to the number.
+		for(int i = 1; i <= number; i++) {
+			result = result * i;
+		}
 		return result;
-		
-		
 	}
 	
 	public static double power(double a,int b) {
-		//Use a for loop to compute a^b. Use a similar approach as in the factorial. You want to multiply a by itself b times.
-
-		
-		return 1.0;
+		double result = 1.0;
+		//For loop to compute a^b. Multiply a by itself b times.
+		for(int i = 1; i <= b; i++) {
+			result = result * a;
+		}
+		return result;
 	}
 	
 	public static double myExp(double x, int n) {
@@ -30,10 +30,10 @@ public class ExponentialCalculator {
 	
 	public static void main(String[] args) {
 		//Here is some code to test your factorial and power methods:
-//		System.out.println(factorial(4)); //should be 24
-//		System.out.println(factorial(7)); // should be 5040
-//		System.out.println(power(2,4)); // should be 16
-//		System.out.println(power(1.5,3)); //should be 3.375
+		//System.out.println(factorial(4)); //should be 24
+		//System.out.println(factorial(7)); // should be 5040
+		//System.out.println(power(2,4)); // should be 16
+		//System.out.println(power(1.5,3)); //should be 3.375
 		
 		
 		//Compute two estimates for e^2.5, one using n=5 and the other n=10.
