@@ -1,5 +1,6 @@
 
 // Kevin Chung
+// Extra Credit
 public class ExponentialCalculator {
 
 	public static void main(String[] args) {
