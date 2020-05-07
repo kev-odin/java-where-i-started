@@ -9,18 +9,40 @@ public class DrawCheckerBoard {
         g.setColor(Color.darkGray);
         g.fillRect(0, 0, width, height);
 
-        //Checker square size
-        int squareWidth = width / 8;
-        int squareHeight = height / 8;
+        //Checker square size and number for later loops, should be 8 square across and downwards
+        int squareSize = width / 8;
+        int squareNumber= width / squareSize;
 
         //Drawing the board
-        for (int j = 0; j < height / squareHeight; j++) {
-            for (int i = 0; i <  width / squareWidth; i += 2) {
-                    g.setColor(Color.lightGray);
-                    g.fillRect(i * squareWidth, j * squareHeight, squareWidth, squareHeight);
+        for (int row = 0; row < squareNumber; row++) {
+            for (int col = 0; col < squareNumber; col++ ) {
+                if ((row + col) % 2 == 0) {
+                    g.setColor(Color.lightGray);  
+                }
+                else {
+                    g.setColor(Color.darkGray);
+                }
+                g.fillRect(row * squareSize, col * squareSize, squareSize, squareSize);
+            }
+        }
+
+        //Drawing the checker pieces
+        for (int row = 0; row < squareNumber; row++) {
+            for (int col = 0; col < squareNumber; col++) {
+                if ((row + col) % 2 == 1) {
+                    if (row < 3) {
+                        g.setColor(Color.red);
+                        g.fillOval(col * squareSize, row * squareSize, squareSize, squareSize);
+                    }
+                    if (row >= 5) {
+                        g.setColor(Color.white);
+                        g.fillOval(col * squareSize, row * squareSize, squareSize, squareSize);
+                    }
                 }
             }
         }
+    }
+
     // Leave the main method alone! It just sets up the drawing window for you. This is the framework.
     public static void main(String[] args) {
         JFrame window = new JFrame("Graphics window");
