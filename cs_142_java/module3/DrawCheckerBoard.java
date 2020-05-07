@@ -42,7 +42,6 @@ public class DrawCheckerBoard {
             }
         }
     }
-
     // Leave the main method alone! It just sets up the drawing window for you. This is the framework.
     public static void main(String[] args) {
         JFrame window = new JFrame("Graphics window");
