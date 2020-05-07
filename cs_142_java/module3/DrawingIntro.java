@@ -18,7 +18,6 @@ public class DrawingIntro {
 		g.drawRect(0, 0, width/4, height/4);
 		g.drawRect(200, 200, 100, 300);
 		
-
 	}
 
 	// Leave the main method alone! It just sets up the drawing window for you.

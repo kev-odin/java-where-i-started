@@ -3,18 +3,20 @@ import javax.swing.*;
 
 public class DrawCheckerBoard {
     
-	
 	//Draw a checkerboard.
-
 	public static void drawCheckerBoard(Graphics g, int width, int height) {
+        //Background color
+        g.setColor(Color.darkGray);
+        g.fillRect(0, 0, width, height);
+        g.setColor(Color.lightGray);
 
+        //Checker square size
+        int squareWidth = width / 8;
+        int squareHeight = height / 8;
+
+        //Drawing the board
     }
-
-    
-    
-    
-    // Leave the main method alone! It just sets up the drawing window for you. This is the 
-	//framework.
+    // Leave the main method alone! It just sets up the drawing window for you. This is the framework.
     public static void main(String[] args) {
         JFrame window = new JFrame("Graphics window");
         window.setLocationByPlatform(true);
