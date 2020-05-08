@@ -11,31 +11,31 @@ public class DrawCheckerBoard {
         g.fillRect(0, 0, width, height);
 
         //Checker square size and number for later loops, should be 8 square across and downwards
-        int squareSize = width / 8;
+        int squareSize = width / 8; // width and height values are the same for a square
         int squareNumber= width / squareSize;
 
         //Drawing the board
-        for (int row = 0; row < squareNumber; row++) {
-            for (int col = 0; col < squareNumber; col++ ) {
-                if ((row + col) % 2 == 0) {
-                    g.setColor(Color.lightGray);  
+        for (int row = 0; row < squareNumber; row++) { // for loop used for the y-axis
+            for (int col = 0; col < squareNumber; col++ ) { // for loop used for the x-axis
+                if ((row + col) % 2 == 0) { 
+                    g.setColor(Color.lightGray); // even values are light gray
                 }
                 else {
-                    g.setColor(Color.darkGray);
+                    g.setColor(Color.darkGray); // odd values are dark gray
                 }
-                g.fillRect(row * squareSize, col * squareSize, squareSize, squareSize);
+                g.fillRect(col * squareSize, row * squareSize, squareSize, squareSize); // (x , y, square width, square height)
             }
         }
         //Drawing the checker pieces
-        for (int row = 0; row < squareNumber; row++) {
-            for (int col = 0; col < squareNumber; col++) {
+        for (int row = 0; row < squareNumber; row++) { // for loop used for the y-axis
+            for (int col = 0; col < squareNumber; col++) { // for loop used for the x-axis
                 if ((row + col) % 2 == 1) {
-                    if (row < 3) {
+                    if (row < 3) { // red checkers for the first 3 rows
                         g.setColor(Color.red);
                         g.fillOval(col * squareSize, row * squareSize, squareSize, squareSize);
                     }
-                    if (row >= 5) {
-                        g.setColor(Color.white);
+                    else if (row >= 5) {
+                        g.setColor(Color.white); // white checkers for the last 3 rows
                         g.fillOval(col * squareSize, row * squareSize, squareSize, squareSize);
                     }
                 }
