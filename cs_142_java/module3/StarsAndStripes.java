@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-// Please put your name here!
+// Kevin Chung
 
 public class StarsAndStripes {
 	public static void drawFlag(int stars, int stripes, java.awt.Graphics g, int x, int y, int width, int height) {

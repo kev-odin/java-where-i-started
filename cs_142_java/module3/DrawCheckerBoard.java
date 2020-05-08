@@ -1,3 +1,4 @@
+// Kevin Chung
 import java.awt.*;
 import javax.swing.*;
 
@@ -25,7 +26,6 @@ public class DrawCheckerBoard {
                 g.fillRect(row * squareSize, col * squareSize, squareSize, squareSize);
             }
         }
-
         //Drawing the checker pieces
         for (int row = 0; row < squareNumber; row++) {
             for (int col = 0; col < squareNumber; col++) {
