@@ -17,16 +17,38 @@ import javax.swing.border.BevelBorder;
 
 public class StarsAndStripes {
 	public static void drawFlag(int stars, int stripes, java.awt.Graphics g, int x, int y, int width, int height) {
-		// Fill this in according to the assignment!
+		// Draw a filled white rectangle for the canvas
+		g.setColor(Color.white);
+		g.fillRect(x, y, width, height);
+
+		// Draw red stripes
+		int stripeHeight = height / stripes; // Evenly divided stripe height
+		//int stripeNumber = height / stripeHeight; // Number of stripes needed for the height
+		//System.out.println("This is the number of stripes from the height: " + stripeNumber);
+
+		for (int i = 0; i <= stripes; i += 2) {
+			g.setColor(Color.red);
+			g.fillRect(x, y + i * stripeHeight, width, stripeHeight);
+			System.out.println(y + i * stripeHeight + " and the i value: " + i);
+		//Last red stripe if number of stripes are odd
+		
+		//Testing
+		//System.out.println("This is the number of stars: " + stars);
+		System.out.println("This is the number of stripes: " + stripes);
+		System.out.println("This is the number of red stripes: " + stripes / 2);
+		//System.out.println("This is the stripe height: " + stripeHeight);
+		//System.out.println("This is the starting x-coordinate: " + x);
+		//System.out.println("This is the starting y-coordinate: " + y);
+		//System.out.println("This is the width of the flag: " + width);
+		//System.out.println("This is the height of the flag: " + height);
+		}
 	}
 
 	public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
 		// Fill this in according to the assignment!
 	}
 
-	// Only alter the "drawFlag" part of the paintComponent
-	// code to call it in different ways. You can also test
-	// drawing multiple flags at once!
+	// Only alter the "drawFlag" part of the paintComponent code to call it in different ways. You can also test drawing multiple flags at once!
 	public static void main(String[] args) {
 		JFrame window = new JFrame("Graphics window");
 		window.setLocationByPlatform(true);
@@ -46,9 +68,9 @@ public class StarsAndStripes {
 
 				// You could alter this code to try different flags!
 				drawFlag(15, 13, g, 0, 0, width/2, height/2);
-				drawFlag(20, 14, g, width/2, 0, width/2, height/2);
-				drawFlag(24, 15, g, 0, height/2, width/2, height/2);
-				drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
+				//drawFlag(20, 14, g, width/2, 0, width/2, height/2);
+				//drawFlag(24, 15, g, 0, height/2, width/2, height/2);
+				//drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
 			}
 		};
 		panel.addMouseMotionListener(new MouseMotionListener() {
@@ -56,7 +78,6 @@ public class StarsAndStripes {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
