@@ -22,24 +22,39 @@ public class StarsAndStripes {
 		g.fillRect(x, y, width, height);
 
 		// Draw red stripes
-		int stripeHeight = height / stripes; // Evenly divided stripe height
-		int stripeArea = stripes * stripeHeight;
-		int stripeAreaMissing = height - stripeArea;
-		System.out.println(stripeArea);
-		System.out.println(stripeAreaMissing);
+		int stripeHeight = height / stripes; // Evenly divided stripe height, rounded down
+		int numberOfRedEven = stripes / 2;
+		int numberOfRedOdd = stripes / 2 + 1; // Number of red stripes is half the stripes, rounded up
 
-		for (int i = 0; i <= stripes; i++) {
-			if (i % 2 == 0) {
+		if (stripes % 2 == 0) { // even number of stripes
+			for (int i = 0; i < numberOfRedEven; i++) {
+				int verticalPosition = y + (2 * i * stripeHeight); 
 				g.setColor(Color.red);
-				g.fillRect(x, y + i * stripeHeight, width, stripeHeight);
+				g.fillRect(x, verticalPosition, width, stripeHeight);
 			}
-			// if (stripes % 2 != 0) { //Last red stripe if number of stripes are odd
-			// 	if (i == stripes) {
-			// 		g.setColor(Color.red);
-			// 		g.fillRect(x, y + i * stripeHeight, width, stripeHeight);
-			// 	}
-			// }
+		} else if (stripes % 2 != 0) { // odd number of stripes
+			for (int i = 0; i < numberOfRedOdd; i++) {
+				int verticalPosition = y + (2 * i * stripeHeight); 
+				g.setColor(Color.red);
+				g.fillRect(x, verticalPosition, width, stripeHeight);
+			}
 		}
+
+		// Draw blue starfield
+		int baseRatio = width / height;
+		// width calculations should be rounded down.
+		if (stripes % 2 == 0) {
+			g.setColor(Color.blue);
+			int blueHeight = numberOfRedEven * stripeHeight;
+			int blueWidth = baseRatio * blueHeight;
+			g.fillRect(x, y, blueWidth, blueHeight);
+		} else if (stripes % 2 != 0) {
+			g.setColor(Color.blue);
+			int blueHeight = numberOfRedOdd * stripeHeight;
+			int blueWidth = baseRatio * blueHeight;
+			g.fillRect(x, y, blueWidth, blueHeight);
+		}
+		
 		//Testing
 		//System.out.println("This is the number of stars: " + stars);
 		//System.out.println("This is the number of stripes: " + stripes);
@@ -76,9 +91,9 @@ public class StarsAndStripes {
 
 				// You could alter this code to try different flags!
 				drawFlag(15, 13, g, 0, 0, width/2, height/2);
-				//drawFlag(20, 14, g, width/2, 0, width/2, height/2);
-				//drawFlag(24, 15, g, 0, height/2, width/2, height/2);
-				//drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
+				drawFlag(20, 14, g, width/2, 0, width/2, height/2);
+				drawFlag(24, 15, g, 0, height/2, width/2, height/2);
+				drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
 			}
 		};
 		panel.addMouseMotionListener(new MouseMotionListener() {
