@@ -23,16 +23,22 @@ public class StarsAndStripes {
 
 		// Draw red stripes
 		int stripeHeight = height / stripes; // Evenly divided stripe height
+		int stripeArea = stripes * stripeHeight;
+		int stripeAreaMissing = height - stripeArea;
+		System.out.println(stripeArea);
+		System.out.println(stripeAreaMissing);
 
 		for (int i = 0; i <= stripes; i++) {
 			if (i % 2 == 0) {
 				g.setColor(Color.red);
 				g.fillRect(x, y + i * stripeHeight, width, stripeHeight);
-			}	
-		//Last red stripe if number of stripes are odd
-		}
-		if (stripes % 2 != 0) {
-			System.out.println("This flag has an odd number of stripes.");
+			}
+			// if (stripes % 2 != 0) { //Last red stripe if number of stripes are odd
+			// 	if (i == stripes) {
+			// 		g.setColor(Color.red);
+			// 		g.fillRect(x, y + i * stripeHeight, width, stripeHeight);
+			// 	}
+			// }
 		}
 		//Testing
 		//System.out.println("This is the number of stars: " + stars);
@@ -70,9 +76,9 @@ public class StarsAndStripes {
 
 				// You could alter this code to try different flags!
 				drawFlag(15, 13, g, 0, 0, width/2, height/2);
-				drawFlag(20, 14, g, width/2, 0, width/2, height/2);
-				drawFlag(24, 15, g, 0, height/2, width/2, height/2);
-				drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
+				//drawFlag(20, 14, g, width/2, 0, width/2, height/2);
+				//drawFlag(24, 15, g, 0, height/2, width/2, height/2);
+				//drawFlag(48, 16, g, width/2, height/2, width/2, height/2);
 			}
 		};
 		panel.addMouseMotionListener(new MouseMotionListener() {
