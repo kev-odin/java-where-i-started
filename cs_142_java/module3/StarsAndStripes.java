@@ -34,22 +34,27 @@ public class StarsAndStripes {
 		}
 			//blue starfield
 			g.setColor(Color.blue);
-			int blueHeight = numberOfRed * stripeHeight;
-			int blueWidth =  blueHeight * width / height;
-			g.fillRect(x, y, blueWidth, blueHeight);
+			int starfieldHeight = numberOfRed * stripeHeight;
+			int starfieldWidth =  starfieldHeight * width / height;
+			g.fillRect(x, y, starfieldWidth, starfieldHeight);
 
 		// Determine the number of row and columns for the stars
-		int row;
-		int col;
-		for (row = 1; row <= stars; row++) {
-            for (col = 1; col <= stars; col++) {
-                if (row * col == stars) {
-                    if (row < col && col < 2 * row) {
-                    }
-                }
-            }
+		int row = 1;
+		int col = 1;
+
+		while ((row * col != stars) || (col < row) || (row > 2 * col)) {
+			if (row > stars) {
+				row = 1;
+				col++;
+			} else {
+				row++;
+			}
 		}
-	}
+		// System.out.println(row);
+		// System.out.println(col);
+
+		
+	} // drawFlag end bracket
 
 	public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
 		// Fill this in according to the assignment!
