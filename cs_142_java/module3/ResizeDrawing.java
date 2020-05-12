@@ -11,30 +11,30 @@ import javax.swing.JPanel;
 
 public class ResizeDrawing {
 
-	public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
-		// Fill this in according to the assignment!
-		int dividedSize5 = size / 5;
-		int dividedSize10 = size / 10;
+	// public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
+	// 	// Fill this in according to the assignment!
+	// 	int dividedSize5 = size / 5;
+	// 	int dividedSize10 = size / 10;
 
-		g.setColor(Color.white);
-		int x1 = x + dividedSize5;
-		int y1 = y + size;
+	// 	g.setColor(Color.white);
+	// 	int x1 = x + dividedSize5;
+	// 	int y1 = y + size;
 
-		int x2 = x + size;
-		int y2 = y + dividedSize5 * 2;
+	// 	int x2 = x + size;
+	// 	int y2 = y + dividedSize5 * 2;
 
-		int x3 = x;
-		int y3 = y + dividedSize5 * 2;
+	// 	int x3 = x;
+	// 	int y3 = y + dividedSize5 * 2;
 
-		int x4 = x + dividedSize5 * 4;
-		int y4 = y + size;
+	// 	int x4 = x + dividedSize5 * 4;
+	// 	int y4 = y + size;
 
-		int x5 = x + dividedSize10 * 5;
-		int y5 = y;
+	// 	int x5 = x + dividedSize10 * 5;
+	// 	int y5 = y;
 
-		g.drawLine(x1, y1, x2, y2); // bottom left to top right line
+	// 	g.drawLine(x1, y1, x2, y2); // bottom left to top right line
 		
-	}
+	// }
 
 	public static void draw(Graphics g, int width, int height) {
 
