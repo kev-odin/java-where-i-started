@@ -28,7 +28,7 @@ public class StarsAndStripes {
 		int numberOfRedOdd = stripes / 2 + 1; // Number of red stripes is half the stripes, rounded up
 
 		//Blue starfield variables
-		int baseRatio = (width / height);
+		//int baseRatio = (width / height);
 
 		if (stripes % 2 == 0) { // even number of stripes
 			for (int i = 0; i < numberOfRedEven; i++) {
@@ -39,7 +39,7 @@ public class StarsAndStripes {
 			//blue starfield - even
 			g.setColor(Color.blue);
 			int blueHeight = numberOfRedEven * stripeHeight;
-			int blueWidth =  blueHeight * baseRatio;
+			int blueWidth =  blueHeight * width / height;
 			g.fillRect(x, y, blueWidth, blueHeight);
 
 		} else if (stripes % 2 != 0) { // odd number of stripes
@@ -51,21 +51,21 @@ public class StarsAndStripes {
 			//blue starfield - odd
 			g.setColor(Color.blue);
 			int blueHeight = numberOfRedOdd * stripeHeight;
-			int blueWidth = blueHeight * baseRatio;
+			int blueWidth = blueHeight * width / height;
 			g.fillRect(x, y, blueWidth, blueHeight);
 		}
 
 		// Determine the number of row and columns for the stars
-		for (int row = 0; row <= stars; row++) {
-            for (int col = 0; col <= stars; col++) {
+		int row;
+		int col;
+		for (row = 1; row <= stars; row++) {
+            for (col = 1; col <= stars; col++) {
                 if (row * col == stars) {
-                    if (row == col - 2) {
-                        System.out.println(row);
-                        System.out.println(col);
+                    if (row < col && col < 2 * row) {
                     }
                 }
             }
-        }
+		}
 		
 		//Testing
 		//System.out.println("This is the number of stars: " + stars);
