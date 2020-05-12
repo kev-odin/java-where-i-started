@@ -54,13 +54,23 @@ public class StarsAndStripes {
 		}
 		// System.out.println(row);
 		// System.out.println(col);
+
+		// Determine the grid size for the stars
+		int gridRowSize = starfieldHeight / row;
+		int gridColSize = starfieldWidth / col;
+
+		System.out.println(gridRowSize);
+		System.out.println(gridColSize);
 		
 		// Draw stars in a grid pattern
-		for (int i = 0; i <= row; i++) {
-			for (int j = 0; j <= col; j++) {
-				drawStar(g, x + i * starfieldWidth, y, starfieldWidth / 2);
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				drawStar(g, x + j * gridColSize, y + i * gridRowSize, gridRowSize);
+				System.out.print("* ");
 			}
+			System.out.println();
 		}
+		System.out.println();
 
 	} // drawFlag end bracket
 
@@ -90,7 +100,6 @@ public class StarsAndStripes {
 		g.drawLine(x3, y3, x4, y4); // top left corner to the bottom right corner
 		g.drawLine(x4, y4, x5, y5); // bottom right corner to the top center
 		g.drawLine(x5, y5, x1, y1); // top center to the bottom left corner - completed star
-
 	}
 
 	// Only alter the "drawFlag" part of the paintComponent code to call it in different ways. You can also test drawing multiple flags at once!
