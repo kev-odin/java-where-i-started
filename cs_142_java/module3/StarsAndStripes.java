@@ -54,6 +54,13 @@ public class StarsAndStripes {
 		}
 		// System.out.println(row);
 		// System.out.println(col);
+		
+		// Draw stars in a grid pattern
+		for (int i = 0; i <= row; i++) {
+			for (int j = 0; j <= col; j++) {
+				drawStar(g, x + i * starfieldWidth, y, starfieldWidth / 2);
+			}
+		}
 
 	} // drawFlag end bracket
 
