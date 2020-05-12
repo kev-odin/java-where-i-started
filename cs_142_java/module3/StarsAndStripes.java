@@ -31,6 +31,8 @@ public class StarsAndStripes {
 			int verticalPosition = y + (i * stripeHeightSkip); 
 			g.setColor(Color.red);
 			g.fillRect(x, verticalPosition, width, stripeHeight);
+			
+			// Last red stripe if odd
 		}
 			//blue starfield
 			g.setColor(Color.blue);
@@ -53,7 +55,6 @@ public class StarsAndStripes {
 		// System.out.println(row);
 		// System.out.println(col);
 
-		
 	} // drawFlag end bracket
 
 	public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
