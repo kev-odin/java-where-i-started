@@ -24,33 +24,29 @@ public class StarsAndStripes {
 		// Draw red stripes
 		int stripeHeight = height / stripes; // Evenly divided stripe height, rounded down
 		int stripeHeightSkip = 2 * stripeHeight; // Used for drawing the red stripes, double the height for drawing the red lines
-		int numberOfRedEven = stripes / 2;
-		int numberOfRedOdd = stripes / 2 + 1; // Number of red stripes is half the stripes, rounded up
-
-		//Blue starfield variables
-		//int baseRatio = (width / height);
+		int numberOfRed = (int) Math.ceil((double) stripes / 2); // Number of red stripes rounded up, casted to double to use Math.ceil 
 
 		if (stripes % 2 == 0) { // even number of stripes
-			for (int i = 0; i < numberOfRedEven; i++) {
+			for (int i = 0; i < numberOfRed; i++) {
 				int verticalPosition = y + (i * stripeHeightSkip); 
 				g.setColor(Color.red);
 				g.fillRect(x, verticalPosition, width, stripeHeight);
 			}
 			//blue starfield - even
 			g.setColor(Color.blue);
-			int blueHeight = numberOfRedEven * stripeHeight;
+			int blueHeight = numberOfRed * stripeHeight;
 			int blueWidth =  blueHeight * width / height;
 			g.fillRect(x, y, blueWidth, blueHeight);
 
 		} else if (stripes % 2 != 0) { // odd number of stripes
-			for (int i = 0; i < numberOfRedOdd; i++) {
+			for (int i = 0; i < numberOfRed; i++) {
 				int verticalPosition = y + (i * stripeHeightSkip); 
 				g.setColor(Color.red);
 				g.fillRect(x, verticalPosition, width, stripeHeight);
 			}
 			//blue starfield - odd
 			g.setColor(Color.blue);
-			int blueHeight = numberOfRedOdd * stripeHeight;
+			int blueHeight = numberOfRed * stripeHeight;
 			int blueWidth = blueHeight * width / height;
 			g.fillRect(x, y, blueWidth, blueHeight);
 		}
