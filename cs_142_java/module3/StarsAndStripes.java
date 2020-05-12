@@ -22,9 +22,13 @@ public class StarsAndStripes {
 		g.fillRect(x, y, width, height);
 
 		// Red stripe position and dimensions
-		int stripeHeight = height / stripes; // Evenly divided stripe height, rounded down
+		int stripeHeight = (int) Math.floor(height / stripes); // Evenly divided stripe height, rounded down
 		int stripeHeightSkip = 2 * stripeHeight; // Used for drawing the red stripes, double the height for drawing the red lines
 		int numberOfRed = (int) Math.ceil((double) stripes / 2); // Number of red stripes rounded up, casted to double to use Math.ceil 
+
+		// Odd red stripe maybe?
+		// int stripeArea = stripeHeight * stripes;
+		// int stripeFill = height - stripeArea;
 
 		// Draw red stripes
 		for (int i = 0; i < numberOfRed; i++) {
@@ -33,6 +37,12 @@ public class StarsAndStripes {
 			g.fillRect(x, verticalPosition, width, stripeHeight);
 			
 			// Last red stripe if odd
+			// if (stripes % 2 != 0) {
+			// 	if (i == numberOfRed - 1) {
+			// 		g.setColor(Color.black);
+			// 		g.fillRect(x, y + 2 * numberOfRed * stripeHeight, width, height - stripeHeight * 2 * numberOfRed);
+			// 	}
+			// }
 		}
 			//blue starfield
 			g.setColor(Color.blue);
@@ -55,22 +65,18 @@ public class StarsAndStripes {
 		// System.out.println(row);
 		// System.out.println(col);
 
-		// Determine the grid size for the stars
-		int gridRowSize = starfieldHeight / row;
-		int gridColSize = starfieldWidth / col;
-
-		System.out.println(gridRowSize);
-		System.out.println(gridColSize);
+		// Determine the grid size for the stars - unsure how to determine grid size?
+		int gridSize = starfieldHeight / ((col + row) / 2);
 		
 		// Draw stars in a grid pattern
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				drawStar(g, x + j * gridColSize, y + i * gridRowSize, gridRowSize);
-				System.out.print("* ");
+				drawStar(g, x + j * gridSize, y + i * gridSize, gridSize);
+				//System.out.print("* ");
 			}
-			System.out.println();
+			//System.out.println();
 		}
-		System.out.println();
+		//System.out.println();
 
 	} // drawFlag end bracket
 
