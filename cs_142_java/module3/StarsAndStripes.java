@@ -50,7 +50,7 @@ public class StarsAndStripes {
 			int starfieldWidth =  starfieldHeight * width / height;
 			g.fillRect(x, y, starfieldWidth, starfieldHeight);
 
-		// Determine the number of row and columns for the stars
+		// Determine the number of row and columns for the stars, to be used for the star grid
 		int row = 1;
 		int col = 1;
 
@@ -62,8 +62,6 @@ public class StarsAndStripes {
 				row++;
 			}
 		}
-		// System.out.println(row);
-		// System.out.println(col);
 
 		// Determine the grid size for the stars - unsure how to determine grid size?
 		int gridSize = starfieldHeight / ((col + row) / 2);
@@ -72,11 +70,11 @@ public class StarsAndStripes {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				drawStar(g, x + j * gridSize, y + i * gridSize, gridSize);
-				//System.out.print("* ");
+				System.out.print("* ");
 			}
-			//System.out.println();
+			System.out.println();
 		}
-		//System.out.println();
+		System.out.println();
 
 	} // drawFlag end bracket
 
