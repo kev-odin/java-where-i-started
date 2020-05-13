@@ -64,18 +64,27 @@ public class StarsAndStripes {
 		}
 
 		// Determine the grid size for the stars - unsure how to determine grid size?
-		int gridSize = starfieldHeight / ((col + row) / 2);
+		// vertical - number of rows
+		// horizontal - number of columns
+		int gridSizeVertical = starfieldHeight / row;
+		int gridSizeHorizontal = starfieldWidth / col;
+
+		// Determine the size of stars based on both grid sizes above
+		int starSize = Math.min(gridSizeVertical, gridSizeHorizontal);
+
+		// Horizontal and vertical gaps
+		int verticalGap = (starfieldHeight - (starSize * row)) / 2;
+		int horizontalGap = (starfieldWidth - (starSize * col)) / 2;
+
+		System.out.println(verticalGap);
+		System.out.println(horizontalGap);
 		
 		// Draw stars in a grid pattern
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				drawStar(g, x + j * gridSize, y + i * gridSize, gridSize);
-				System.out.print("* ");
+				drawStar(g, x + j * gridSizeHorizontal, y + i * gridSizeVertical, starSize);
 			}
-			System.out.println();
 		}
-		System.out.println();
-
 	} // drawFlag end bracket
 
 	public static void drawStar(java.awt.Graphics g, int x, int y, int size) {
