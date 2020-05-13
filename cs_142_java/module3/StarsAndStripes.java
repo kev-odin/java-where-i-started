@@ -23,28 +23,19 @@ public class StarsAndStripes {
 
 		// Red stripe position and dimensions
 		int stripeHeight = (int) Math.floor(height / stripes); // Evenly divided stripe height, rounded down
-		int stripeHeightSkip = 2 * stripeHeight; // Used for drawing the red stripes, double the height for drawing the red lines
 		int numberOfRed = (int) Math.ceil((double) stripes / 2); // Number of red stripes rounded up, casted to double to use Math.ceil 
-
-		// Odd red stripe maybe?
-		// int stripeArea = stripeHeight * stripes;
-		// int stripeFill = height - stripeArea;
 
 		// Draw red stripes
 		for (int i = 0; i < numberOfRed; i++) {
-			int verticalPosition = y + (i * stripeHeightSkip); 
+			int verticalPosition = i * stripeHeight * 2; 
 			g.setColor(Color.red);
-			g.fillRect(x, verticalPosition, width, stripeHeight);
-			
-			// Last red stripe if odd
-			// if (stripes % 2 != 0) {
-			// 	if (i == numberOfRed - 1) {
-			// 		g.setColor(Color.black);
-			// 		g.fillRect(x, y + 2 * numberOfRed * stripeHeight, width, height - stripeHeight * 2 * numberOfRed);
-			// 	}
-			// }
+			if (stripes % 2 == 1 && i == numberOfRed - 1) { // Odd red stripe
+				g.fillRect(x, y + verticalPosition, width, height - verticalPosition);
+			} else {
+				g.fillRect(x, y + verticalPosition, width, stripeHeight);
+			}
 		}
-			//blue starfield
+			//Blue starfield, based on the number of red stripes
 			g.setColor(Color.blue);
 			int starfieldHeight = numberOfRed * stripeHeight;
 			int starfieldWidth =  starfieldHeight * width / height;
@@ -109,7 +100,7 @@ public class StarsAndStripes {
 		int x5 = x + dividedSize10 * 5;
 		int y5 = y;
 
-		g.drawLine(x1, y1, x2, y2); //bottom left to top right line
+		g.drawLine(x1, y1, x2, y2); // bottom left to top right line
 		g.drawLine(x2, y2, x3, y3); // top right line to the top left corner (opposite side)
 		g.drawLine(x3, y3, x4, y4); // top left corner to the bottom right corner
 		g.drawLine(x4, y4, x5, y5); // bottom right corner to the top center
