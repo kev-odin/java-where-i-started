@@ -13,8 +13,7 @@ public class YardSaleScanner {
 	
 	public static double yardSale(Scanner s, double money) {
 		
-		
-		return 0.0; //change this to the correct amount
+		return money; //change this to the correct amount
 	}
 
 }
