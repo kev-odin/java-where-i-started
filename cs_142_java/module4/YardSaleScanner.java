@@ -3,18 +3,21 @@ import java.util.Scanner;
 // Kevin Chung
 public class YardSaleScanner {
 
-	// In the main method, you should create a new scanner and call the yardSale
-	// method to test your code.
+	// In the main method, you should create a new scanner and call the yardSale method to test your code.
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		double remainingBudget = yardSale(input, 50.75);
+		System.out.println(remainingBudget);
 	}
 
 	public static double yardSale(Scanner s, double money) {
 		double spendyCash = 0.0;
+		double spendiestItem = 0.0;
 		int quantity = 0;
 		int totalQuantity = 0;
+		
+		System.out.println(); //Blank line
 
 		// Money needs to be above $5.00 to keep the loop going
 		while (money > 5.0) {
@@ -37,10 +40,16 @@ public class YardSaleScanner {
 					totalQuantity += quantity;
 					money -= finalCost;
 				}
+				// New spendiest item
+				if (finalCost > spendiestItem) {
+					spendiestItem = finalCost;
+				}
 			}
-			System.out.print("Remaining money: $" + money + "\n");
+			System.out.println("Remaining money: $" + money + "\n");
 		}
 		System.out.println("Total quantity purchased: " + totalQuantity);
-		return money; // change this to the correct amount
+		System.out.println("Most expensive purchase: $" + spendiestItem);
+
+		return money;
 	}
 }
