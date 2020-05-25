@@ -100,6 +100,12 @@ public class CricketsAndGrasshoppers {
         // Return true if the given player has any move they can make.
         // Cricket is player 1 and grasshopper is 2.
         // This method will help you determine when the game is over.
+
+        for (int i = 0; i < board.length; i++) {
+
+        }
+
+
         return true;
     }
 
