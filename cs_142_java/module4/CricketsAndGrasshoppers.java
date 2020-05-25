@@ -20,23 +20,35 @@ public class CricketsAndGrasshoppers {
         Scanner readThis = new Scanner(System.in);
         int max = 10; // given assignment parameter
         int piecesPerPlayer = 0;
-        int numberOfSpaces = 0;
+        int spacesInMiddle = 0;
+        int playerTurn = 1;
 
         String[] playerName = new String[2];
         playerName[0] = "Crickets";
         playerName[1] = "Grasshoppers";
 
-        String[] playerPrompt = new String[2];
+        String[] playerPrompt = new String[3];
         playerPrompt[0] = "Please enter the number of pieces for each player (1-10): ";
         playerPrompt[1] = "Please enter the number of spaces in the middle (1-9): ";
+        playerPrompt[2] = ", please enter your move: ";
 
         // Prompt user to make the game board, gather information on the array size
         piecesPerPlayer = promptNumberReadLine(readThis, playerPrompt[0], max);
-        numberOfSpaces = promptNumberReadLine(readThis, playerPrompt[1], max - 1);
+        spacesInMiddle = promptNumberReadLine(readThis, playerPrompt[1], max - 1);
+        
+        while (true) {
+            // Create game board based on the user input
+            createBoard(piecesPerPlayer, spacesInMiddle);
+            System.out.println(boardToString(createBoard(piecesPerPlayer, spacesInMiddle)));
 
-        // Create game board based on the user input
-        createBoard(piecesPerPlayer, numberOfSpaces);
-
+            if (playerTurn == 1) {
+                promptNumberReadLine(readThis, playerName[0] + playerPrompt[2], max);
+                playerTurn++;
+            } else {
+                promptNumberReadLine(readThis, playerName[1] + playerPrompt[2], max);
+                playerTurn--;
+            }
+        }
     }
 
     public static int promptNumberReadLine(Scanner s, String prompt, int max) {
@@ -68,7 +80,7 @@ public class CricketsAndGrasshoppers {
         int[] gameBoard = new int[gameSize];
 
         // build int[] based on player input
-        for (int i = 0; i < gameBoard.length; i++) { 
+        for (int i = 0; i < gameBoard.length; i++) {
             if (i < piecesPerPlayer) {
                 gameBoard[i] = 1; // Crickets
             } else if (i >= gameBoard.length - piecesPerPlayer) {
@@ -104,7 +116,6 @@ public class CricketsAndGrasshoppers {
         for (int i = 0; i < board.length; i++) {
 
         }
-
 
         return true;
     }
