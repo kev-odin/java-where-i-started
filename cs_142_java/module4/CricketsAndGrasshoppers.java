@@ -63,19 +63,30 @@ public class CricketsAndGrasshoppers {
     }
 
     public static int[] createBoard(int piecesPerPlayer, int spacesInMiddle) {
-    // Create and return an array representing a new game with the number of pieces
-    // for each player indicated.
-    // The pieces should be on the ends of the board with the specified empty
-    // spaces.
-    // In your array, use 1 to represent Crickets (player 1), use 2 to represent
-    // Grasshoppers (player 2), and use 0 to represent an empty space.
-    // return 0;
-    
-    int gameSize = (piecesPerPlayer * 2) + spacesInMiddle;
-    System.out.println("The size of this game board is: " + gameSize);
-    int[] gameBoard = new int[gameSize];
+        // Create and return an array representing a new game with the number of pieces
+        // for each player indicated.
+        // The pieces should be on the ends of the board with the specified empty
+        // spaces.
+        // In your array, use 1 to represent Crickets (player 1), use 2 to represent
+        // Grasshoppers (player 2), and use 0 to represent an empty space.
+        // return 0;
 
-    return gameBoard;
+        int gameSize = (piecesPerPlayer * 2) + spacesInMiddle;
+        System.out.println("The size of this game board is: " + gameSize);
+        int[] gameBoard = new int[gameSize];
+
+        for (int i = 0; i < gameSize; i++) {
+            for (int j = 0; j < piecesPerPlayer; j++) {
+                if (i < piecesPerPlayer) {
+                    gameBoard[i] = 1;
+                } else if (i < piecesPerPlayer + spacesInMiddle) {
+                    gameBoard[i + spacesInMiddle] = 2;
+                }
+            }
+            System.out.print(gameBoard[i]);
+        }
+
+        return gameBoard;
     }
 
     // public static String boardToString(int[] board) {
