@@ -21,33 +21,37 @@ public class CricketsAndGrasshoppers {
         int max = 10; // given assignment parameter
         int piecesPerPlayer = 0;
         int spacesInMiddle = 0;
-        int playerTurn = 1;
+        int player = 1;
 
         String[] playerName = new String[2];
         playerName[0] = "Crickets";
         playerName[1] = "Grasshoppers";
 
-        String[] playerPrompt = new String[3];
+        String[] playerPrompt = new String[4];
         playerPrompt[0] = "Please enter the number of pieces for each player (1-10): ";
         playerPrompt[1] = "Please enter the number of spaces in the middle (1-9): ";
-        playerPrompt[2] = ", please enter your move: ";
+        playerPrompt[2] = ", please enter your move ";
+        playerPrompt[3] = "That space does not contain a piece you can move! Please try again.";
 
         // Prompt user to make the game board, gather information on the array size
         piecesPerPlayer = promptNumberReadLine(readThis, playerPrompt[0], max);
         spacesInMiddle = promptNumberReadLine(readThis, playerPrompt[1], max - 1);
-        
+        max = spacesInMiddle + piecesPerPlayer * 2;
+
         while (true) {
             // Create game board based on the user input
-            createBoard(piecesPerPlayer, spacesInMiddle);
-            System.out.println(boardToString(createBoard(piecesPerPlayer, spacesInMiddle)));
+            int[] gameBoardPlay = createBoard(piecesPerPlayer, spacesInMiddle);
+            System.out.println(boardToString(gameBoardPlay));
 
-            if (playerTurn == 1) {
-                promptNumberReadLine(readThis, playerName[0] + playerPrompt[2], max);
-                playerTurn++;
+            if (player == 1) {
+                promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
+                player++;
             } else {
-                promptNumberReadLine(readThis, playerName[1] + playerPrompt[2], max);
-                playerTurn--;
+                promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
+                player--;
             }
+            canMove(gameBoardPlay, player);
+
         }
     }
 
@@ -94,7 +98,7 @@ public class CricketsAndGrasshoppers {
 
         String gameBoardString = "";
 
-        // Searching the board array for 0, 1, 2 and adding the letter
+        // Searching the board array for 0, 1, 2 and adding the corresponding letter
         for (int i = 0; i < board.length; i++) {
 
             if (board[i] == 1) {
@@ -112,12 +116,26 @@ public class CricketsAndGrasshoppers {
         // Return true if the given player has any move they can make.
         // Cricket is player 1 and grasshopper is 2.
         // This method will help you determine when the game is over.
-
-        for (int i = 0; i < board.length; i++) {
-
+        int numberOfMoves = 0;
+        if (player == 1) {
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] == 0) { // counting spaces for number of moves
+                    numberOfMoves++;
+                }
+            }
+        } else { // player 2 - grasshopper
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] == 0) { // counting spaces for number of moves
+                    numberOfMoves++;
+                }
+            }
         }
-
-        return true;
+        
+        if (numberOfMoves > 0) {
+            System.out.println("You have these many valid moves: " + numberOfMoves);
+            return true;
+        }
+        return false;
     }
 
     public static boolean move(int[] board, int player, int position) {
