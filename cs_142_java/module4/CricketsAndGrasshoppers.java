@@ -75,15 +75,15 @@ public class CricketsAndGrasshoppers {
         System.out.println("The size of this game board is: " + gameSize);
         int[] gameBoard = new int[gameSize];
 
-        for (int i = 0; i < gameSize; i++) {
-            for (int j = 0; j < piecesPerPlayer; j++) {
-                if (i < piecesPerPlayer) {
-                    gameBoard[i] = 1;
-                } else if (i < piecesPerPlayer + spacesInMiddle) {
-                    gameBoard[i + spacesInMiddle] = 2;
-                }
+        for (int i = 0; i < gameSize; i++) { // build int[] based on player input
+            if (i < piecesPerPlayer) {
+                gameBoard[i] = 1; // Crickets
+            } else if (i >= piecesPerPlayer + spacesInMiddle) {
+                gameBoard[i + spacesInMiddle - 1] = 2; // Grasshoppers
+            } else {
+                gameBoard[i] = 0;
             }
-            System.out.print(gameBoard[i]);
+            System.out.print(gameBoard[i] + " ");
         }
 
         return gameBoard;
