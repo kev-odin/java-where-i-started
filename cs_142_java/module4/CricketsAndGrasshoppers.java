@@ -42,7 +42,7 @@ public class CricketsAndGrasshoppers {
     public static int promptNumberReadLine(Scanner s, String prompt, int max) {
 
         int userInput = 0;
-        String errorRange = "That was not a valid number. Please try again.";
+        String errorRange = "That was not a valid number! Please try again.";
 
         // Making sure that the user inputs are valid and within the the right range.
         while (true) {
@@ -63,41 +63,38 @@ public class CricketsAndGrasshoppers {
     }
 
     public static int[] createBoard(int piecesPerPlayer, int spacesInMiddle) {
-        // Create and return an array representing a new game with the number of pieces
-        // for each player indicated.
-        // The pieces should be on the ends of the board with the specified empty
-        // spaces.
-        // In your array, use 1 to represent Crickets (player 1), use 2 to represent
-        // Grasshoppers (player 2), and use 0 to represent an empty space.
-        // return 0;
 
         int gameSize = (piecesPerPlayer * 2) + spacesInMiddle;
-        System.out.println("The size of this game board is: " + gameSize);
         int[] gameBoard = new int[gameSize];
 
-        for (int i = 0; i < gameSize; i++) { // build int[] based on player input
+        // build int[] based on player input
+        for (int i = 0; i < gameBoard.length; i++) { 
             if (i < piecesPerPlayer) {
                 gameBoard[i] = 1; // Crickets
-            } else if (i >= piecesPerPlayer + spacesInMiddle) {
-                gameBoard[i + spacesInMiddle - 1] = 2; // Grasshoppers
-            } else {
-                gameBoard[i] = 0;
+            } else if (i >= gameBoard.length - piecesPerPlayer) {
+                gameBoard[i] = 2; // Grasshoppers
             }
-            System.out.print(gameBoard[i] + " ");
         }
-
         return gameBoard;
     }
 
-    // public static String boardToString(int[] board) {
-    // Create and return a String that represents the game board, all on one line.
-    // Crickets are specified with C, grasshoppers with G, and empty spaces with .
-    // (period)
-    // Don’t print it with this method! You’ll print the board by calling this
-    // method from the main later.
-    // Hint: Use string concatenation in a for loop.
-    // return 0;
-    // }
+    public static String boardToString(int[] board) {
+
+        String gameBoardString = "";
+
+        // Searching the board array for 0, 1, 2 and adding the letter
+        for (int i = 0; i < board.length; i++) {
+
+            if (board[i] == 1) {
+                gameBoardString += "C";
+            } else if (board[i] == 2) {
+                gameBoardString += "G";
+            } else {
+                gameBoardString += ".";
+            }
+        }
+        return gameBoardString;
+    }
 
     public static boolean canMove(int[] board, int player) {
         // Return true if the given player has any move they can make.
