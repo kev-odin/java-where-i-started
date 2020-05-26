@@ -116,12 +116,12 @@ public class CricketsAndGrasshoppers {
         boolean validMoves = false;
 
         for (int i = 0; i < board.length; i++) {
-            if (player == 1 && board[i] == 1) { // player 1 availible moves, empty space OR enemy + empty space
+            if (player == 1 && board[i] == 1) { // player 1 available moves, empty space OR enemy + empty space
                 if (board[i + 1] == 0) {
                 } else if (board[i + 1] == 2 && board[i + 2] == 0) {
                 }
                 validMoves = true;
-            } else if (player == 2 && board[i] == 2) { // player 2 availible moves, empty space OR enemy + empty space
+            } else if (player == 2 && board[i] == 2) { // player 2 available moves, empty space OR enemy + empty space
                 if (board[i - 1] == 0) {
                 } else if (board[i - 1] == 1 && board[i - 2] == 0) {
                 }
