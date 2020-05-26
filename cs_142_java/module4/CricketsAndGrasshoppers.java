@@ -45,13 +45,13 @@ public class CricketsAndGrasshoppers {
 
             if (player == 1) {
                 promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
+                isMoveValid(gameBoardPlay, player, 1);
                 player++;
             } else {
                 promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
+                isMoveValid(gameBoardPlay, player, 1);
                 player--;
             }
-            canMove(gameBoardPlay, player);
-
         }
     }
 
@@ -100,7 +100,6 @@ public class CricketsAndGrasshoppers {
 
         // Searching the board array for 0, 1, 2 and adding the corresponding letter
         for (int i = 0; i < board.length; i++) {
-
             if (board[i] == 1) {
                 gameBoardString += "C";
             } else if (board[i] == 2) {
@@ -112,29 +111,45 @@ public class CricketsAndGrasshoppers {
         return gameBoardString;
     }
 
+    public static boolean isMoveValid(int[] board, int player, int position) {
+
+        boolean validMoves = false;
+
+        for (int i = 0; i < board.length; i++) {
+            if (player == 1 && board[i] == 1) { // player 1 availible moves, empty space OR enemy + empty space
+                if (board[i + 1] == 0) {
+                } else if (board[i + 1] == 2 && board[i + 2] == 0) {
+                }
+                validMoves = true;
+            } else if (player == 2 && board[i] == 2) { // player 2 availible moves, empty space OR enemy + empty space
+                if (board[i - 1] == 0) {
+                } else if (board[i - 1] == 1 && board[i - 2] == 0) {
+                }
+                validMoves = true;
+            }
+        }
+        return validMoves;
+    }
+
     public static boolean canMove(int[] board, int player) {
         // Return true if the given player has any move they can make.
         // Cricket is player 1 and grasshopper is 2.
         // This method will help you determine when the game is over.
-        int numberOfMoves = 0;
-        if (player == 1) {
-            for (int i = 0; i < board.length; i++) {
-                if (board[i] == 0) { // counting spaces for number of moves
-                    numberOfMoves++;
-                }
-            }
-        } else { // player 2 - grasshopper
-            for (int i = 0; i < board.length; i++) {
-                if (board[i] == 0) { // counting spaces for number of moves
-                    numberOfMoves++;
-                }
-            }
-        }
-        
-        if (numberOfMoves > 0) {
-            System.out.println("You have these many valid moves: " + numberOfMoves);
-            return true;
-        }
+
+        // Look for pieces matching the player piece in the array
+        // for (int i = 0; i < board.length; i++) {
+        // for (int j = 0; j < board.length; j++) {
+        // if (player == 1 && board[i] == 1) {
+        // System.out.println(board[i]);
+        // return true;
+        // }
+        // if (player == 2 && board[i] == 2) {
+        // System.out.println(board[i]);
+        // return true;
+        // }
+        // }
+        // }
+        // System.out.println("There are no valid pieces here.");
         return false;
     }
 
@@ -147,7 +162,4 @@ public class CricketsAndGrasshoppers {
         return true;
     }
 
-    public static boolean isMoveLegal() { // possible to add later on for logic test
-        return true;
-    }
 }
