@@ -45,11 +45,11 @@ public class CricketsAndGrasshoppers {
 
             if (player == 1) {
                 promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
-                isMoveValid(gameBoardPlay, player, 1);
+                canMove(gameBoardPlay, player);
                 player++;
             } else {
                 promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
-                isMoveValid(gameBoardPlay, player, 1);
+                canMove(gameBoardPlay, player);
                 player--;
             }
         }
@@ -135,22 +135,18 @@ public class CricketsAndGrasshoppers {
         // Return true if the given player has any move they can make.
         // Cricket is player 1 and grasshopper is 2.
         // This method will help you determine when the game is over.
-
         // Look for pieces matching the player piece in the array
-        // for (int i = 0; i < board.length; i++) {
-        // for (int j = 0; j < board.length; j++) {
-        // if (player == 1 && board[i] == 1) {
-        // System.out.println(board[i]);
-        // return true;
-        // }
-        // if (player == 2 && board[i] == 2) {
-        // System.out.println(board[i]);
-        // return true;
-        // }
-        // }
-        // }
-        // System.out.println("There are no valid pieces here.");
-        return false;
+
+        int position = 0;
+
+        for (int i = 0; i < board.length; i++) {
+            if (player == 1 && board[i] == 1) {
+                isMoveValid(board, player, position);
+            } else if (player == 2 && board[i] == 2) {
+                isMoveValid(board, player, position);
+            }
+        }
+        return true;
     }
 
     public static boolean move(int[] board, int player, int position) {
