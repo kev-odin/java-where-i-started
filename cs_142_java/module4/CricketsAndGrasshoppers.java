@@ -3,20 +3,7 @@ import java.util.Scanner;
 public class CricketsAndGrasshoppers {
 
     public static void main(String[] args) {
-        // The main method will do several things in this program:
-        // Start by creating a new Scanner object, then use your promptNumberReadLine
-        // method to ask the user for the number of pieces per player and empty spaces
-        // in the middle.
-        // Use this information to create the initial board.
-        // Then use a while loop to repeat the primary game loop where you:
-        // print the board to the console as a String,
-        // ask the current player to enter their move, and, if it is valid,
-        // modify the board with your move method. If it is not valid, print a message
-        // and ask again.
-        // Repeat this until a player has won.
-        // Once a player has won, exit the loop and print out a message as shown in the
-        // examples above.
-
+        // Crickets and grasshopper game 
         Scanner readThis = new Scanner(System.in);
         int max = 10; // given assignment parameter
         int piecesPerPlayer = 0;
@@ -42,10 +29,10 @@ public class CricketsAndGrasshoppers {
 
         // Game has started playing, after the game board has been set up
         boolean playGame = true; // outer game loop, when we start the program
-        boolean playerMove = true;
 
         while (playGame) {
 
+            boolean playerMove = true;
             // Create game board based on the user input
             System.out.println(boardToString(gameBoardPlay));
 
@@ -54,7 +41,7 @@ public class CricketsAndGrasshoppers {
             if (player == 1) {
                 while (playerMove) {
                     playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
-                    if (isMoveValid(gameBoardPlay, player, playerInput - 1)) {
+                    if (isMoveValid(gameBoardPlay, player, playerInput)) {
                         move(gameBoardPlay, player, playerInput);
                         playerMove = false;
                     } else {
@@ -62,17 +49,19 @@ public class CricketsAndGrasshoppers {
                     }
                 }
                 player++;
+                playerMove = true;
             } else {
                 while (playerMove) {
                     playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
                     if (isMoveValid(gameBoardPlay, player, playerInput - 1)) {
-                        move(gameBoardPlay, player, playerInput);
+                        move(gameBoardPlay, player, playerInput - 1);
                         playerMove = false;
                     } else {
                         System.out.println(playerPrompt[3]);
                     }
                 }
                 player--;
+                playerMove = true;
             }
         }
     }
