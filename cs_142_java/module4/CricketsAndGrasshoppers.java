@@ -113,22 +113,20 @@ public class CricketsAndGrasshoppers {
 
     public static boolean isMoveValid(int[] board, int player, int position) {
 
-        boolean validMoves = false;
+        int i = position - 1;
 
-        for (int i = 0; i < board.length; i++) {
-            if (player == 1 && board[i] == 1) { // player 1 available moves, empty space OR enemy + empty space
-                if (board[i + 1] == 0) {
-                } else if (board[i + 1] == 2 && board[i + 2] == 0) {
-                }
-                validMoves = true;
-            } else if (player == 2 && board[i] == 2) { // player 2 available moves, empty space OR enemy + empty space
-                if (board[i - 1] == 0) {
-                } else if (board[i - 1] == 1 && board[i - 2] == 0) {
-                }
-                validMoves = true;
+        if (player == 1 && board[i] == 1) {
+            if (board[i + 1] == 0 || board[i + 1] == 2 && board[i + 2] == 0) {
+                System.out.println("You found a Cricket. That can dance. At position: " + position);
+                return true;
+            }
+        } else if (player == 2 && board[i] == 2) {
+            if (board[i - 1] == 0 || board[i - 1] == 1 && board[i - 2] == 0) {
+                System.out.println("You found a Grasshopper. That can dance. At position " + position);
+                return true;
             }
         }
-        return validMoves;
+        return false;
     }
 
     public static boolean canMove(int[] board, int player) {
@@ -137,16 +135,15 @@ public class CricketsAndGrasshoppers {
         // This method will help you determine when the game is over.
         // Look for pieces matching the player piece in the array
 
-        int position = 0;
+        boolean movePiece = false;
 
-        for (int i = 0; i < board.length; i++) {
-            if (player == 1 && board[i] == 1) {
-                isMoveValid(board, player, position);
-            } else if (player == 2 && board[i] == 2) {
-                isMoveValid(board, player, position);
+        for (int i = 0; i <= board.length - 1; i++) {
+            int position = i + 1;
+            if (isMoveValid(board, player, position)) {
+                movePiece = true;
             }
         }
-        return true;
+        return movePiece;
     }
 
     public static boolean move(int[] board, int player, int position) {
@@ -155,7 +152,7 @@ public class CricketsAndGrasshoppers {
         // Otherwise, don’t modify board and return false.
         // Note: The user will enter a number form 1 to n to specify a position, but in
         // your board array, recall that the entries are indexed 0 to n-1.
-        return true;
+        return false;
     }
 
 }
