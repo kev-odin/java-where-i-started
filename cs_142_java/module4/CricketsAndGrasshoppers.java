@@ -21,8 +21,7 @@ public class CricketsAndGrasshoppers {
         int max = 10; // given assignment parameter
         int piecesPerPlayer = 0;
         int spacesInMiddle = 0;
-        int player = 1;
-        boolean playGame = true;
+        int player = 1; // current player starts at 1
 
         String[] playerName = new String[2];
         playerName[0] = "Crickets";
@@ -39,18 +38,40 @@ public class CricketsAndGrasshoppers {
         spacesInMiddle = promptNumberReadLine(readThis, playerPrompt[1], max - 1);
         max = spacesInMiddle + piecesPerPlayer * 2;
 
+        int[] gameBoardPlay = createBoard(piecesPerPlayer, spacesInMiddle);
+
+        // Game has started playing, after the game board has been set up
+        boolean playGame = true; // outer game loop, when we start the program
+        boolean playerMove = true;
+
         while (playGame) {
+
             // Create game board based on the user input
-            int[] gameBoardPlay = createBoard(piecesPerPlayer, spacesInMiddle);
             System.out.println(boardToString(gameBoardPlay));
 
+            int playerInput = 1000;
+
             if (player == 1) {
-                promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
-                canMove(gameBoardPlay, player);
+                while (playerMove) {
+                    playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
+                    if (isMoveValid(gameBoardPlay, player, playerInput - 1)) {
+                        move(gameBoardPlay, player, playerInput);
+                        playerMove = false;
+                    } else {
+                        System.out.println(playerPrompt[3]);
+                    }
+                }
                 player++;
             } else {
-                promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
-                canMove(gameBoardPlay, player);
+                while (playerMove) {
+                    playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
+                    if (isMoveValid(gameBoardPlay, player, playerInput - 1)) {
+                        move(gameBoardPlay, player, playerInput);
+                        playerMove = false;
+                    } else {
+                        System.out.println(playerPrompt[3]);
+                    }
+                }
                 player--;
             }
         }
@@ -114,10 +135,10 @@ public class CricketsAndGrasshoppers {
 
     public static boolean isMoveValid(int[] board, int player, int position) {
 
-         //System.out.println("This is the array length: " + board.length);
-         //System.out.println("This is the position: " + position);
+        // System.out.println("This is the array length: " + board.length);
+        // System.out.println("This is the position: " + position);
         int i = position - 1;
-         //System.out.println("This is the array index: "+ i);
+        // System.out.println("This is the array index: "+ i);
 
         // checking special cases, when the pieces are at the edge cases
         // player 1 cases, at the end when the position is at the end of the
@@ -134,7 +155,7 @@ public class CricketsAndGrasshoppers {
                 }
             }
         }
-        
+
         if (player == 2) {
             if (position == 1) { // at the beginning of the board
                 return false;
@@ -153,12 +174,10 @@ public class CricketsAndGrasshoppers {
         // be empty.
         if (player == 1 && board[i] == 1) {
             if (board[i + 1] == 0 || board[i + 1] == 2 && board[i + 2] == 0) {
-                System.out.println("You found a Cricket. That can dance. At position: " + position);
                 return true;
             }
         } else if (player == 2 && board[i] == 2) {
             if (board[i - 1] == 0 || board[i - 1] == 1 && board[i - 2] == 0) {
-                System.out.println("You found a Grasshopper. That can dance. At position " + position);
                 return true;
             }
         }
@@ -189,24 +208,24 @@ public class CricketsAndGrasshoppers {
         }
 
         if (player == 1 && board[i] == 1) {
-            if (board[i + 1] == 2) {            // grasshopper in front
-                board[i] = 0;                   // current space is replaced with 0
-                board[i + 2] = 1;               // crickets jumped over a grasshopper
+            if (board[i + 1] == 2) { // grasshopper in front
+                board[i] = 0; // current space is replaced with 0
+                board[i + 2] = 1; // crickets jumped over a grasshopper
 
-            } else if (board[i + 1] == 0) {     // empty space in front
-                board[i] = 0;                   // current space is replaced with 0
-                board[i + 1] = 1;               // crickets jumped to the next space
+            } else if (board[i + 1] == 0) { // empty space in front
+                board[i] = 0; // current space is replaced with 0
+                board[i + 1] = 1; // crickets jumped to the next space
             }
         }
 
-        if (player == 2 && board[i] == 2) {     
-            if (board [i - 1] == 1) {           // cricket to the left
-                board[i] = 0;                   // current space is replaced with 0
-                board[i - 2] = 2;               // grasshopper jumped over a cricket
+        if (player == 2 && board[i] == 2) {
+            if (board[i - 1] == 1) { // cricket to the left
+                board[i] = 0; // current space is replaced with 0
+                board[i - 2] = 2; // grasshopper jumped over a cricket
 
-            } else if (board[i - 1] == 0) {     // empty space in front
-                board[i] = 0;                   // current space is replaced with 0
-                board[i - 1] = 2;               // grasshopper jumped to the next space
+            } else if (board[i - 1] == 0) { // empty space in front
+                board[i] = 0; // current space is replaced with 0
+                board[i - 1] = 2; // grasshopper jumped to the next space
             }
         }
         return true;
