@@ -33,6 +33,7 @@ public class CricketsAndGrasshoppers {
         while (playGame) {
 
             boolean playerMove = true;
+
             // Create game board based on the user input
             System.out.println(boardToString(gameBoardPlay));
 
@@ -52,9 +53,9 @@ public class CricketsAndGrasshoppers {
                 playerMove = true;
             } else {
                 while (playerMove) {
-                    playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
-                    if (isMoveValid(gameBoardPlay, player, playerInput - 1)) {
-                        move(gameBoardPlay, player, playerInput - 1);
+                    playerInput = promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
+                    if (isMoveValid(gameBoardPlay, player, playerInput)) {
+                        move(gameBoardPlay, player, playerInput);
                         playerMove = false;
                     } else {
                         System.out.println(playerPrompt[3]);
