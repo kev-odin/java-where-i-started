@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class CricketsAndGrasshoppers {
 
     public static void main(String[] args) {
-        // Crickets and grasshopper game 
+        // Crickets and grasshopper game
         Scanner readThis = new Scanner(System.in);
         int max = 10; // given assignment parameter
         int piecesPerPlayer = 0;
@@ -14,11 +14,12 @@ public class CricketsAndGrasshoppers {
         playerName[0] = "Crickets";
         playerName[1] = "Grasshoppers";
 
-        String[] playerPrompt = new String[4];
+        String[] playerPrompt = new String[5];
         playerPrompt[0] = "Please enter the number of pieces for each player (1-10): ";
         playerPrompt[1] = "Please enter the number of spaces in the middle (1-9): ";
         playerPrompt[2] = ", please enter your move ";
         playerPrompt[3] = "That space does not contain a piece you can move! Please try again.";
+        playerPrompt[4] = " win!";
 
         // Prompt user to make the game board, gather information on the array size
         piecesPerPlayer = promptNumberReadLine(readThis, playerPrompt[0], max);
@@ -32,12 +33,20 @@ public class CricketsAndGrasshoppers {
 
         while (playGame) {
 
-            boolean playerMove = true;
+            if (!canMove(gameBoardPlay, player)) {
+                if (player == 1) {
+                    System.out.println(playerName[1] + playerPrompt[4]); // Grasshoppers win!
+                } else {
+                    System.out.println(playerName[0] + playerPrompt[4]); // Crickets win!
+                }
+                playGame = false;
+            }
 
             // Create game board based on the user input
             System.out.println(boardToString(gameBoardPlay));
 
             int playerInput = 1000;
+            boolean playerMove = true; // used to loop the player prompts until a valid input is entered
 
             if (player == 1) {
                 while (playerMove) {
