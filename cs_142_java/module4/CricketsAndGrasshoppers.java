@@ -141,50 +141,49 @@ public class CricketsAndGrasshoppers {
 
     public static boolean isMoveValid(int[] board, int player, int position) {
 
-        // System.out.println("This is the array length: " + board.length);
-        // System.out.println("This is the position: " + position);
         int i = position - 1;
-        // System.out.println("This is the array index: "+ i);
 
-        // checking special cases, when the pieces are at the edge cases
-        // player 1 cases, at the end when the position is at the end of the
-        // array.length
+        if (position <= board.length && position > 0) {
 
-        if (player == 1) {
-            if (position == board.length) { // at the end of the board
-                return false;
+            // checking special cases, when the pieces are at the edge cases
+            // player 1 cases, at the end when the position is at the end of the
+            // array.length
 
-            } else if (position == board.length - 1) { // before the last space on the board
-                if (board[i + 1] == 0) { // check the last index is empty
-                } else {
+            if (player == 1) {
+                if (position == board.length) { // at the end of the board
                     return false;
+
+                } else if (position == board.length - 1) { // before the last space on the board
+                    if (board[i + 1] == 0) { // check the last index is empty
+                    } else {
+                        return false;
+                    }
                 }
             }
-        }
 
-        if (player == 2) {
-            if (position == 1) { // at the beginning of the board
-                return false;
-
-            } else if (position == 2) { // the second space on the board
-                if (board[1] == 0) { // check that the first space is empty
-                } else {
+            if (player == 2) {
+                if (position == 1) { // at the beginning of the board
                     return false;
+
+                } else if (position == 2) { // the second space on the board
+                    if (board[1] == 0) { // check that the first space is empty
+                    } else {
+                        return false;
+                    }
                 }
             }
-        }
 
-        // possible moves, based on the rule of the game, move 1 space ahead if empty
-        // or if the space ahead is occupied by an enemy piece, then the space behind
-        // has to
-        // be empty.
-        if (player == 1 && board[i] == 1) {
-            if (board[i + 1] == 0 || board[i + 1] == 2 && board[i + 2] == 0) {
-                return true;
-            }
-        } else if (player == 2 && board[i] == 2) {
-            if (board[i - 1] == 0 || board[i - 1] == 1 && board[i - 2] == 0) {
-                return true;
+            // possible moves, based on the rule of the game, move 1 space ahead if empty
+            // or if the space ahead is occupied by an enemy piece, then the space behind
+            // has to be empty.
+            if (player == 1 && board[i] == 1) {
+                if (board[i + 1] == 0 || board[i + 1] == 2 && board[i + 2] == 0) {
+                    return true;
+                }
+            } else if (player == 2 && board[i] == 2) {
+                if (board[i - 1] == 0 || board[i - 1] == 1 && board[i - 2] == 0) {
+                    return true;
+                }
             }
         }
         return false;
