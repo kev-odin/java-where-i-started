@@ -43,37 +43,43 @@ public class CricketsAndGrasshoppers {
                 playGame = false; // end game state does not break out of the main method
             }
 
-            // Create game board based on the user input
-            System.out.println(boardToString(gameBoardPlay));
+            if (playGame) {
+                // Create game board based on the user input
+                System.out.println(boardToString(gameBoardPlay));
 
-            int playerInput = 1000;
+                int playerInput = 1000;
 
-            if (player == 1) {
-                boolean playerMove = true; // used to loop the player prompts until a valid input is entered
-                while (playerMove) {
-                    playerInput = promptNumberReadLine(readThis, playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
-                    if (isMoveValid(gameBoardPlay, player, playerInput)) {
-                        move(gameBoardPlay, player, playerInput);
-                        playerMove = false;
-                    } else {
-                        System.out.println(playerPrompt[3]);
+                if (player == 1) {
+                    boolean playerMove = true; // used to loop the player prompts until a valid input is entered
+                    while (playerMove) {
+                        playerInput = promptNumberReadLine(readThis,
+                                playerName[0] + playerPrompt[2] + "(1-" + max + "): ", max);
+                        if (isMoveValid(gameBoardPlay, player, playerInput)) {
+                            move(gameBoardPlay, player, playerInput);
+                            playerMove = false;
+                        } else {
+                            System.out.println(playerPrompt[3]);
+                        }
                     }
-                }
-                player++;
+                    player++;
 
-            } else {
-                boolean playerMove = true;
-                while (playerMove) {
-                    playerInput = promptNumberReadLine(readThis, playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
-                    if (isMoveValid(gameBoardPlay, player, playerInput)) {
-                        move(gameBoardPlay, player, playerInput);
-                        playerMove = false;
-                    } else {
-                        System.out.println(playerPrompt[3]);
+                } else {
+                    boolean playerMove = true;
+                    while (playerMove) {
+                        playerInput = promptNumberReadLine(readThis,
+                                playerName[1] + playerPrompt[2] + "(1-" + max + "): ", max);
+                        if (isMoveValid(gameBoardPlay, player, playerInput)) {
+                            move(gameBoardPlay, player, playerInput);
+                            playerMove = false;
+                        } else {
+                            System.out.println(playerPrompt[3]);
+                        }
                     }
+                    player--;
                 }
-                player--;
+
             }
+
         }
     }
 
