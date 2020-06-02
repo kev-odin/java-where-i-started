@@ -18,5 +18,7 @@ public class CharacterCreator {
 
         thud.attack(goblin);
 
+        Spellcaster ara = new Spellcaster("Ara", "Wizard", 8, 13, 18, 20);
+        ara.heal(thud);
     }
 }

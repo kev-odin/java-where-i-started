@@ -3,10 +3,8 @@ public class Adventurer {
     private String name;
     private String job;
     private int[] abilityScores; // 3 elements: strength, dexterity, intel
-    // private int strength;
-    // private int dexterity;
-    // private int intelligence;
     private int maxHP = 10; // initiallized to 10
+    private int currentHP = maxHP;
 
     // Constructors
     public Adventurer(int str, int dex, int intel) {
@@ -29,6 +27,10 @@ public class Adventurer {
     }
 
     // Getters and Setters
+    public int getCurrentHP() {
+        return currentHP;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -47,6 +49,18 @@ public class Adventurer {
 
     public int getIntelligence() {
         return abilityScores[2];
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
     }
 
     public void setName(String newName) {
@@ -89,4 +103,6 @@ public class Adventurer {
         System.out.println("Intelligence: " + abilityScores[2]);
         System.out.println("Max Hit Points: " + maxHP);
     }
+
+
 }
