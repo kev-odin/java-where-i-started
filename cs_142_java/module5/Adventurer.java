@@ -26,6 +26,26 @@ public class Adventurer {
         this.job = job;
     }
 
+    // Methods
+    public void introSelf() {
+        System.out.println("My name is " + name + " and I am a " + job + ".");
+    }
+
+    public void attack(Monster m) {
+        m.takeDamage(10);
+    }
+
+    public void rest() {
+        currentHP = maxHP;
+    }
+
+    @Override
+    public String toString() {
+        String s = name + " " + job + "\nCurrent HP: " + currentHP;
+        System.out.println();
+        return s;
+    }
+
     // Getters and Setters
     public int getCurrentHP() {
         return currentHP;
@@ -86,23 +106,4 @@ public class Adventurer {
     public void setIntelligence(int intelligence) {
         abilityScores[2] = intelligence;
     }
-
-    // Methods
-    public void introSelf() {
-        System.out.println("My name is " + name + " and I am a " + job + ".");
-    }
-
-    public void attack(Monster m) {
-        m.takeDamage(10);
-    }
-
-    public void listStats() {
-        System.out.println("Here are my stats: ");
-        System.out.println("Strength: " + abilityScores[0]);
-        System.out.println("Dexterity: " + abilityScores[1]);
-        System.out.println("Intelligence: " + abilityScores[2]);
-        System.out.println("Max Hit Points: " + maxHP);
-    }
-
-
 }

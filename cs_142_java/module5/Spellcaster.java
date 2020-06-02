@@ -9,11 +9,22 @@ public class Spellcaster extends Adventurer{
     }
 
     public void heal(Adventurer a) {
-        
         if (currentMP >= 5) {
             a.setCurrentHP(a.getMaxHP());
             currentMP -= 5;
         }
+    }
+
+    @Override
+    public void rest() {
+        super.rest();
+        currentMP = maxMP;
+    }
+    @Override
+    public String toString(){
+        String s = super.toString();
+        s += "\nCurrent MP: " + currentMP;
+        return s;
     }
 
     public int getMaxMP() {
