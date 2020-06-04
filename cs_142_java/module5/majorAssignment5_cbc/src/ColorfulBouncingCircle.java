@@ -23,26 +23,32 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
         double positionX = getCenterX() + getxVelocity();
         double positionY = getCenterY() + getyVelocity();
 
-        if ((positionX > 0 && positionX < width) && (positionY > 0 && positionY < height)) {
+        if ((positionX >= 0 && positionX <= width) && (positionY >= 0 && positionY <= height)) { // movement is within the ball playing field, move accordingly
+            if ((positionX == width || positionX == 0) && (positionY == height || positionY == 0)) { // corner case
+                xVelocity *= -1;
+                yVelocity *= -1;
+            }
             setCenterCoordinates(positionX, positionY);
-        } else if (positionX > width || positionX < 0) { // greater or less than the width, flip xVelocity
-            setxVelocity(getxVelocity() * (-1.0));
-        } else if (positionY > height || positionY < 0) { // greater or less than the height, flip yVelocity
-            setyVelocity(getyVelocity() * (-1.0));
-        } else if ((positionX == width || positionX == 0) && (positionY == height || positionY == 0)){ // corner case
-            setxVelocity(getxVelocity() * (-1.0));
-            setyVelocity(getyVelocity() * (-1.0));
+        } 
+        
+        else if (positionX < 0 || positionX > width || positionY < 0 || positionY > height) {  // center coordinates do not change - x and y
+            setCenterCoordinates(positionX - getxVelocity(), positionY - getyVelocity()); // ball does not move, or change center position
+            if (positionX < 0 || positionX > width) {
+                xVelocity *= -1;
+            }
+            if (positionY < 0 || positionY > height) {
+                yVelocity *= -1;
+            }
         }
-        setCenterCoordinates(positionX, positionY);
     }
     
     @Override
     public boolean overlaps(Circle c) {
         if (super.overlaps(c)) {
             if (this.getCenterX() > c.getCenterX() || this.getCenterX() < c.getCenterX()) { // overlap true - flip xVelocity
-                setxVelocity(xVelocity * (-1.0));
+                //setxVelocity(xVelocity * (-1.0));
             } else if (this.getCenterY() > c.getCenterY() || this.getCenterY() < c.getCenterY()) { // overlap true - flip yVelocity
-                setyVelocity(yVelocity * (-1.0));
+                //setyVelocity(yVelocity * (-1.0));
             }
             return true;
         }    
