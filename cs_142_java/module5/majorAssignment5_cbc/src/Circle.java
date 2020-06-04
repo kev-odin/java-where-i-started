@@ -59,5 +59,4 @@ public class Circle {
 				(int)(2*radius));
 		
 	}
-	
 }
