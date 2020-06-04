@@ -1,5 +1,5 @@
 import java.awt.Color;
-// Kevin Chung
+// Kevin Chung - Thank you Prof. Jon and Mylo for a fantastic online learning experience!
 
 public class ColorfulBouncingCircle extends ColorfulCircle {
     private double xVelocity;
