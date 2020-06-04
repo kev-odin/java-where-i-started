@@ -8,7 +8,7 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
     private static double width;
     private static double height;
 
-    public ColorfulBouncingCircle(double radius, double centerX, double centerY, Color color, double xVelocity, double yVelocity) {
+    public ColorfulBouncingCircle(double radius, double centerX, double centerY, Color color, double xVelocity, double yVelocity) { // constructor
         super(radius, centerX, centerY, color);
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
@@ -20,19 +20,19 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
     }
 
     public void tick() {
-        double positionX = getCenterX() + getxVelocity();
-        double positionY = getCenterY() + getyVelocity();
+        double positionX = getCenterX() + xVelocity;
+        double positionY = getCenterY() + yVelocity;
 
-        if ((positionX >= 0 && positionX <= width) && (positionY >= 0 && positionY <= height)) { // movement is within the ball playing field, move accordingly
-            if ((positionX == width || positionX == 0) && (positionY == height || positionY == 0)) { // corner case
+        if ((positionX >= 0 && positionX <= width) && (positionY >= 0 && positionY <= height)) {        // movement is within the ball playing field, move accordingly
+            if ((positionX == 0 || positionX == width) && (positionY == 0 || positionY == height)) {    // corner case
                 xVelocity *= -1;
                 yVelocity *= -1;
             }
             setCenterCoordinates(positionX, positionY);
         } 
         
-        else if (positionX < 0 || positionX > width || positionY < 0 || positionY > height) {  // center coordinates do not change - x and y
-            setCenterCoordinates(positionX - getxVelocity(), positionY - getyVelocity()); // ball does not move, or change center position
+        else if (positionX < 0 || positionX > width || positionY < 0 || positionY > height) {            // center coordinates do not change - x and y
+            setCenterCoordinates(getCenterX(), getCenterY());                                            // ball does not move, or change center position
             if (positionX < 0 || positionX > width) {
                 xVelocity *= -1;
             }
@@ -45,29 +45,14 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
     @Override
     public boolean overlaps(Circle c) {
         if (super.overlaps(c)) {
-            if (this.getCenterX() > c.getCenterX() || this.getCenterX() < c.getCenterX()) { // overlap true - flip xVelocity
-                //setxVelocity(xVelocity * (-1.0));
-            } else if (this.getCenterY() > c.getCenterY() || this.getCenterY() < c.getCenterY()) { // overlap true - flip yVelocity
-                //setyVelocity(yVelocity * (-1.0));
+            if (this.getCenterY() > c.getCenterY() || this.getCenterY() < c.getCenterY()) {
+                yVelocity *= -1;
+            }
+            if (this.getCenterX() > c.getCenterX() || this.getCenterX() < c.getCenterX()) {
+                xVelocity *= -1;
             }
             return true;
-        }    
-    return false;
-    }
-
-    public double getxVelocity() {
-        return xVelocity;
-    }
-
-    public void setxVelocity(double xVelocity) {
-        this.xVelocity = xVelocity;
-    }
-
-    public double getyVelocity() {
-        return yVelocity;
-    }
-
-    public void setyVelocity(double yVelocity) {
-        this.yVelocity = yVelocity;
+        }
+        return false;
     }
 }
