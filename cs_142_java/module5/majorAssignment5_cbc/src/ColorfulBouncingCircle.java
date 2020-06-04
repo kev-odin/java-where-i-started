@@ -1,4 +1,5 @@
 import java.awt.Color;
+// Kevin Chung
 
 public class ColorfulBouncingCircle extends ColorfulCircle {
     private double xVelocity;
@@ -19,27 +20,32 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
     }
 
     public void tick() {
-        double positionX = this.getCenterX() + this.xVelocity;
-        double positionY = this.getCenterY() + this.yVelocity;
+        double positionX = getCenterX() + getxVelocity();
+        double positionY = getCenterY() + getyVelocity();
 
-        if ((positionX > 0 && positionX <= width) && (positionY > 0 && positionY <= height)) {
-            this.setCenterCoordinates(positionX, positionY);
-        } else if (positionX > width || positionX < 0) {
-            this.xVelocity = xVelocity * (-1.0);
-            positionX = this.getCenterX() + this.xVelocity;
-        } else if (positionY > height || positionY < 0) {
-            this.yVelocity = yVelocity * (-1.0);
-            positionY = this.getCenterY() + this.yVelocity;
+        if ((positionX > 0 && positionX < width) && (positionY > 0 && positionY < height)) {
+            setCenterCoordinates(positionX, positionY);
+        } else if (positionX > width || positionX < 0) { // greater or less than the width, flip xVelocity
+            setxVelocity(getxVelocity() * (-1.0));
+        } else if (positionY > height || positionY < 0) { // greater or less than the height, flip yVelocity
+            setyVelocity(getyVelocity() * (-1.0));
+        } else if ((positionX == width || positionX == 0) && (positionY == height || positionY == 0)){ // corner case
+            setxVelocity(getxVelocity() * (-1.0));
+            setyVelocity(getyVelocity() * (-1.0));
         }
-        this.setCenterCoordinates(positionX, positionY);
+        setCenterCoordinates(positionX, positionY);
     }
     
     @Override
     public boolean overlaps(Circle c) {
         if (super.overlaps(c)) {
+            if (this.getCenterX() > c.getCenterX() || this.getCenterX() < c.getCenterX()) { // overlap true - flip xVelocity
+                setxVelocity(xVelocity * (-1.0));
+            } else if (this.getCenterY() > c.getCenterY() || this.getCenterY() < c.getCenterY()) { // overlap true - flip yVelocity
+                setyVelocity(yVelocity * (-1.0));
+            }
             return true;
-        }
-    
+        }    
     return false;
     }
 
@@ -58,7 +64,4 @@ public class ColorfulBouncingCircle extends ColorfulCircle {
     public void setyVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
-
-    
-
 }
