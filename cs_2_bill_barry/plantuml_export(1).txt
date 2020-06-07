@@ -1,0 +1,28 @@
+@startuml
+
+class Rectangle {
+    -width = 1 : double
+    -height = 1 : double
+    
+    +Rectangle()
+    +Rectangle(width : double, height : double)
+    -getArea(width * height)
+    -getPerimeter(2*width + 2*height)
+    -getWidth()
+    -getHeight()
+    -setWidth()
+    -setHeight()
+}
+    
+class Stock {
+    -symbol : string
+    -name : string
+    -prevClosingPrice : double
+    -currentPrice : double
+    
+    +Stock()
+    +Stock(symbol, name)
+    +getChangePercent(currentPrice, prevClosingPrice)
+}
+
+@enduml
