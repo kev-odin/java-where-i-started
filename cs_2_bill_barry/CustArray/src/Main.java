@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException { // reading a file in a document and if the file is not found we throw an exception
         // Prepare the program to read a file
-        File inFile = new File("src/Customer.txt");
+        File inFile = new File("CustArray/src/Customer.txt");
         Scanner readThis = new Scanner(inFile);
 
         // Read count and create array
