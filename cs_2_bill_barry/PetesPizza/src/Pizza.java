@@ -1,3 +1,5 @@
+package PetesPizza.src;
+
 public class Pizza {
     // instance variables
     private int x;
