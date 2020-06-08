@@ -1,6 +1,5 @@
 public class Pizza {
     // instance variables
-    private int x;
 
     // enumerated types? - useful in this situation 
     public enum pizzaType {CHEESE, PEPPERONI, VEGGIE};
@@ -38,7 +37,7 @@ public class Pizza {
 
     // methods for this Pizza object, easier to read without curly braces
     public double getArea() {
-        double diameter, area;
+        double diameter;
         if      (size == pizzaSize.SMALL)   diameter = SMALL_DIAM;
         else if (size == pizzaSize.MEDIUM)  diameter = MEDIUM_DIAM;
         else if (size == pizzaSize.LARGE)   diameter = LARGE_DIAM;
