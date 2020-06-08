@@ -15,7 +15,7 @@ public class Main {
         File inFile = new File("CustArray/src/Customer.txt");
         Scanner readThis = new Scanner(inFile);
 
-        // Read count and create array
+        // Read count and create array of objects
         int customerCount = readThis.nextInt();
         Customer[] custArray = new Customer[customerCount];
 
@@ -28,7 +28,7 @@ public class Main {
             balance = readThis.nextDouble();
             age = readThis.nextInt();
             name = readThis.next() + readThis.nextLine();
-            custArray[i] = new Customer(name, age, balance); // Store object in the array
+            custArray[i] = new Customer(name, age, balance); // Store object in the array, thats cool!
         }
         // Prove we have access to objects
         System.out.print("Customer: ");
