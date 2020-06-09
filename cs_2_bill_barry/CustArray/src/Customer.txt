@@ -1,6 +1,6 @@
 5
 123.45      34      Johnny Quest Adams
 234.56      48      Tomasina Jefferson
-1345.67     52      Maggie Breadloaf
-45.78       73      Bourbon Wolf
--5.87       29      Juan Handy
+1345.67     39      Maggie Breadloaf
+45.78       33      Bourbon Wolf
+6.05        29      Juan Handy
