@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/kevinchung/Documents/new-start/JUNIT/junit-4.13.jar"
+    ]
+}
