@@ -11,11 +11,14 @@ public class Car {
         this.milesDriven = milesDriven;
     }
 
-    public Car(){
+    public Car(String modelName, int numberOfWheels, int gasMileage){
+        this.modelName = modelName;
+        this.numberOfWheels = numberOfWheels;
+        this.gasMileage = gasMileage;
     }
 
     public static void main(String[] args) {
-        Car a = new Car("Mazda", 4, 30, 10000);
+        Car a = new Car("Mazda", 4, 30);
         System.out.println(a);
     }
 
