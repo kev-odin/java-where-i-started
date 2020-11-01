@@ -6,6 +6,9 @@ public class TV {
     private boolean on;
 
     public static void main(String[] args) {
+        TV Samsung = new TV();
+        Samsung.turnOn();
+        Samsung.setChannel(55);
     }
 
     public TV(){
