@@ -20,6 +20,12 @@ public class Warehouse {
 		// adding itme to the warehouse
 		// itemCode refers to what item is being added
 		// itemCount refers to how many of those items are being added to the warehouse
+		// add as many boxes of itemCode to the array as possible
+
+		// Hints: Calculate how many numbers exist in the warehouse(array) that are equal to itemCount
+		// Hints: Calculate how many numbers exist in the warehouse(array) that are equal to itemCount
+		// Calculate how many empty spaces in the warehouse (with a loop)
+		// Calculate how many items you can recieve, and modify the empty spaces in the array 
 		return 0;
 	}
 
@@ -27,6 +33,9 @@ public class Warehouse {
 		// removing items from the warehouse
 		// itemCode refers to what item is being removed
 		// itemCount refers to how many of those items are being removed to the warehouse
+		
+		// Hints: Calculate how many numbers in the array match itemCode to see how many are availible to ship
+		// Replace that many instances in the warehouse with 0 (empty space)
 		return 0;
 	}
 }
