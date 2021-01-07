@@ -5,19 +5,21 @@ public class Warehouse {
 	private int[] warehouse;
 
 	public Warehouse(int size, int limitPerItem) {
-		// size of array should be included with the constructor method.
+		this.size = size;
+		this.limitPerItem = limitPerItem;
+		this.warehouse = new int[size];
 	}
 
 	public int getSize() {
-		return size;
+		return this.size;
 	}
 
 	public int getLimitPerItem() {
-		return limitPerItem;
+		return this.limitPerItem;
 	}
 
 	public int receive(int itemCode, int itemCount) {
-		// adding itme to the warehouse
+		// adding item to the warehouse
 		// itemCode refers to what item is being added
 		// itemCount refers to how many of those items are being added to the warehouse
 		// add as many boxes of itemCode to the array as possible
@@ -37,5 +39,11 @@ public class Warehouse {
 		// Hints: Calculate how many numbers in the array match itemCode to see how many are availible to ship
 		// Replace that many instances in the warehouse with 0 (empty space)
 		return 0;
+	}
+	
+	public String toString() {
+		String s = "";
+		s += "Warehouse \nSize: " + this.size + "\nLimit per Item: " + this.limitPerItem;
+		return s;
 	}
 }
