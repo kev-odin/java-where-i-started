@@ -19,12 +19,17 @@ public class Warehouse {
 	}
 
 	public int receive(int itemCode, int itemCount) {
+		int emptySpace = 0;
+		for (int count = 0; count < warehouse.length; count++) {
+			if (warehouse[count] == 0) {
+				emptySpace++;
+			}
+		}
 		// adding item to the warehouse
 		// itemCode refers to what item is being added
 		// itemCount refers to how many of those items are being added to the warehouse
 		// add as many boxes of itemCode to the array as possible
 
-		// Hints: Calculate how many numbers exist in the warehouse(array) that are equal to itemCount
 		// Hints: Calculate how many numbers exist in the warehouse(array) that are equal to itemCount
 		// Calculate how many empty spaces in the warehouse (with a loop)
 		// Calculate how many items you can recieve, and modify the empty spaces in the array 
