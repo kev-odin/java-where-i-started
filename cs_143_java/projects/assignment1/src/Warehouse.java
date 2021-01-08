@@ -13,7 +13,7 @@ public class Warehouse {
 	public int receive(int itemCode, int itemCount) {
 		int currentInventory = 0;
 		int emptySpace = 0;
-		int overStock = 0;
+		int returnShip = 0;
 		boolean acceptShip;
 
 		for (int room = 0; room < warehouse.length; room++) {
@@ -26,31 +26,32 @@ public class Warehouse {
 			}
 		}
 
-		if (emptySpace == 0) {
-			acceptShip = false;
-			return itemCount;
+		if (emptySpace == 0) { // No space availible in the warehouse
+			returnShip = itemCount;
+			return returnShip;
 		}
 
-		if (itemCount <= limitPerItem && itemCount <= emptySpace) {
-			for (int space = 0; space < itemCount; space++) {
-				if (warehouse[space] == 0) {
-					warehouse[space] = itemCode;
+		if (emptySpace > 0) { // Space is availible in the warehouse, how many items can we take?
+			if (currentInventory < limitPerItem) {
+				itemCount = itemCount - currentInventory;
+
+				for (int space = 0; space < itemCount; space++) {
+					if (warehouse[space] == 0 && currentInventory < limitPerItem) {
+						warehouse[space] = itemCode;
+						emptySpace--; // Do I want to decrement from itemCount or emptySpace?
+						itemCount--;
+						currentInventory++;
+					}
 				}
+				returnShip = itemCount - currentInventory;
+				return returnShip;
 			}
-			return itemCount;
 		}
-		return overStock;
+		return returnShip;
 	}
 
 	public int ship(int itemCode, int itemCount) {
-		// removing items from the warehouse
-		// itemCode refers to what item is being removed
-		// itemCount refers to how many of those items are being removed to the
-		// warehouse
 
-		// Hints: Calculate how many numbers in the array match itemCode to see how many
-		// are availible to ship
-		// Replace that many instances in the warehouse with 0 (empty space)
 		return 99;
 	}
 
