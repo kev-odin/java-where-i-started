@@ -11,46 +11,47 @@ public class Warehouse {
 	}
 
 	public int receive(int itemCode, int itemCount) {
-		int emptySpace = 0;
 		int currentInventory = 0;
+		int emptySpace = 0;
+		int overStock = 0;
+		boolean acceptShip;
 
-		for (int space = 0; space < warehouse.length; space++) {
-			//if ( tree0 != null ) area += tree0.area();
-			if (warehouse[space] == 0) {
+		for (int room = 0; room < warehouse.length; room++) {
+			if (warehouse[room] == itemCode) {
+				currentInventory++;
+			}
+
+			if (warehouse[room] == 0) {
 				emptySpace++;
 			}
 		}
 
-		for (int space = 0; space < warehouse.length; space++) {
-			if (warehouse[space] == itemCode) {
-				currentInventory++;
-			}
+		if (emptySpace == 0) {
+			acceptShip = false;
+			return itemCount;
 		}
 
-		// adding item to the warehouse, itemCode refers to what item is being added
-		for (int space = 0; space < itemCount; space++) {
-			if (warehouse[space] == 0) {
-				warehouse[space] = itemCode;
+		if (itemCount <= limitPerItem && itemCount <= emptySpace) {
+			for (int space = 0; space < itemCount; space++) {
+				if (warehouse[space] == 0) {
+					warehouse[space] = itemCode;
+				}
 			}
+			return itemCount;
 		}
-
-		// itemCount refers to how many of those items are being added to the warehouse
-		// add as many boxes of itemCode to the array as possible
-
-		// Hints: Calculate how many numbers exist in the warehouse(array) that are equal to itemCount
-		// Calculate how many empty spaces in the warehouse (with a loop)
-		// Calculate how many items you can recieve, and modify the empty spaces in the array 
-		return size - currentInventory - emptySpace;
+		return overStock;
 	}
 
 	public int ship(int itemCode, int itemCount) {
 		// removing items from the warehouse
 		// itemCode refers to what item is being removed
-		// itemCount refers to how many of those items are being removed to the warehouse
-		
-		// Hints: Calculate how many numbers in the array match itemCode to see how many are availible to ship
+		// itemCount refers to how many of those items are being removed to the
+		// warehouse
+
+		// Hints: Calculate how many numbers in the array match itemCode to see how many
+		// are availible to ship
 		// Replace that many instances in the warehouse with 0 (empty space)
-		return 0;
+		return 99;
 	}
 
 	public int getSize() {
@@ -60,7 +61,7 @@ public class Warehouse {
 	public int getLimitPerItem() {
 		return this.limitPerItem;
 	}
-	
+
 	public String toString() {
 		String s = "Warehouse: \n";
 		s += "Size: " + this.size;
