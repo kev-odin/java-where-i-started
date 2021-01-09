@@ -55,7 +55,7 @@ public class Warehouse {
 
 		if (weHaveIt) {
 			for (int room = 0; room < warehouse.length; room++) {
-				if (warehouse[room] == itemCode && deliveredBox <= itemCount) {
+				if (warehouse[room] == itemCode && itemCount > 0) {
 					warehouse[room] = 0;
 					deliveredBox++;
 					itemCount--;
