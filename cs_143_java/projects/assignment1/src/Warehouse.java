@@ -14,11 +14,11 @@ public class Warehouse {
 		int currentInventory = 0;
 		int emptySpace = 0;
 
-		for (int room = 0; room < warehouse.length; room++) {
-			if (warehouse[room] == itemCode) {
+		for (int room : warehouse) {
+			if (room == itemCode) {
 				currentInventory++;
 			}
-			if (warehouse[room] == 0) {
+			if (room == 0) {
 				emptySpace++;
 			}
 		}
@@ -34,7 +34,7 @@ public class Warehouse {
 		}
 		return itemCount;
 	}
-
+	
 	public int ship(int itemCode, int itemCount) {
 		int deliveredBox = 0;
 		boolean weHaveIt = false;
