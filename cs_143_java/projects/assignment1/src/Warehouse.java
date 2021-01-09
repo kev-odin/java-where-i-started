@@ -42,13 +42,11 @@ public class Warehouse {
 	}
 
 	public int ship(int itemCode, int itemCount) {
-		int currentInventory = 0;
 		int deliveredBox = 0;
 		boolean weHaveIt = false;
 
 		for (int room = 0; room < warehouse.length; room++) {
 			if (warehouse[room] == itemCode) {
-				currentInventory++;
 				weHaveIt = true;
 			}
 		}
