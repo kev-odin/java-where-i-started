@@ -13,8 +13,6 @@ public class Warehouse {
 	public int receive(int itemCode, int itemCount) {
 		int currentInventory = 0;
 		int emptySpace = 0;
-		int returnShip = 0;
-		boolean acceptShip;
 
 		for (int room = 0; room < warehouse.length; room++) {
 			if (warehouse[room] == itemCode) {
@@ -27,32 +25,45 @@ public class Warehouse {
 		}
 
 		if (emptySpace == 0) { // No space availible in the warehouse
-			returnShip = itemCount;
-			return returnShip;
+			return itemCount;
 		}
 
 		if (emptySpace > 0) { // Space is availible in the warehouse, how many items can we take?
-			if (currentInventory < limitPerItem) {
-				itemCount = itemCount - currentInventory;
 
-				for (int space = 0; space < itemCount; space++) {
-					if (warehouse[space] == 0 && currentInventory < limitPerItem) {
-						warehouse[space] = itemCode;
-						emptySpace--; // Do I want to decrement from itemCount or emptySpace?
-						itemCount--;
-						currentInventory++;
-					}
+			for (int space = 0; space < warehouse.length; space++) {
+				if (warehouse[space] == 0 && currentInventory < limitPerItem) {
+					warehouse[space] = itemCode;
+					itemCount--;
+					currentInventory++;
 				}
-				returnShip = itemCount - currentInventory;
-				return returnShip;
 			}
 		}
-		return returnShip;
+		return itemCount;
 	}
 
 	public int ship(int itemCode, int itemCount) {
+		int currentInventory = 0;
+		int deliveredBox = 0;
+		boolean weHaveIt = false;
 
-		return 99;
+		for (int room = 0; room < warehouse.length; room++) {
+			if (warehouse[room] == itemCode) {
+				currentInventory++;
+				weHaveIt = true;
+			}
+		}
+
+		if (weHaveIt) {
+			for (int room = 0; room < warehouse.length; room++) {
+				if (warehouse[room] == itemCode && deliveredBox <= itemCount) {
+					warehouse[room] = 0;
+					deliveredBox++;
+					itemCount--;
+				}
+			}
+		}
+
+		return deliveredBox;
 	}
 
 	public int getSize() {
