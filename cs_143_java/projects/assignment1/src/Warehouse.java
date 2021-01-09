@@ -31,7 +31,7 @@ public class Warehouse {
 		if (emptySpace > 0) { // Space is availible in the warehouse, how many items can we take?
 
 			for (int space = 0; space < warehouse.length; space++) {
-				if (warehouse[space] == 0 && currentInventory < limitPerItem) {
+				if (warehouse[space] == 0 && currentInventory < limitPerItem && itemCount > 0) {
 					warehouse[space] = itemCode;
 					itemCount--;
 					currentInventory++;
