@@ -1,4 +1,4 @@
-// Please put your name here!
+// Kevin Chung
 
 public class IAList {
 	private int[] a; // Underlying array
