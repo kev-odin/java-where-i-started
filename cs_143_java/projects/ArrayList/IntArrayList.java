@@ -9,6 +9,7 @@ public class IntArrayList {
 
     private int[] a; // internal array to be used as storage for our IntArrayList
     private int n; // the number of integers that have been added to the IntArrayList
+    private int shift; // the new shifted array index after an add
 
     /**
      * Constructor to create an empty IntArrayList
