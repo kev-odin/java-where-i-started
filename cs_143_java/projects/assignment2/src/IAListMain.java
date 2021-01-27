@@ -7,10 +7,7 @@ public class IAListMain {
         a.add(4);
         a.addBefore(5);
         a.addBefore(6);
-        a.addBefore(7);
-        a.addBefore(8);
-        a.add(9);
-        a.add(10);
+        System.out.println(a.get(0));
         System.out.println(a.size());
     }
 }

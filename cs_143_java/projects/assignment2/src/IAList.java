@@ -19,6 +19,7 @@ public class IAList {
 	}
 
 	public int size() { // Number of added elements, O(1)
+		// the data does not start are the beginning of the array
 		// THE NEW DATA FIELD(S) MAY CHANGE THE WAY SIZE WORKS.
 		return length; // The number of added elements to array
 	}
@@ -43,19 +44,22 @@ public class IAList {
 	}
 
 	public void addBefore(int x) {
-		if (length >= a.length || header == 0) {					// No space availible for addBefore OR at the 
-			int[] b = new int[a.length * 2];
-			header = b.length - 1;
-			for (int i = b.length - 1; i >= a.length; i--) {		// Copy my items in the array from the tail to head
+		int maxSize = a.length;
+		if (length >= a.length || header == 0 && length == maxSize) {		// No space availible for addBefore OR at the start
+			int[] b = new int[a.length * 2];	//TODO: Shift the index + 1
+			header = b.length - a.length;
+			for (int i = b.length - a.length; i < b.length; i++) {				// Copy my items in the array from the tail to head
 				b[i] = a[i - a.length];
 				header--;
 			}
 			length++;
 			b[header] = x;
 			a = b;
-		} else {
+		} else if (length < maxSize && header == 0) {
+			for (int i = a.length - 1; i > 0; i--) {
+				a[i] = a[i - 1];
+			}
 			length++;
-			header--;
 			a[header] = x;
 		}
 	}
