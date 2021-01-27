@@ -17,10 +17,10 @@ public class IAList {
 			for (int i = header; i < a.length; i++) { // Copy the elements of a to the corresponding indexes of b
 				b[i] = a[i];
 			}
-			a = b; // Reassign a reference to b
+			a = b;
 		}
 		a[length + header] = x; // Place x at the end of the continuous data
-		length++; // Increase length by 1
+		length++;
 	}
 
 	public void addBefore(int x) {
@@ -33,36 +33,34 @@ public class IAList {
 			}
 			b[header] = x;
 			length++;
-			a = b; // Copy array
-		} else if (length < a.length && header > 0) { // Room in the array to place element and data does not start at 0
+			a = b;
+		} else { // Room in the array to place element and data does not start at 0
 			header--;
 			a[header] = x;
 			length++;
 		}
 	}
 
-	public int get(int i) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY GET WORKS. (Retrieve an added element, O(1))
-		if (i < 0|| i >= length) {
+	public int get(int i) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY GET WORKS. 
+		if (i < 0 || i >= length) { //(Retrieve an added element, O(1))
 			throw new IndexOutOfBoundsException(i + "");
-		}
-		if (header > 0 && length + header <= a.length) {
+		} else {
 			i = i + header;
 		}
 		return a[i]; // Retrieve the element at position i
 	}
 
-	public int size() { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SIZE WORKS.(Number of added elements, O(1))
-		return length; // The number of added elements to array
-	}
-
-	public void set(int i, int x) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SET WORKS. (Modify an existing element, O(1))
-		if (i < 0 || i >= a.length) { 
+	public void set(int i, int x) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SET WORKS. 
+		// (Modify an existing element, O(1))
+		if (i < 0 || i >= a.length) {
 			throw new IndexOutOfBoundsException(i + "");
-		}
-		if (header > 0) {
+		} else {
 			i = i + header;
 		}
-		a[i] = x; // Change the existing element at position i to x
+		a[i] = x;
 	}
 
+	public int size() { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SIZE WORKS.
+		return length;	//(Number of added elements, O(1))
+	}
 }
