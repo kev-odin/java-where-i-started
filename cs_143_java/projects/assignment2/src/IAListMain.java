@@ -6,6 +6,5 @@ public class IAListMain {
             a.add(i);
         }
         a.addBefore(5);
-        int x = 0;
     }
 }

@@ -1,31 +1,31 @@
-// Kevin Chung
+// Name: Kevin Chung (CS143 - Winter 2021)
 
 public class IAList {
 	private int[] a; // Underlying array
 	private int length; // Number of added elements in a
 	private int header; // Start position of data
 
-	public IAList() { // YOU WILL NEED TO ADD AT LEAST ONE NEW DATA FIELD HERE.
-		a = new int[4]; // A little room to grow
-		length = 0; // Start with no added elements in a
-		header = 0; // YOU MAY NEED TO INITIALIZE YOUR NEW DATA FIELD(S).
+	public IAList() { 
+		a = new int[4];
+		length = 0;
+		header = 0;
 	}
 
 	public void add(int x) { // Add an element to the end, O(n) for n
-		if (length + header >= a.length) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY ADD WORKS.
-			int[] b = new int[a.length * 2]; // Create new array of double the length
+		if (length + header >= a.length) {
+			int[] b = new int[a.length * 2];
 			for (int i = header; i < a.length; i++) { // Copy the elements of a to the corresponding indexes of b
 				b[i] = a[i];
 			}
 			a = b;
 		}
-		a[length + header] = x; // Place x at the end of the continuous data
+		a[length + header] = x; // Place x at the end of continuous data
 		length++;
 	}
 
 	public void addBefore(int x) {
 		if (length >= a.length || header == 0) { // No space availible for addBefore OR at the start
-			int[] b = new int[a.length * 2]; // Double length of array a
+			int[] b = new int[a.length * 2];
 			header = b.length - 1; // Header is starting at the end of array
 			for (int i = header; i >= a.length; i--) { // Copy my items in the array from the tail to head
 				b[i] = a[i - a.length];
@@ -41,16 +41,16 @@ public class IAList {
 		}
 	}
 
-	public int get(int i) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY GET WORKS. 
+	public int get(int i) {
 		if (i < 0 || i >= length) { //(Retrieve an added element, O(1))
 			throw new IndexOutOfBoundsException(i + "");
 		} else {
 			i = i + header;
 		}
-		return a[i]; // Retrieve the element at position i
+		return a[i];
 	}
 
-	public void set(int i, int x) { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SET WORKS. 
+	public void set(int i, int x) {
 		// (Modify an existing element, O(1))
 		if (i < 0 || i >= a.length) {
 			throw new IndexOutOfBoundsException(i + "");
@@ -60,7 +60,7 @@ public class IAList {
 		a[i] = x;
 	}
 
-	public int size() { // THE NEW DATA FIELD(S) MAY CHANGE THE WAY SIZE WORKS.
+	public int size() {
 		return length;	//(Number of added elements, O(1))
 	}
 }
