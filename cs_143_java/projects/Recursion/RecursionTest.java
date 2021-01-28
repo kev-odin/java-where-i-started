@@ -3,7 +3,7 @@ public class RecursionTest {
     public static void main(String[] args) {
         System.out.println(square(4));
         System.out.println(factorial(7));
-        System.out.println(pow(2, 5));
+        System.out.println(pow(2, 40));
     }
 
     /**
