@@ -2,8 +2,17 @@ public class RecursionTest {
 
     public static void main(String[] args) {
         System.out.println(square(4));
-        System.out.println(factorial(7));
-        System.out.println(pow(2, 40));
+        System.out.println(factorial(5));
+        System.out.println(pow(2, 10));
+        System.out.println(multiply(5, 5));
+    }
+
+    public static int multiply(int a, int b) {
+        if (b == 0) {
+            return 0;
+        } else {
+            return a + multiply(a, b - 1);
+        }
     }
 
     /**

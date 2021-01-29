@@ -1,7 +1,7 @@
 public class ArraySearch {
     public static void main(String[] args) {
         int[] a = {10, -5, 17, 6, 17};
-        System.out.println(find(a, 17));
+        System.out.println(find(a, 22));
         System.out.println(find(a, 1));
     }
 
