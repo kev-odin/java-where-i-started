@@ -1,8 +1,8 @@
 public class SortedArraySearch {
     public static void main(String[] args) {
-        int[] a = new int[1000000]; // create an array of 1 million ints
-        for (int i = 1; i < 1000000; i++) {
-            a[i] = a[i-1] + (int)(Math.random()*3); // each element is the previous element + 0, 1, or 2
+        int[] a = new int[100]; // create an array of 1 million ints
+        for (int i = 1; i < 100; i++) {
+            a[i] = a[i-1] + (int)(Math.random()*5); // each element is the previous element + 0, 1, or 2
         }
 
         long start = System.currentTimeMillis();
