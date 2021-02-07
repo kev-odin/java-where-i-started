@@ -26,12 +26,23 @@ public class RecursionIntro {
         }
     }
 
-    public static void printSparseTable(int start, int end) {
-
+    public static void printSparseTable(int start, int end) { // DONE
+        printFibPair(start, end, 0);
     }
 
-    private static void printSparseTable(int start, int end, int prevFib) {
-
+    private static void printFibPair(int start, int end, int prevFib) { // DONE
+        if (start <= end) {
+            if (prevFib == fibby(start)) {
+                prevFib = fibby(start);
+                start++;
+                printFibPair(start, end, prevFib);
+            } else {
+                System.out.println(start + " " + fibby(start));
+                prevFib = fibby(start);
+                start++;
+                printFibPair(start, end, prevFib);
+            }
+        }
     }
 
     public static int lp2lt(int n) { // DONE
