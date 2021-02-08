@@ -1,25 +1,38 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        // System.out.println(mystery(-6));
-        // System.out.println(mystery(63));
-        // System.out.println(mystery(-763));
-        // System.out.println(mystery(8888));
         // System.out.println(eduodd(1)); // 0
         // System.out.println(eduodd(2)); // 3
         // System.out.println(eduodd(27)); // = 36
         // System.out.println(eduodd(987654321)); // = 896745230
         // System.out.println(eduodd(-11)); // = 0
-        // System.out.println(lp2lt(20));
-        // System.out.println(fibby(1));
-        // printSparseTable(1, 10);
+        boolean test[] = { false, false }; // false is tails, true is heads
+        champion(test);
+
     }
 
     public static int champion(boolean[] a) {
-        return 0;
+        return battle(a, 0, a.length - 1, 0);
     }
 
-    private static int battle(boolean[] a, int start, int end) {
-        return 0;
+    private static int battle(boolean[] a, int start, int end, int winner) {
+        // base case, when the array length is only 1
+        if (a.length > 1) {
+            end = lp2lt(a.length);
+        } else if (a.length == 1) {
+            winner = start;
+            return winner;
+        } else if (a.length == 2) {
+            if (a[start] != a[end]) {
+                winner = start;
+                return winner;
+            } else {
+                winner = end;
+                return winner;
+            }
+        } else {
+            battle(a, start, end, winner);
+        }
+        return winner;
     }
 
     public static void printSparseTable(int start, int end) { // DONE

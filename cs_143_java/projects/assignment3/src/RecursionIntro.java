@@ -2,7 +2,7 @@
 
 public class RecursionIntro {
 
-    public static long eduodd(long n) {
+    public static long eduodd(long n) { // need help
         if (n < 0) {
             return -eduodd(-n); // if n is negative
         } else if (n > 10) {
@@ -31,12 +31,12 @@ public class RecursionIntro {
     }
 
     private static void printFibPair(int start, int end, int prevFib) { // DONE
-        if (start <= end) {
+        if (start <= end) { // prev fibby number has been printed, continue method call
             if (prevFib == fibby(start)) {
                 prevFib = fibby(start);
                 start++;
                 printFibPair(start, end, prevFib);
-            } else {
+            } else { // fibby pair has not been printed, print, anc continue method call
                 System.out.println(start + " " + fibby(start));
                 prevFib = fibby(start);
                 start++;
@@ -59,11 +59,28 @@ public class RecursionIntro {
     }
 
     public static int champion(boolean[] a) {
-        return 0;
+        return battle(a, 0, a.length - 1, 0);
     }
 
-    private static int battle(boolean[] a, int start, int end) {
-        return 0;
+    private static int battle(boolean[] a, int start, int end, int winner) {
+        // base case, when the array length is only 1
+
+        if (a.length >= 1) {
+            end = lp2lt(a.length);
+            battle(a, start, end, winner);
+        } else if (a.length == 1) {
+            return winner;
+        } else if (a.length == 2) {
+
+        }
+
+        if (a.length == 1) {
+            return winner;
+        } else if (a[0] != a[1]) {
+            return winner;
+        } else {
+            winner++;
+            return winner;
+        }
     }
-    
 }
