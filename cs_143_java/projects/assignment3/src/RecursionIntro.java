@@ -61,5 +61,9 @@ public class RecursionIntro {
     public static int champion(boolean[] a) {
         return 0;
     }
+
+    private static int battle(boolean[] a, int start, int end) {
+        return 0;
+    }
     
 }

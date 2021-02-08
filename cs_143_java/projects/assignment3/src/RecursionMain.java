@@ -11,7 +11,15 @@ public class RecursionMain {
         // System.out.println(eduodd(-11)); // = 0
         // System.out.println(lp2lt(20));
         // System.out.println(fibby(1));
-        printSparseTable(4, 10);
+        // printSparseTable(1, 10);
+    }
+
+    public static int champion(boolean[] a) {
+        return 0;
+    }
+
+    private static int battle(boolean[] a, int start, int end) {
+        return 0;
     }
 
     public static void printSparseTable(int start, int end) { // DONE
