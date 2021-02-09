@@ -9,9 +9,18 @@ public class RecursionMain {
     }
 
     private static int battle(boolean[] a, int startIndex, int endIndex, int winner) {
-        // base case, when the array length is only 1
-        
-        return 0;
+        System.out.println( a.length);
+        System.out.println(startIndex);
+        System.out.println(endIndex);
+        System.out.println(winner);
+
+        if (endIndex - startIndex == 1) {
+            return winner;
+        } else if (endIndex - startIndex == 2) {
+            return battle(a, startIndex, endIndex, winner);
+        } else {
+            return battle(a, lp2lt(startIndex), lp2lt(a.length - endIndex), winner);
+        }
     }
 
     public static long eduodd(long n) { // DONE
