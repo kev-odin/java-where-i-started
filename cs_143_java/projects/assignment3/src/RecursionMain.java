@@ -1,38 +1,35 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        // System.out.println(eduodd(1)); // 0
-        // System.out.println(eduodd(2)); // 3
-        // System.out.println(eduodd(27)); // = 36
-        // System.out.println(eduodd(987654321)); // = 896745230
-        // System.out.println(eduodd(-11)); // = 0
-        boolean test[] = { false, false }; // false is tails, true is heads
-        champion(test);
-
+        boolean test[] = {false, false}; // false is tails, true is heads
+        System.out.println(champion(test)); // should be 1
     }
 
     public static int champion(boolean[] a) {
         return battle(a, 0, a.length - 1, 0);
     }
 
-    private static int battle(boolean[] a, int start, int end, int winner) {
+    private static int battle(boolean[] a, int startIndex, int endIndex, int winner) {
         // base case, when the array length is only 1
-        if (a.length > 1) {
-            end = lp2lt(a.length);
-        } else if (a.length == 1) {
-            winner = start;
-            return winner;
-        } else if (a.length == 2) {
-            if (a[start] != a[end]) {
-                winner = start;
-                return winner;
+        
+        return 0;
+    }
+
+    public static long eduodd(long n) { // DONE
+        if (n < 0) {
+            return -eduodd(-n);
+        } else if (n < 10) {
+            if (n % 2 == 0) {
+                return (n + 1) % 10;
             } else {
-                winner = end;
-                return winner;
+                return (n - 1) % 10;
             }
         } else {
-            battle(a, start, end, winner);
+            if (n % 2 == 0) {
+                return 10 * eduodd(n / 10) + (n + 1) % 10;
+            } else {
+                return 10 * eduodd(n / 10) + (n - 1) % 10;
+            }
         }
-        return winner;
     }
 
     public static void printSparseTable(int start, int end) { // DONE
@@ -52,31 +49,6 @@ public class RecursionMain {
                 printFibPair(start, end, prevFib);
             }
         }
-    }
-
-    public static int mystery(int n) { // eduodd part 1; what to do when n is even or odd
-        if (n < 0) {
-            return -mystery(-n);
-        } else if (n < 10) { // base case, when n is less than 10, then mod will
-            return (n + 1) % 10;
-        } else {
-            return 10 * mystery(n / 10) + (n + 1) % 10;
-        }
-    }
-
-    public static long eduodd(long n) { // WIP
-        if (n < 0) {
-            return -eduodd(-n); // if n is negative
-        } else if (n > 10) {
-            return 10 * eduodd(n / 10);
-        } else if (n < 10) {
-            if (n % 2 == 0) {
-                return (n + 1) % 10; // even numbers
-            } else {
-                return (n - 1) % 10; // odd numbers
-            }
-        }
-        return n;
     }
 
     public static int fibby(int n) { // DONE

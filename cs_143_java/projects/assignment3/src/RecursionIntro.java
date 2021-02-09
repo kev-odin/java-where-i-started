@@ -2,24 +2,26 @@
 
 public class RecursionIntro {
 
-    public static long eduodd(long n) { // need help
+    public static long eduodd(long n) { // DONE
         if (n < 0) {
-            return -eduodd(-n); // if n is negative
-        } else if (n > 10) {
-            return 10 * eduodd(n / 10);
-        } else if (n < 10) {
-            if (n % 2 == 0) { 
-                return (n + 1) % 10; // even numbers
+            return -eduodd(-n);
+        } else if (n < 10) { // base case, single digit
+            if (n % 2 == 0) {
+                return (n + 1) % 10;
             } else {
-                return (n - 1) % 10; // odd numbers
+                return (n - 1) % 10;
+            }
+        } else {
+            if (n % 2 == 0) {
+                return 10 * eduodd(n / 10) + (n + 1) % 10;
+            } else {
+                return 10 * eduodd(n / 10) + (n - 1) % 10;
             }
         }
-        return n;
     }
 
     public static int fibby(int n) { // DONE
-        // base case
-        if (n == 0) {
+        if (n == 0) { // base case
             return 1;
         } else {
             return fibby(n / 3) + fibby((2 * n) / 3);
@@ -31,12 +33,12 @@ public class RecursionIntro {
     }
 
     private static void printFibPair(int start, int end, int prevFib) { // DONE
-        if (start <= end) { // prev fibby number has been printed, continue method call
+        if (start <= end) { // prev fibby number has been printed, and continue method call
             if (prevFib == fibby(start)) {
                 prevFib = fibby(start);
                 start++;
                 printFibPair(start, end, prevFib);
-            } else { // fibby pair has not been printed, print, anc continue method call
+            } else { // fibby pair has not been printed, print, and continue method call
                 System.out.println(start + " " + fibby(start));
                 prevFib = fibby(start);
                 start++;
@@ -46,14 +48,11 @@ public class RecursionIntro {
     }
 
     public static int lp2lt(int n) { // DONE
-        // base case
-        if (n == 2) {
+        if (n == 2) { // base case
             return 1;
-        // even case
-        } else if (n > 2 && n % 2 == 0) {
+        } else if (n > 2 && n % 2 == 0) { // even case
             return 2 * lp2lt(n / 2);
-        // odd case
-        } else {
+        } else { // odd case
             return 2 * lp2lt((n + 1) / 2);
         }
     }
@@ -63,24 +62,7 @@ public class RecursionIntro {
     }
 
     private static int battle(boolean[] a, int start, int end, int winner) {
-        // base case, when the array length is only 1
-
-        if (a.length >= 1) {
-            end = lp2lt(a.length);
-            battle(a, start, end, winner);
-        } else if (a.length == 1) {
-            return winner;
-        } else if (a.length == 2) {
-
-        }
-
-        if (a.length == 1) {
-            return winner;
-        } else if (a[0] != a[1]) {
-            return winner;
-        } else {
-            winner++;
-            return winner;
-        }
+    // base case, when the array length is only 1
+    return 99;
     }
 }
