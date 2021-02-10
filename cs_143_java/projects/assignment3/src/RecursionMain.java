@@ -1,7 +1,7 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        boolean test[] = { false, false, false, false }; // false is tails, true is heads
-        System.out.println(champion(test)); // should be 1
+        boolean test[] = { false, false, false }; // false is tails, true is heads
+        System.out.println(champion(test));
     }
 
     public static int champion(boolean[] a) {
@@ -9,17 +9,27 @@ public class RecursionMain {
     }
 
     private static int battle(boolean[] a, int start, int end) {
-
-        if (start == end) { // start and end are the same, only one person
+        if (start == end) { // start and end are the same, only one person in arena - base case
             return start;
-        } else if (end - start == 1) { // start and end are next to each other
+        } else if (end - start == 1) { // start and end are next to each other - base case
             if (a[start] == a[end]) { // same coin
                 return end;
             }
             return start; // different coin
-        } else { // (end - start > 1), if the distance is greater than the striking distance
-            end = lp2lt(end);
-            start = end - start;
+        } else { // (end - start > 1)
+            // end - start > 1, then you need to split the array into two portions
+            // (first portion has length lp2lt(size of current portion))
+            if (lp2lt(end) < end) {
+                end = lp2lt(end);
+                return battle(a, start, end);
+            }
+            // (second portion is everyone else in the group)
+            start = lp2lt(end); // start for the second group, end index should be the same
+            // Then you have two recursive calls, one where you pass in the start and end
+            // indices of the first group,
+            // one where you pass in the start and end indices of the second group.
+            // Then once you have recursively computed the winners of the two groups,
+            // compare them using the rules to get a final winner
             return battle(a, start, end);
         }
     }
