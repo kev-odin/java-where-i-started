@@ -1,25 +1,26 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        boolean test[] = {false, false}; // false is tails, true is heads
+        boolean test[] = { false, false, false, false }; // false is tails, true is heads
         System.out.println(champion(test)); // should be 1
     }
 
     public static int champion(boolean[] a) {
-        return battle(a, 0, a.length - 1, 0);
+        return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int startIndex, int endIndex, int winner) {
-        System.out.println( a.length);
-        System.out.println(startIndex);
-        System.out.println(endIndex);
-        System.out.println(winner);
+    private static int battle(boolean[] a, int start, int end) {
 
-        if (endIndex - startIndex == 1) {
-            return winner;
-        } else if (endIndex - startIndex == 2) {
-            return battle(a, startIndex, endIndex, winner);
-        } else {
-            return battle(a, lp2lt(startIndex), lp2lt(a.length - endIndex), winner);
+        if (start == end) { // start and end are the same, only one person
+            return start;
+        } else if (end - start == 1) { // start and end are next to each other
+            if (a[start] == a[end]) { // same coin
+                return end;
+            }
+            return start; // different coin
+        } else { // (end - start > 1), if the distance is greater than the striking distance
+            end = lp2lt(end);
+            start = end - start;
+            return battle(a, start, end);
         }
     }
 

@@ -58,11 +58,35 @@ public class RecursionIntro {
     }
 
     public static int champion(boolean[] a) {
-        return battle(a, 0, a.length - 1, 0);
+        return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int start, int end, int winner) {
-    // base case, when the array length is only 1
-    return 99;
+    private static int battle(boolean[] a, int start, int end) {
+        if (start == end) { // start and end are the same, only one person
+            return start;
+        } else if (end - start == 1) { // start and end are next to each other
+            if (a[start] == a[end]) { // same coin
+                return end;
+            }
+            return start; // different coin
+        } else { // (end - start > 1), if the distance is greater than the striking distance
+            start = battle(a, start, lp2lt(end));
+            return battle(a, start, end);
+        }
     }
+
+    //     if (start == end) { // start and end are the same, only one person
+    //         return start;
+    //     } else if (end - start == 1) { // start and end are next to each other
+    //         if (a[start] == a[end]) {
+    //             return end;
+    //         }
+    //         return start;
+    //     } else if (end - start > 1) {
+    //         end = lp2lt(end);
+    //         return battle(a, start, end);
+    //     } else {
+    //         return battle(a, start, end);
+    //     }
+    // }
 }
