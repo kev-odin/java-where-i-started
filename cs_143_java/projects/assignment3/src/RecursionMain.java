@@ -16,20 +16,15 @@ public class RecursionMain {
                 return end;
             }
             return start; // different coin
-        } else { // (end - start > 1)
-            // end - start > 1, then you need to split the array into two portions
+
+        } else { // (end - start > 1), then you need to split the array into two portions
             // (first portion has length lp2lt(size of current portion))
-            if (lp2lt(end) < end) {
-                end = lp2lt(end);
-                return battle(a, start, end);
-            }
+            // update to another end, and pass through parameter (gets smaller until the end and start meet above base case)
             // (second portion is everyone else in the group)
-            start = lp2lt(end); // start for the second group, end index should be the same
-            // Then you have two recursive calls, one where you pass in the start and end
-            // indices of the first group,
+            // update start to begin at the second group, end should be the same
+            // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
             // one where you pass in the start and end indices of the second group.
-            // Then once you have recursively computed the winners of the two groups,
-            // compare them using the rules to get a final winner
+            // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
             return battle(a, start, end);
         }
     }
