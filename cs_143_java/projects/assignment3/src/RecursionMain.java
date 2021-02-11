@@ -1,16 +1,18 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        boolean test[] = {true, true, false};
-        //boolean test[] = {false, false, false, false, false, false, false, false, false, false, false}; // false is tails, true is heads, works until 4 in boolean array?
-        boolean classTest[] = {false, false, true, false, true, true, true, false, true}; // OneNote example
+        //boolean test[] = {false, false, false};
+        boolean test[] = {false, false, false, false}; // false is tails, true is heads (83/100)
+        //boolean classTest[] = {false, false, true, false, true, true, true, false, true}; // OneNote example
         System.out.println(champion(test));
     }
 
     public static int champion(boolean[] a) {
-        return battle(a, 0, a.length - 1);
+        return battle(a, 0, a.length - 1, a.length);
     }
 
-    private static int battle(boolean[] a, int start, int end) {
+    private static int battle(boolean[] a, int start, int end, int length) {
+        battleStats(start, end, length);
+
         if (start == end) { // start and end are the same, only one person in arena - base case
             return start;
         } else if (end - start == 1) { // start and end are next to each other - base case
@@ -21,20 +23,26 @@ public class RecursionMain {
 
         } else { // (end - start > 1), then you need to split the array into two portions
             // (first portion has length lp2lt(size of current portion))
-            System.out.println(lp2lt(end));
-            int leftEnd = lp2lt(end);
+            length = lp2lt(length);
+            int leftEnd = length - 1;
             // (second portion is everyone else in the group)
-            int rightStart = end;
+            int rightStart = length;
             // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
-            int winnerLeft = battle(a, start, leftEnd); //return index of winner
+            int winnerLeft = battle(a, start, leftEnd, length);
             // one where you pass in the start and end indices of the second group.
-            int winnerRight = battle(a, rightStart, end); //return index of winner
+            int winnerRight = battle(a, rightStart, end, length);
             // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
             if (a[winnerLeft] == a[winnerRight]) {
                 return winnerRight;
             }
             return winnerLeft;
         }
+    }
+
+    public static void battleStats(int start, int end, int length) {
+        System.out.println("The start index is: " + start);
+        System.out.println("The end index is: " + end);
+        System.out.println("The length of this portion is: " + length);
     }
 
     public static long eduodd(long n) { // DONE
