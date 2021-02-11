@@ -1,9 +1,10 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        //boolean test[] = {false, false, false};
-        boolean test[] = {false, false, false, false}; // false is tails, true is heads (83/100)
-        //boolean classTest[] = {false, false, true, false, true, true, true, false, true}; // OneNote example
-        System.out.println(champion(test));
+        // boolean test[] = {false, false, false};
+        // boolean test[] = {false, false, false, false, false}; // false is tails, true
+        // is heads
+        boolean classTest[] = { false, false, true, false, true, true, true, false, true }; // OneNote example
+        System.out.println(champion(classTest));
     }
 
     public static int champion(boolean[] a) {
@@ -22,16 +23,18 @@ public class RecursionMain {
             return start; // different coin
 
         } else { // (end - start > 1), then you need to split the array into two portions
-            // (first portion has length lp2lt(size of current portion))
             length = lp2lt(length);
-            int leftEnd = length - 1;
+            // (first portion has length lp2lt(size of current portion))
+            int leftEnd = a.length - lp2lt(length);
             // (second portion is everyone else in the group)
-            int rightStart = length;
-            // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
+            int rightStart = end - lp2lt(length);
+            // Then you have two recursive calls, one where you pass in the start and end
+            // indices of the first group,
             int winnerLeft = battle(a, start, leftEnd, length);
             // one where you pass in the start and end indices of the second group.
             int winnerRight = battle(a, rightStart, end, length);
-            // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+            // Then once you have recursively computed the winners of the two groups,
+            // compare them using the rules to get a final winner.
             if (a[winnerLeft] == a[winnerRight]) {
                 return winnerRight;
             }
