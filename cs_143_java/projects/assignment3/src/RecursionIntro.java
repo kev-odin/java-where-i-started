@@ -71,20 +71,72 @@ public class RecursionIntro {
             return start; // different coin
 
         } else { // (end - start > 1), then you need to split the array into two portions
-            // (first portion has length lp2lt(size of current portion)) Do I need another variable to keep track of group size?
-                if (start <= lp2lt(end)) {
-                    end = lp2lt(end); // update to smaller end, and pass through parameter (gets smaller until the end and start meet above base case)
-                    return battle(a, start, end);
-                }
+            // (first portion has length lp2lt(size of current portion))
+            int leftEnd = lp2lt(end) - 1;
             // (second portion is everyone else in the group)
-                if (lp2lt(end) < end) {
-                    start = lp2lt(end); // update start to begin at the second group, end should be the same
-                    return battle(a, start, end);
-                }
-            return battle(a, start, end);
+            int rightStart = end;
             // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
+            int winnerLeft = battle(a, start, leftEnd); //return index of winner
             // one where you pass in the start and end indices of the second group.
+            int winnerRight = battle(a, rightStart, end); //return index of winner
             // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+            if (a[winnerLeft] == a[winnerRight]) {
+                return winnerRight;
+            }
+            return winnerLeft;
         }
     }
+
+    // private static int battle(boolean[] a, int start, int end) {
+    //     if (start == end) { // start and end are the same, only one person in arena - base case
+    //         return start;
+    //     } else if (end - start == 1) { // start and end are next to each other - base case
+    //         if (a[start] == a[end]) { // same coin
+    //             return end;
+    //         }
+    //         return start; // different coin
+
+    //     } else { // (end - start > 1), then you need to split the array into two portions
+    //         // (first portion has length lp2lt(size of current portion))
+    //         int leftEnd = lp2lt(end);
+    //         // (second portion is everyone else in the group)
+    //         int rightStart = lp2lt(end) + 1;
+    //         int winnerLeft = battle(a, start, leftEnd); //return index of winner
+    //         int winnerRight = battle(a, rightStart, end); //return index of winner
+    //         // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
+    //         // one where you pass in the start and end indices of the second group.
+    //         // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+    //         if (a[winnerLeft] == a[winnerRight]) {
+    //             return winnerRight;
+    //         }
+    //         return winnerLeft;
+    //     }
+    // }
+
+    // private static int battle(boolean[] a, int start, int end) {
+    //     if (start == end) { // start and end are the same, only one person in arena - base case
+    //         return start;
+    //     } else if (end - start == 1) { // start and end are next to each other - base case
+    //         if (a[start] == a[end]) { // same coin
+    //             return end;
+    //         }
+    //         return start; // different coin
+
+    //     } else { // (end - start > 1), then you need to split the array into two portions
+    //         // (first portion has length lp2lt(size of current portion)) Do I need another variable to keep track of group size?
+    //             if (start <= lp2lt(end)) {
+    //                 end = lp2lt(end); // update to smaller end, and pass through parameter (gets smaller until the end and start meet above base case)
+    //                 return battle(a, start, end);
+    //             }
+    //         // (second portion is everyone else in the group)
+    //             if (lp2lt(end) < end) {
+    //                 start = lp2lt(end); // update start to begin at the second group, end should be the same
+    //                 return battle(a, start, end);
+    //             }
+    //         return battle(a, start, end);
+    //         // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
+    //         // one where you pass in the start and end indices of the second group.
+    //         // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+    //     }
+    // }
 }
