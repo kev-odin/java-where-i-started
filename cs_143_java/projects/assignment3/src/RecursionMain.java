@@ -1,10 +1,10 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        // boolean test[] = {false, false, false};
-        // boolean test[] = {false, false, false, false, false}; // false is tails, true
-        // is heads
-        boolean classTest[] = { false, false, true, false, true, true, true, false, true }; // OneNote example
-        System.out.println(champion(classTest));
+        //boolean test[] = {false, false, false};
+        //boolean test[] = {true, false, false, true, false, false}; // false is tails, true is heads (83/100)
+        //boolean test[] = {false, false, true, false, true, true, true, false, true}; // OneNote example
+        //boolean test[] = {false, true, false, false, true, false, true, false}; //kevin.pdf
+        //System.out.println(champion(test));
     }
 
     public static int champion(boolean[] a) {
@@ -25,16 +25,15 @@ public class RecursionMain {
         } else { // (end - start > 1), then you need to split the array into two portions
             length = lp2lt(length);
             // (first portion has length lp2lt(size of current portion))
-            int leftEnd = a.length - lp2lt(length);
+            int leftEnd = start + (length - 1);
             // (second portion is everyone else in the group)
-            int rightStart = end - lp2lt(length);
-            // Then you have two recursive calls, one where you pass in the start and end
-            // indices of the first group,
+            int rightStart = start + length;
+            // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
             int winnerLeft = battle(a, start, leftEnd, length);
             // one where you pass in the start and end indices of the second group.
             int winnerRight = battle(a, rightStart, end, length);
-            // Then once you have recursively computed the winners of the two groups,
-            // compare them using the rules to get a final winner.
+            // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+
             if (a[winnerLeft] == a[winnerRight]) {
                 return winnerRight;
             }
