@@ -1,17 +1,18 @@
 public class RecursionMain {
     public static void main(String[] args) {
-        //boolean test[] = {false, false, false};
+        boolean test[] = {false, false, false};
         //boolean test[] = {true, false, false, true, false, false}; // false is tails, true is heads (83/100)
         //boolean test[] = {false, false, true, false, true, true, true, false, true}; // OneNote example
         //boolean test[] = {false, true, false, false, true, false, true, false}; //kevin.pdf
-        //System.out.println(champion(test));
+        System.out.println(champion(test));
     }
 
     public static int champion(boolean[] a) {
-        return battle(a, 0, a.length - 1, a.length);
+        return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int start, int end, int length) {
+    private static int battle(boolean[] a, int start, int end) {
+        int length = (end - start) + 1;
         battleStats(start, end, length);
 
         if (start == end) { // start and end are the same, only one person in arena - base case
@@ -22,16 +23,15 @@ public class RecursionMain {
             }
             return start; // different coin
 
-        } else { // (end - start > 1), then you need to split the array into two portions
-            length = lp2lt(length);
+        } else { // (end - start > 1)
             // (first portion has length lp2lt(size of current portion))
-            int leftEnd = start + (length - 1);
+            int leftEnd = start + lp2lt(length) - 1;
             // (second portion is everyone else in the group)
-            int rightStart = start + length;
+            int rightStart = start + lp2lt(length);
             // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
-            int winnerLeft = battle(a, start, leftEnd, length);
+            int winnerLeft = battle(a, start, leftEnd);
             // one where you pass in the start and end indices of the second group.
-            int winnerRight = battle(a, rightStart, end, length);
+            int winnerRight = battle(a, rightStart, end);
             // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
 
             if (a[winnerLeft] == a[winnerRight]) {

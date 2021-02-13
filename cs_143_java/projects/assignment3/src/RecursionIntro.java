@@ -57,11 +57,12 @@ public class RecursionIntro {
         }
     }
 
-    public static int champion(boolean[] a) {
-        return battle(a, 0, a.length - 1, a.length);
+    public static int champion(boolean[] a) { // DONE
+        return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int start, int end, int length) {
+    private static int battle(boolean[] a, int start, int end) {
+        int length = (end - start) + 1;
 
         if (start == end) { // start and end are the same, only one person in arena - base case
             return start;
@@ -71,17 +72,12 @@ public class RecursionIntro {
             }
             return start; // different coin
 
-        } else { // (end - start > 1), then you need to split the array into two portions
-            length = lp2lt(length);
-            // (first portion has length lp2lt(size of current portion))
-            int leftEnd = start + (length - 1);
-            // (second portion is everyone else in the group)
-            int rightStart = start + length;
-            // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
-            int winnerLeft = battle(a, start, leftEnd, length);
-            // one where you pass in the start and end indices of the second group.
-            int winnerRight = battle(a, rightStart, end, length);
-            // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
+        } else { // (end - start > 1)
+            int leftEnd = start + lp2lt(length) - 1; // (first portion has length lp2lt(size of current portion))
+            
+            int rightStart = start + lp2lt(length); // (second portion is everyone else in the group)
+            int winnerLeft = battle(a, start, leftEnd);
+            int winnerRight = battle(a, rightStart, end);
 
             if (a[winnerLeft] == a[winnerRight]) {
                 return winnerRight;
@@ -89,31 +85,4 @@ public class RecursionIntro {
             return winnerLeft;
         }
     }
-    // private static int battle(boolean[] a, int start, int end, int length) {
-
-    //     if (start == end) { // start and end are the same, only one person in arena - base case
-    //         return start;
-    //     } else if (end - start == 1) { // start and end are next to each other - base case
-    //         if (a[start] == a[end]) { // same coin
-    //             return end;
-    //         }
-    //         return start; // different coin
-
-    //     } else { // (end - start > 1), then you need to split the array into two portions
-    //         // (first portion has length lp2lt(size of current portion))
-    //         length = lp2lt(length);
-    //         int leftEnd = length - 1;
-    //         // (second portion is everyone else in the group)
-    //         int rightStart = length;
-    //         // Then you have two recursive calls, one where you pass in the start and end indices of the first group,
-    //         int winnerLeft = battle(a, start, leftEnd, length);;
-    //         // one where you pass in the start and end indices of the second group.
-    //         int winnerRight = battle(a, rightStart, end, length);
-    //         // Then once you have recursively computed the winners of the two groups, compare them using the rules to get a final winner.
-    //         if (a[winnerLeft] == a[winnerRight]) {
-    //             return winnerRight;
-    //         }
-    //         return winnerLeft;
-    //     }
-    // }
 }
