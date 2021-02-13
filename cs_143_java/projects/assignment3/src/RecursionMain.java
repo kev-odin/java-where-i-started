@@ -12,7 +12,7 @@ public class RecursionMain {
     }
 
     private static int battle(boolean[] a, int start, int end) {
-        int length = (end - start) + 1;
+        int length = (end - start) + 1; // length of the section
         battleStats(start, end, length);
 
         if (start == end) { // start and end are the same, only one person in arena - base case

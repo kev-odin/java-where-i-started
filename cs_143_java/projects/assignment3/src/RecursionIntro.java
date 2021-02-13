@@ -61,8 +61,8 @@ public class RecursionIntro {
         return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int start, int end) {
-        int length = (end - start) + 1;
+    private static int battle(boolean[] a, int start, int end) { // helper method for champion
+        int length = (end - start) + 1; // length of the section, account for index shift
 
         if (start == end) { // start and end are the same, only one person in arena - base case
             return start;
@@ -74,7 +74,6 @@ public class RecursionIntro {
 
         } else { // (end - start > 1)
             int leftEnd = start + lp2lt(length) - 1; // (first portion has length lp2lt(size of current portion))
-            
             int rightStart = start + lp2lt(length); // (second portion is everyone else in the group)
             int winnerLeft = battle(a, start, leftEnd);
             int winnerRight = battle(a, rightStart, end);
