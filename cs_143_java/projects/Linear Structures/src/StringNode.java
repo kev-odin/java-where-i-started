@@ -12,6 +12,8 @@ public class StringNode {
     }
 
     /**
+     * O(n), the number of times size is called depends on the number of nodes in the linked list
+     *
      * The size of a list of Strings is 1 + the size of the list of Strings after the first String
      * @return
      */

@@ -1,19 +1,11 @@
-public class StringQueue {
+public class SlowStringQueue {
     // the first person in line
     private StringNode beginning;
     // what if we also maintained a direct link to the end of the queue
     // no more walking!
 
-    // the last person in line
-    private StringNode end;
-
-    public StringQueue(){
-        beginning = null;
-        end = null;
-    }
-
     /**
-     * O(1) constant time
+     * O(n) linear time
      * Add a new String to the end of the queue
      * @param data
      */
@@ -23,13 +15,21 @@ public class StringQueue {
         // Step 2: What if we are the only person in line?
         if(isEmpty()){
             beginning = node; // we are now the only person in line, so we are at the beginning
-            end = node; // since we are the only person in line, we are also the end of the line!
         }
         else{
-            // we no longer need to "walk" to the end of the line!
-            // we can use the "end" reference to teleport there
-            end.rest = node; // add new node after the end
-            end = node; // update the end to be the new end
+            // Step 3: we need to "walk" to the end of the line
+            // problem! we don't have access to the last node! we only have access to the beginning node!
+            // we could use a loop to "walk" through the queue until we get to the end
+            // then, add our new node to the end
+            // we should not change the beginning!
+            // A. create a reference to the beginning that we can change without modifying the beginning
+            StringNode walker = beginning;
+            // B. walk the line to get to the end
+            while(walker.rest != null){ // as long as we aren't at the end of the queue
+                walker = walker.rest; // moving the walker to the next node
+            }
+            // C. walker now points to the last node in the queue, now we can add "node" after it
+            walker.rest = node;
         }
     }
 
@@ -43,14 +43,7 @@ public class StringQueue {
         String oldBeginning = beginning.data;
         // Step 2: update the beginning to be whatever is after the current beginning
         beginning = beginning.rest;
-
-        // Step 3: is the queue now empty?
-        if(isEmpty()){
-            // update the end to also reference null\
-            end = null;
-        }
-
-        // Step 4: return the data that used to be at the beginning
+        // Step 3: return the data that used to be at the beginning
         return oldBeginning;
     }
 

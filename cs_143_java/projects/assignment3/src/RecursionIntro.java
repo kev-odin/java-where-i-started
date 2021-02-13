@@ -61,8 +61,8 @@ public class RecursionIntro {
         return battle(a, 0, a.length - 1);
     }
 
-    private static int battle(boolean[] a, int start, int end) { // helper method for champion
-        int length = (end - start) + 1; // length of the section, account for index shift
+    private static int battle(boolean[] a, int start, int end) { // helper method with champion
+        int length = (end - start) + 1; // length of the section, account index shift
 
         if (start == end) { // start and end are the same, only one person in arena - base case
             return start;
