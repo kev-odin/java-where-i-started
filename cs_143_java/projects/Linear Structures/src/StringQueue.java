@@ -1,13 +1,13 @@
 public class StringQueue {
     // the first person in line
     private StringNode beginning;
-    // what if we also maintained a direct link to the end of the queue
+    // What if we also maintained a direct link to the end of the queue?
     // no more walking!
 
     // the last person in line
     private StringNode end;
 
-    public StringQueue(){
+    public StringQueue(){ //default constructor
         beginning = null;
         end = null;
     }

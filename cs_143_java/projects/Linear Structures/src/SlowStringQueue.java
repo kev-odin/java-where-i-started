@@ -5,7 +5,8 @@ public class SlowStringQueue {
     // no more walking!
 
     /**
-     * O(n) linear time
+     * O(n) linear time, we take a performance hit because of the walker that needs to 
+     * find the null reference at the end
      * Add a new String to the end of the queue
      * @param data
      */

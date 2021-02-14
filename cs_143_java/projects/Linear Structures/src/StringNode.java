@@ -3,7 +3,7 @@
  */
 public class StringNode {
     // these properties should be private, but we will leave them as public for simplicity
-    public String data;
+    public String data; //top
     public StringNode rest;
 
     public StringNode(String data, StringNode rest) {
