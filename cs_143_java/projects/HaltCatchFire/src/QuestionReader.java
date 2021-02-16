@@ -8,18 +8,17 @@ import java.io.FileNotFoundException;
  * categories, and answers for the trivia game.
  */
 
-public class Trebek {
+public class QuestionReader {
     private Scanner readThis;
     private String line;
+    private String answer;
     private static File textFile;
 
-    public Trebek(File textFile) { // Constructor to read and sort .txt file
-        textFile = new File("trivia.txt");
+    ArrayList<Question> trivia = new ArrayList<Question>();
+
+    public QuestionReader(File textFile) { // Constructor to read and sort .txt file
+        textFile = new File("src/trivia.txt");
         readInFile(textFile);
-    }
-
-    public Trebek() {
-
     }
 
     private void readInFile(File textFile) {
@@ -27,9 +26,12 @@ public class Trebek {
             readThis = new Scanner(textFile);
 
             while (readThis.hasNextLine()) {
+                if (readThis.hasNextInt()) {
+                    answer = readThis.nextLine();
+                } else {
                 line = readThis.nextLine();
-                System.out.println(line);
             }
+        }
 
         } catch (FileNotFoundException e) {
             System.out.println("trivia.txt was not found");
@@ -37,6 +39,6 @@ public class Trebek {
     }
 
     public static void main(String[] args) {
-        Trebek test = new Trebek(textFile);
+        QuestionReader test = new QuestionReader(textFile);
     }
 }
