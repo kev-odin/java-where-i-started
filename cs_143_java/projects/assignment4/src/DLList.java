@@ -217,7 +217,6 @@ public class DLList<T> implements Iterable<T> {
 	 * list going A <-> B <-> C <-> D would now go D <-> C <-> B <-> A.
 	 */
 	public void reverse() {
-		// TODO: Write this method!
 	}
 
 	/**
@@ -230,6 +229,38 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		return false; // TODO: Fix this!
+		if (i < 0 || i > size()) { // catches the invalid indexes for negative values and values larger than the size of the list
+			throw new IndexOutOfBoundsException();
+		
+		} else if (i == 0) {
+			Node<T> current = first; // adding to the start of the list
+			current.after = first; //current node after points to the previous first node
+			current.before = null; //current node before points to null	
+			first.before = current; // first before node points to current node
+			first = current; //reassign first reference to the current node
+			return true;
+
+		} else if (i == size()) {
+			Node<T> current = last; // adding to the end of the list
+			current.before = last; //current node before points to the previous last node
+			current.after = null; // current node after points to null
+			last.after = current; // last after node points to the current node
+			last = current;	//reassign last reference to the current node
+			return true;
+
+		} else {
+			Node<T> current = first;
+			for (int j = 0; current != null && j < i; j++) {
+				current = current.after; // walking current iterator down the line
+				if (i == j) { // current is on the index to insert
+					current.before = current.before.after; // current new node will point to the existing node before the index 
+					current.after = current.after.before; // current new node will point to the existing node after the index
+					current.after.before = current; // existing node will point to the new node
+					current.before.after = current; // existing node will point to the new node
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
