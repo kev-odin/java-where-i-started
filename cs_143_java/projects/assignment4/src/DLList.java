@@ -1,3 +1,5 @@
+// Name: Kevin Chung (CS143 - Winter 2021)
+
 import java.util.Iterator;
 
 /**
@@ -59,63 +61,42 @@ public class DLList<T> implements Iterable<T> {
 	}
 
 	/**
-	 * Add data to the end (last) of the list.
-	 * Size is recorded with increment operator to update.
+	 * Add data to the end (last) of the list. Size is recorded with increment
+	 * operator to update.
 	 */
 	public void add(T data) {
 		if (last == null) {
 			// Empty list: one node is first and last
-			size++;
 			first = new Node<>(null, data, null);
 			last = first;
 		} else {
-			size++;
 			last.after = new Node<>(last, data, null);
 			last = last.after;
 		}
+		size++;
 	}
 
 	/**
-	 * Retrieve an element from middle of list.
-	 * 
-	 * @param i Zero-based index of element
-	 * @return The element at that index
-	 * @throws IndexOutOfBoundsException if i is invalid
-	 */
-	public T get(int i) {
-		if (i < 0) {
-			throw new IndexOutOfBoundsException();
-		}
-		Node<T> current = first;
-		for (int j = 0; current != null && j < i; j++) {
-			// Count our way up to desired element
-			current = current.after;
-		}
-		if (current == null) {
-			throw new IndexOutOfBoundsException();
-		}
-		return current.data;
-	}
-
-	/**
-	 * Get and remove element i from the list.
+	 * Get and remove element i from the list. Size is recorded with decrement
+	 * operator to update.
 	 * 
 	 * @param i Zero-based index of element
 	 * @return The element at that index
 	 * @throws IndexOutOfBoundsException if i is invalid
 	 */
 	public T remove(int i) {
-		if (i < 0) throw new IndexOutOfBoundsException();
-		
+		if (i < 0)
+			throw new IndexOutOfBoundsException();
+
 		Node<T> current = first;
 		for (int j = 0; current != null && j < i; j++) {
 			// Count our way up to desired element
 			current = current.after;
 		}
-		if (current == null) throw new IndexOutOfBoundsException();
-		size--;
+		if (current == null)
+			throw new IndexOutOfBoundsException();
 
-			if (current.before != null) {
+		if (current.before != null) {
 			// Link before's after to new after
 			// (The node after the node before the current node
 			// becomes the node after the current node)
@@ -135,7 +116,46 @@ public class DLList<T> implements Iterable<T> {
 			// the node before it to stop referencing current
 			last = last.before;
 		}
+		size--;
 		return current.data;
+	}
+
+	/**
+	 * Retrieve an element from middle of list.
+	 * 
+	 * @param i Zero-based index of element
+	 * @return The element at that index
+	 * @throws IndexOutOfBoundsException if i is invalid
+	 */
+	public T get(int i) {
+		if (i <= size / 2) { // index is near the beginning of the list (first half)
+			if (i < 0)
+				throw new IndexOutOfBoundsException();
+
+			Node<T> current = first;
+			for (int j = 0; current != null && j < i; j++) {
+				// Count our way up to desired element, ascending from the first element
+				current = current.after;
+			}
+			if (current == null)
+				throw new IndexOutOfBoundsException();
+
+			return current.data;
+
+		} else { // index is near the end of the list (second half)
+			if (i < 0)
+				throw new IndexOutOfBoundsException();
+
+			Node<T> current = last;
+			for (int j = size - 1; current != null && j > i; j--) {
+				// Count our way down to desired element, descending from the last element
+				current = current.before;
+			}
+			if (current == null)
+				throw new IndexOutOfBoundsException();
+
+			return current.data;
+		}
 	}
 
 	/**
@@ -152,20 +172,23 @@ public class DLList<T> implements Iterable<T> {
 		return new Conductor<T>(this);
 	}
 
+	/**
+	 * Backwards iterator class (BackwardConductor).
+	 */
 	private static class BackwardConductor<T> implements Iterator<T> {
-		public Node<T> cart; // Next node to visit
+		public Node<T> car; // Next node to visit
 
 		public BackwardConductor(DLList<T> list) {
-			cart = list.last; // Begin at first
+			car = list.last; // Begin at last (opposite of first)
 		}
 
 		public boolean hasNext() {
-			return cart != null; // No more to visit
+			return car != null; // No more to visit
 		}
 
 		public T next() {
-			T data = cart.data; // Remember current
-			cart = cart.before; // Advance to before cart
+			T data = car.data; // Remember current
+			car = car.before; // Advance to before cart
 			return data; // Return old car data
 		}
 	}
@@ -180,13 +203,13 @@ public class DLList<T> implements Iterable<T> {
 	}
 
 	/**
-	 * Retrieve the number of nodes of this list in O(1) time.
-	 * Maintains the size property as nodes are changed with add and remove methods.
+	 * Retrieve the number of nodes of this list in O(1) time. Maintains the size
+	 * property as nodes are changed with add and remove methods.
 	 * 
 	 * @return number of nodes
 	 */
 	public int size() {
-		return size; // TODO: Fix this!
+		return size;
 	}
 
 	/**
