@@ -28,10 +28,10 @@ public class DoublyLinkedList<T> implements Iterable<T>{ // T is placeholder for
     }
 
     /**
-     * Add a new piece of data in a node at the end of the list
+     * Add a new piece of data in a node at the end of the list (1) 25:01, February 9, 2021
      * @param data
      */
-    public void add(T data){
+    public void add(T data){ //February 9, 2021
         // two cases: the list is empty or not
         if(isEmpty()){
             // Nothing in the list, so the new node should be both the head and tail
@@ -59,7 +59,7 @@ public class DoublyLinkedList<T> implements Iterable<T>{ // T is placeholder for
         if(i < 0){
             throw new IndexOutOfBoundsException(); // i was a negative index (less than the lowest index of 0)
         }
-        // create a walker node (we do not want to modify the head
+        // create a walker node (we do not want to modify the head)
         Node<T> n = head;
         // walk walker to the desired index
         for(int j = 0; j < i && n != null; j++){
@@ -92,7 +92,7 @@ public class DoublyLinkedList<T> implements Iterable<T>{ // T is placeholder for
             nnext.prev = nprev; // the node after n should reference the node before n
         }
 
-        // the only variable reference the node we are removing is the n variable (which is local to this method)
+        // the only variable reference the node we are removing is the n variable (which is a local variable to this method)
         // when this method returns, the local variable n goes away and the Garbage Collector will throw away
         // the node we removed
         return n.data;
@@ -109,7 +109,7 @@ public class DoublyLinkedList<T> implements Iterable<T>{ // T is placeholder for
         if(i < 0){
             throw new IndexOutOfBoundsException(); // i was a negative index (less than the lowest index of 0)
         }
-        // create a walker node (we do not want to modify the head
+        // create a walker node (we do not want to modify the head)
         Node<T> walker = head;
         // walk walker to the desired index
         for(int j = 0; j < i && walker != null; j++){
@@ -126,8 +126,8 @@ public class DoublyLinkedList<T> implements Iterable<T>{ // T is placeholder for
      * return true if there is nothing in the list, otherwise false
      * @return
      */
-    public boolean isEmpty(){
-        return head == null;
+    public boolean isEmpty(){ // part of the add method
+        return head == null; // is the head of the list null? 29:30 February 9, 2021
     }
 
     @Override

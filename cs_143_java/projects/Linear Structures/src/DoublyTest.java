@@ -29,14 +29,15 @@ public class DoublyTest {
         System.out.println("Ending slow approach...");
 
         System.out.println("Starting fast approach...");
-        System.out.println("Ending fast approach...");
         // asking the list to return to us a Conductor
         // special type of for loop that can be used with any class that implements Iterable
         // O(n)
         // for each string s in our list....print s
         for (Integer s : list) { // as long as the iterator has more nodes to visit
-            System.out.println(s);
+            //System.out.println(s);
         }
+        System.out.println("Ending fast approach...");
+
 
         DoublyLinkedList<String> list1 = new DoublyLinkedList<String>(); // empty list
         list1.add("A");

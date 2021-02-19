@@ -31,6 +31,7 @@ public class DLList<T> implements Iterable<T> {
 	// They can both reference the same node if the list is one element long
 	// The can both reference null if the list is empty
 	private Node<T> first, last;
+	private int size;
 
 	/**
 	 * Forward iterator class (conductor).
@@ -59,13 +60,16 @@ public class DLList<T> implements Iterable<T> {
 
 	/**
 	 * Add data to the end (last) of the list.
+	 * Size is recorded with increment operator to update.
 	 */
 	public void add(T data) {
 		if (last == null) {
 			// Empty list: one node is first and last
+			size++;
 			first = new Node<>(null, data, null);
 			last = first;
 		} else {
+			size++;
 			last.after = new Node<>(last, data, null);
 			last = last.after;
 		}
@@ -101,17 +105,17 @@ public class DLList<T> implements Iterable<T> {
 	 * @throws IndexOutOfBoundsException if i is invalid
 	 */
 	public T remove(int i) {
-		if (i < 0) {
-			throw new IndexOutOfBoundsException();
-		}
+		if (i < 0) throw new IndexOutOfBoundsException();
+		
 		Node<T> current = first;
 		for (int j = 0; current != null && j < i; j++) {
 			// Count our way up to desired element
 			current = current.after;
 		}
-		if (current == null)
-			throw new IndexOutOfBoundsException();
-		if (current.before != null) {
+		if (current == null) throw new IndexOutOfBoundsException();
+		size--;
+
+			if (current.before != null) {
 			// Link before's after to new after
 			// (The node after the node before the current node
 			// becomes the node after the current node)
@@ -148,22 +152,41 @@ public class DLList<T> implements Iterable<T> {
 		return new Conductor<T>(this);
 	}
 
+	private static class BackwardConductor<T> implements Iterator<T> {
+		public Node<T> cart; // Next node to visit
+
+		public BackwardConductor(DLList<T> list) {
+			cart = list.last; // Begin at first
+		}
+
+		public boolean hasNext() {
+			return cart != null; // No more to visit
+		}
+
+		public T next() {
+			T data = cart.data; // Remember current
+			cart = cart.before; // Advance to before cart
+			return data; // Return old car data
+		}
+	}
+
 	/**
 	 * Create a reverse iterator for this list.
 	 * 
 	 * @return iterator that walks from last to first
 	 */
 	public Iterator<T> descendingIterator() {
-		return null; // TODO: Fix this!
+		return new BackwardConductor<T>(this);
 	}
 
 	/**
 	 * Retrieve the number of nodes of this list in O(1) time.
+	 * Maintains the size property as nodes are changed with add and remove methods.
 	 * 
 	 * @return number of nodes
 	 */
 	public int size() {
-		return 0; // TODO: Fix this!
+		return size; // TODO: Fix this!
 	}
 
 	/**
