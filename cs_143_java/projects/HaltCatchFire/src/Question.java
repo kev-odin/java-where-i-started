@@ -1,5 +1,5 @@
 /**
- * This class is going to store information for the trivia game read from a .txt file
+ * This class is going to store information for the trivia game read from a .csv file
  */
 
 public class Question {

@@ -217,6 +217,14 @@ public class DLList<T> implements Iterable<T> {
 	 * list going A <-> B <-> C <-> D would now go D <-> C <-> B <-> A.
 	 */
 	public void reverse() {
+		Node<T> beginningNode = first;
+		Node<T> endingNode = last;
+
+		// Empty list?
+
+		// Only 1 element in the list?
+
+
 	}
 
 	/**
@@ -229,7 +237,7 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		if (i < 0 || i > size()) { // catches the invalid indexes for negative values and values larger than the size of the list
+		if (i < 0 || i > size) { // catches the invalid indexes for negative values and values larger than the size of the list
 			throw new IndexOutOfBoundsException();
 		
 		} else if (i == 0) {
@@ -240,7 +248,7 @@ public class DLList<T> implements Iterable<T> {
 			first = current; //reassign first reference to the current node
 			return true;
 
-		} else if (i == size()) {
+		} else if (i == size) {
 			Node<T> current = last; // adding to the end of the list
 			current.before = last; //current node before points to the previous last node
 			current.after = null; // current node after points to null
