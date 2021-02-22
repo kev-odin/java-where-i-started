@@ -236,38 +236,37 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		if (i < 0)
-			throw new IndexOutOfBoundsException();
+		if (i < 0 || i > size)
+			return false;
 
 		Node<T> current = first;
+		Node<T> newNode = new Node<T>(null, data, null);
+
+		if (current == null) { // empty list
+			add(data);
+			return true;
+		}
 		for (int j = 0; current != null && j < i; j++) {
-			// Count our way up to desired element, ascending from the first element
 			current = current.after;
 		}
-			if (current == null)
-				throw new IndexOutOfBoundsException();
 
-			else if (first.after == null) { // similar to an add before method
-				current.after = first; // current node after points to the previous first node
-				current.before = null; // current node before points to null
-				first.before = current; // first before node points to current node
-				first = current; // reassign first reference to the current node
-				return true;
+		if (current == null) {
+			last.after = newNode;
+			newNode.before = last;
+			last = newNode;
 
-			} else if (last.after == null) { // similar to an add after method
-				current.before = last; // current node before points to the previous last node
-				current.after = null; // current node after points to null
-				last.after = current; // last after node points to the current node
-				last = current; // reassign last reference to the current node
-				return true;
-
-			} else if (current.after != null) { // we are getting somewhere now
-				current.before = current.before.after; // current new node will point to the existing node before index
-				current.after = current.after.before; // current new node will point to the existing node after index
-				current.after.before = current; // existing node will point to the new node
-				current.before.after = current; // existing node will point to the new node
-				return true;
-			}
-		return false;	
+		} else if (current == first) {
+			newNode.after = current;
+			newNode.before = current.before;
+			current.before = newNode;
+			first = newNode;
+		} else {
+			newNode.after = current;
+			newNode.before = current.before;
+			current.before.after = newNode;
+			current.before = newNode;
+		}
+		size++;
+		return true;
 	}
 }
