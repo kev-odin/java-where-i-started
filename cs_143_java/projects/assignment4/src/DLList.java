@@ -56,6 +56,20 @@ public class DLList<T> implements Iterable<T> {
 		}
 	}
 
+	/**
+	 * Create a forward iterator for this list.
+	 * 
+	 * @return iterator that walks from first to last
+	 */
+	public Iterator<T> iterator() {
+		// The Conductor object can walk this list
+		// forward, front to back. Each time
+		// .next() is called, the Conductor
+		// produces one more piece of data,
+		// starting with first and ending with last
+		return new Conductor<T>(this);
+	}
+
 	public DLList() {
 		first = last = null; // Empty list
 	}
@@ -159,20 +173,6 @@ public class DLList<T> implements Iterable<T> {
 	}
 
 	/**
-	 * Create a forward iterator for this list.
-	 * 
-	 * @return iterator that walks from first to last
-	 */
-	public Iterator<T> iterator() {
-		// The Conductor object can walk this list
-		// forward, front to back. Each time
-		// .next() is called, the Conductor
-		// produces one more piece of data,
-		// starting with first and ending with last
-		return new Conductor<T>(this);
-	}
-
-	/**
 	 * Backwards iterator class (BackwardConductor).
 	 */
 	private static class BackwardConductor<T> implements Iterator<T> {
@@ -224,7 +224,6 @@ public class DLList<T> implements Iterable<T> {
 
 		// Only 1 element in the list?
 
-
 	}
 
 	/**
@@ -237,38 +236,38 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		if (i < 0 || i > size) { // catches the invalid indexes for negative values and values larger than the size of the list
+		if (i < 0)
 			throw new IndexOutOfBoundsException();
-		
-		} else if (i == 0) {
-			Node<T> current = first; // adding to the start of the list
-			current.after = first; //current node after points to the previous first node
-			current.before = null; //current node before points to null	
-			first.before = current; // first before node points to current node
-			first = current; //reassign first reference to the current node
-			return true;
 
-		} else if (i == size) {
-			Node<T> current = last; // adding to the end of the list
-			current.before = last; //current node before points to the previous last node
-			current.after = null; // current node after points to null
-			last.after = current; // last after node points to the current node
-			last = current;	//reassign last reference to the current node
-			return true;
-
-		} else {
-			Node<T> current = first;
-			for (int j = 0; current != null && j < i; j++) {
-				current = current.after; // walking current iterator down the line
-				if (i == j) { // current is on the index to insert
-					current.before = current.before.after; // current new node will point to the existing node before the index 
-					current.after = current.after.before; // current new node will point to the existing node after the index
-					current.after.before = current; // existing node will point to the new node
-					current.before.after = current; // existing node will point to the new node
-					return true;
-				}
-			}
+		Node<T> current = first;
+		for (int j = 0; current != null && j < i; j++) {
+			// Count our way up to desired element, ascending from the first element
+			current = current.after;
 		}
-		return false;
+			if (current == null)
+				throw new IndexOutOfBoundsException();
+
+			else if (first.after == null) { // similar to an add before method
+				current.after = first; // current node after points to the previous first node
+				current.before = null; // current node before points to null
+				first.before = current; // first before node points to current node
+				first = current; // reassign first reference to the current node
+				return true;
+
+			} else if (last.after == null) { // similar to an add after method
+				current.before = last; // current node before points to the previous last node
+				current.after = null; // current node after points to null
+				last.after = current; // last after node points to the current node
+				last = current; // reassign last reference to the current node
+				return true;
+
+			} else if (current.after != null) { // we are getting somewhere now
+				current.before = current.before.after; // current new node will point to the existing node before index
+				current.after = current.after.before; // current new node will point to the existing node after index
+				current.after.before = current; // existing node will point to the new node
+				current.before.after = current; // existing node will point to the new node
+				return true;
+			}
+		return false;	
 	}
 }
