@@ -236,7 +236,7 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		if (i < 0 || i > size)
+		if (i < 0 || i > size() - 1)
 			return false;
 
 		Node<T> current = first;
