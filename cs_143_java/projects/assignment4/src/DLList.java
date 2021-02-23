@@ -220,10 +220,12 @@ public class DLList<T> implements Iterable<T> {
 		Node<T> current = first;
 		Node<T> swap = null; // temporary hold for the previous reference
 
-		if (current.after == null) { // only item in the list
-			current.after = current.before;
-			current.before = current.after;
+		if (current == null || current.after == null) { // only item in the list
+			return;
 		}
+
+		first = last;
+		last = current;
 
 		while (current != null) { // traverse forward through the list
 			swap = current.before; // swap holds previous reference
@@ -231,7 +233,7 @@ public class DLList<T> implements Iterable<T> {
 			current.after = swap; // change current after pointer to the previous reference
 			current = current.before; // move to the next element (after)
 		}
-		last = current; // previous end of the list is now the first
+		
 	}
 
 	/**
