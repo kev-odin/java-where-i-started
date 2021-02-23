@@ -142,7 +142,7 @@ public class DLList<T> implements Iterable<T> {
 	 * @throws IndexOutOfBoundsException if i is invalid
 	 */
 	public T get(int i) {
-		if (i <= size / 2) { // index is near the beginning of the list (first half)
+		if (i <= size() / 2) { // index is near the beginning of the list (first half)
 			if (i < 0)
 				throw new IndexOutOfBoundsException();
 
@@ -161,7 +161,7 @@ public class DLList<T> implements Iterable<T> {
 				throw new IndexOutOfBoundsException();
 
 			Node<T> current = last;
-			for (int j = size - 1; current != null && j > i; j--) {
+			for (int j = size() - 1; current != null && j > i; j--) {
 				// Count our way down to desired element, descending from the last element
 				current = current.before;
 			}
@@ -217,13 +217,21 @@ public class DLList<T> implements Iterable<T> {
 	 * list going A <-> B <-> C <-> D would now go D <-> C <-> B <-> A.
 	 */
 	public void reverse() {
-		Node<T> beginningNode = first;
-		Node<T> endingNode = last;
+		Node<T> current = first;
+		Node<T> swap = null; // temporary hold for the previous reference
 
-		// Empty list?
+		if (current.after == null) { // only item in the list
+			current.after = current.before;
+			current.before = current.after;
+		}
 
-		// Only 1 element in the list?
-
+		while (current != null) { // traverse forward through the list
+			swap = current.before; // swap holds previous reference
+			current.before = current.after; // change current previous pointer to the node after
+			current.after = swap; // change current after pointer to the previous reference
+			current = current.before; // move to the next element (after)
+		}
+		last = current; // previous end of the list is now the first
 	}
 
 	/**
@@ -236,31 +244,33 @@ public class DLList<T> implements Iterable<T> {
 	 * @return false if i is not an index in the list, true otherwise
 	 */
 	public boolean add(int i, T data) {
-		if (i < 0 || i > size() - 1)
-			return false;
-
 		Node<T> current = first;
 		Node<T> newNode = new Node<T>(null, data, null);
+		
+		if (i < 0 || i >= size()) // is valid index
+			return false;
 
 		if (current == null) { // empty list
 			add(data);
 			return true;
 		}
+
 		for (int j = 0; current != null && j < i; j++) {
 			current = current.after;
 		}
 
-		if (current == null) {
+		if (current == null) { // last node, valid index
 			last.after = newNode;
 			newNode.before = last;
 			last = newNode;
 
-		} else if (current == first) {
+		} else if (current == first) { // existing node, valid index
 			newNode.after = current;
 			newNode.before = current.before;
 			current.before = newNode;
 			first = newNode;
-		} else {
+
+		} else { // inserting within list
 			newNode.after = current;
 			newNode.before = current.before;
 			current.before.after = newNode;
