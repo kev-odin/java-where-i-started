@@ -12,15 +12,14 @@ public class QuestionList {
     private static File textFile;
     private Scanner readThis;
 
-    ArrayList<Question> triviaList = new ArrayList<Question>();
+    ArrayList<Question> triviaList = new ArrayList<>();
 
     public QuestionList(File textFile) {
-        textFile = new File("trivia.csv");
+        textFile = new File("src/trivia.csv");
         readInFile(textFile);
     }
 
     private void readInFile(File textFile) {
-        String[] readChoices;
         Integer readAnswer;
         String readCategory;
         String readQuestionString;
@@ -32,10 +31,10 @@ public class QuestionList {
             readThis.useDelimiter(",");
             readThis.nextLine();
             int selectionSize = readThis.nextInt();
-            readChoices = new String[selectionSize];
             readThis.nextLine();
 
             while (readThis.hasNextLine()) {
+                String[] readChoices = new String[selectionSize];
                 String[] row = readThis.nextLine().split(",");
                 for (int i = 0; i < selectionSize; i++) {
                     readChoices[i] = row[i];
@@ -54,7 +53,7 @@ public class QuestionList {
         }
     }
 
-    private static class Question {
+    public class Question {
         private String[] playerChoices;
         private Integer answer;
         private String category;
@@ -97,7 +96,5 @@ public class QuestionList {
     }
     public static void main(String[] args) {
         QuestionList test = new QuestionList(textFile);
-        int a = 0;
-        System.out.println(test.triviaList.get(0).playerChoices[0]); // should be Venus, bug with storing answers in the choice array.
     }
 }
