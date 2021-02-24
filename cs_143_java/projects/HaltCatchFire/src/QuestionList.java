@@ -1,23 +1,37 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * This class is going to read in a .csv file to be used as questions,
- * categories, and answers for the trivia game.
+ * This class is going to read in a .csv file to be used as a library 
+ * for the trivia game.
+ * 
+ * Mainly use the ArrayList for the interactions that need to occur within
+ * the game.
+ * 
+ * Question objects are used to encapsulate each individual questions to be
+ * used within the game.
+ * 
+ * Written by Kevin Chung for CS143 Group Project. Team Halt and Catch Fire.
  */
 
 public class QuestionList {
-    private static File textFile;
+    private File textFile;
     private Scanner readThis;
 
-    ArrayList<Question> triviaList = new ArrayList<>();
+    ArrayList<Question> triviaList = new ArrayList<Question>();
 
     public QuestionList(File textFile) {
-        textFile = new File("src/trivia.csv");
+        //textFile = new File("src/trivia.csv"); // May need to change the path to where you have the "trivia.csv"; check your own computer.
         readInFile(textFile);
     }
+
+    /**
+     * This method parses the trivia.csv and organizes the data.
+     * @param textFile trivia.csv
+     */
 
     private void readInFile(File textFile) {
         Integer readAnswer;
@@ -52,6 +66,10 @@ public class QuestionList {
             System.out.println("trivia file was not found");
         }
     }
+
+    /**
+     * Question objects to store the relevant information.
+     */
 
     public class Question {
         private String[] playerChoices;
@@ -93,8 +111,17 @@ public class QuestionList {
         public Integer getRound() {
             return round;
         }
+
+        public String toString() {
+            String s ="";
+            s = "Category: " + category;
+            s += "\nQuestion: " + questionString;
+            s += "\nChoices: " + Arrays.toString(playerChoices);
+            s += "\nAnswer index: " + answer;
+            s += "\nPrize amount: " + prize;
+            s += "\nRound: " + round;
+            return s;
+        }
     }
-    public static void main(String[] args) {
-        QuestionList test = new QuestionList(textFile);
-    }
+    
 }

@@ -1,5 +1,5 @@
 Choice 0,Choice 1,Choice 2,Choice 3,Correct Answer (index),Category,Question,Prize,Round
-4,,,,,,,,
+4,,,,,,,,(Integer value used to determine player choices array size, alter to add more choices)
 Venus,Poseidon,Ares,Zeus,3,Greek Mythology,Which Greek god is known as the King of the gods?,99,99
 Mount Rainier,Mount Vesuvius,Mount Olympus,Mount Everest,2,Greek Mythology,What is the name of the mountain where the Greek gods lived?,99,99
 Athens,Aegina,Troy,Thebes,0,Greek Mythology,What Greek city is named after Athena?,99,99
