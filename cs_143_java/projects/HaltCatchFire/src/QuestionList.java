@@ -119,7 +119,7 @@ public class QuestionList {
             s += "\nChoices: " + Arrays.toString(playerChoices);
             s += "\nAnswer index: " + answer;
             s += "\nPrize amount: " + prize;
-            s += "\nRound: " + round;
+            s += "\nRound: " + round + "\n";
             return s;
         }
     }
