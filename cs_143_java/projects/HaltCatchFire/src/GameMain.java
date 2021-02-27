@@ -12,11 +12,11 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
 
-        //System.out.println(prompter); 
+        System.out.println(prompter); 
 
-        for (QuestionList.Question element : game.triviaList) {
-            System.out.print(element + "\n");
-        }
+        // for (QuestionList.Question element : game.triviaList) {
+        //     System.out.print(element + "\n");
+        // }
 
         // prompter.triviaWelcome();
 

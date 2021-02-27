@@ -7,6 +7,15 @@
  */
 
 public class PromptReader {
+    public static final String TEXT_RESET = "\u001B[0m";
+    public static final String TEXT_BLACK = "\u001B[30m";
+    public static final String TEXT_RED = "\u001B[31m";
+    public static final String TEXT_GREEN = "\u001B[32m";
+    public static final String TEXT_YELLOW = "\u001B[33m";
+    public static final String TEXT_BLUE = "\u001B[34m";
+    public static final String TEXT_PURPLE = "\u001B[35m";
+    public static final String TEXT_CYAN = "\u001B[36m";
+    public static final String TEXT_WHITE = "\u001B[37m";
 
     public void triviaWelcome() {
         haltCatchFireSplash();
@@ -28,19 +37,21 @@ public class PromptReader {
     }
 
     public void winSplash() {
-        String youWin = "\n";
+        String youWin = "\n" + TEXT_GREEN;
         youWin += "░█░█░█▀█░█░█░░░█░█░▀█▀░█▀█░█\n";
         youWin += "░░█░░█░█░█░█░░░█▄█░░█░░█░█░▀\n";
         youWin += "░░▀░░▀▀▀░▀▀▀░░░▀░▀░▀▀▀░▀░▀░▀\n";
+        youWin += TEXT_RESET;
         System.out.println(youWin);
         triviaBye();
     }
 
     public void gameOverSplash() {
-        String gameOver = "\n";
+        String gameOver = "\n" + TEXT_RED;
         gameOver += "░█▀▀░█▀█░█▄█░█▀▀░░░█▀█░█░█░█▀▀░█▀▄\n";
         gameOver += "░█░█░█▀█░█░█░█▀▀░░░█░█░▀▄▀░█▀▀░█▀▄\n";
         gameOver += "░▀▀▀░▀░▀░▀░▀░▀▀▀░░░▀▀▀░░▀░░▀▀▀░▀░▀\n";
+        gameOver += TEXT_RESET;
         System.out.println(gameOver);
         triviaBye();
     }
@@ -60,7 +71,7 @@ public class PromptReader {
         gameOverview += "\tGame Overview: \n";
         gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to the next rounds.\n";
         gameOverview += "\tThere are 3 rounds to play and each round will require an increasing amount of money to advance.\n";
-        gameOverview += "\tEarned money will be recordedwith the player's bank account. After the amount is met, the round will end and the next round begins.\n";
+        gameOverview += "\tEarned money will be recorded with the player's bank account. After the amount is met, the round will end and the next round begins.\n";
         gameOverview += "\tIf the player does not reach the required amount to advance, then the player loses and the game ends.";
         System.out.println(gameOverview);
     }
@@ -104,33 +115,36 @@ public class PromptReader {
 
     private void haltCatchFireSplash() {
         clearScreen();
-        String hcf = "\n";
+        String hcf = "\n" + TEXT_RED;
         hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
         hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
         hcf += "███████ ███████ ██      ██        ██      ███████    ██    ██      ███████     █████   ██ ██████  █████   \n";
         hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
         hcf += "██   ██ ██   ██ ███████ ██         ██████ ██   ██    ██     ██████ ██   ██     ██      ██ ██   ██ ███████ \n";
         hcf += "=========================================================================================================";
+        hcf += TEXT_RESET;
         System.out.println(hcf);
         teamShoutOut();
     }
 
     private void teamShoutOut() {
-        String names = "";
-        String spacer = "           ";
+        String spacer = "\t\t"; //"           "
+        String names = "\n" + TEXT_YELLOW;
         names += "Caleb Churness" + spacer;
         names += "Kevin Chung" + spacer;
         names += "Nicole Gouhin" + spacer;
         names += "Herrera Wray" + spacer;
         names += "Zhengqi Yang" + spacer;
+        names += TEXT_RESET;
         System.out.print(names + "\n");
     }
 
     private void instructSplash() {
-        String instructSplash = "\n";
+        String instructSplash = "\n" + TEXT_YELLOW;
         instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
         instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
         instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
+        instructSplash += TEXT_RESET;
         System.out.println(instructSplash);
     }
 
