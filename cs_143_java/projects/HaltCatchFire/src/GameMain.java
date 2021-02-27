@@ -8,13 +8,17 @@ public class GameMain {
 
     public static void main(String[] args) {
         textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
-        QuestionList library = new QuestionList(textFile);
+        QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
 
-        System.out.println(prompter);
+        //System.out.println(prompter); 
 
-        //prompter.triviaWelcome();
+        for (QuestionList.Question element : game.triviaList) {
+            System.out.print(element + "\n");
+        }
+
+        // prompter.triviaWelcome();
 
         // while (playGame) {
         //     String s = readThis.next();

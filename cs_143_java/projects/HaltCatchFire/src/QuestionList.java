@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
  */
 
 public class QuestionList {
-    private File textFile;
     private Scanner readThis;
 
     ArrayList<Question> triviaList = new ArrayList<Question>();
