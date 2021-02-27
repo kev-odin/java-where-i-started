@@ -4,31 +4,28 @@ import java.util.Scanner;
 
 public class GameMain {
     private static File textFile;
+    private static boolean playGame = true;
+
     public static void main(String[] args) {
-        textFile = new File("trivia.csv"); // May need to change the path to where you have the "trivia.csv"; check your own computer.
+        textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
         QuestionList library = new QuestionList(textFile);
+        PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
-        boolean playGame = true;
 
-        triviaWelcome();
+        prompter.triviaWelcome();
 
-        while(playGame) {
-
+        while (playGame) {
             String s = readThis.next();
+            prompter.clearScreen();
             if (s.contains("y")) {
-                System.out.println("YO");
+                prompter.winSplash();
+                playGame = false;
             } else if (s.contains("n")) {
+                prompter.gameOverSplash();
                 playGame = false;
             } else {
-                throw new InputMismatchException("You entered the wrong letter and now must die!");
+                throw new InputMismatchException("You entered the wrong letter and now mustdie!");
             }
         }
-    }
-
-    public static void triviaWelcome() {
-        String welcome = "You are playing the latest and greatest trivia game of this generation!";
-        String instruction = "To play this GOAT, please use the keyboard to make selections and follow the prompts.";
-        String ready = "Are you ready to play? (Y/n)";
-        System.out.println("\n" + welcome + "\n" + instruction + "\n" + ready + "\n");
     }
 }
