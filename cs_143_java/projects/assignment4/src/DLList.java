@@ -218,9 +218,9 @@ public class DLList<T> implements Iterable<T> {
 	 */
 	public void reverse() {
 		Node<T> current = first;
-		Node<T> swap = null; // temporary hold for the previous reference
+		Node<T> swap = first; // temporary hold for the previous reference
 
-		if (current == null || current.after == null) { // only item in the list or an empty list
+		if (current == null  || current.after == null) { // only item in the list or an empty list
 			return;
 		}
 

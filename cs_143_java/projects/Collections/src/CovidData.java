@@ -168,18 +168,18 @@ public class CovidData {
         }
 
 
-//        System.out.println(rows);
-//        System.out.println(states);
-//        System.out.println(states.size());
-//        System.out.println(counties);
-//        System.out.println(counties.size());
-        System.out.println(deathsInCountyAsOfDate.get("King,Washington,2020-11-11"));
-        System.out.println(newDeathsPerCountyOnDate.get("King,Washington,2020-11-01"));
-        System.out.println(deathsAsOfDate.get("2020-08-01"));
-        System.out.println(newDeathsOnDate.get("2020-08-01"));
+    //    System.out.println(rows);
+    //    System.out.println(states);
+    //    System.out.println(states.size());
+    //    System.out.println(counties);
+    //    System.out.println(counties.size());
+        // System.out.println(deathsInCountyAsOfDate.get("King,Washington,2020-11-11"));
+        // System.out.println(newDeathsPerCountyOnDate.get("King,Washington,2020-11-01"));
+        // System.out.println(deathsAsOfDate.get("2020-08-01"));
+        // System.out.println(newDeathsOnDate.get("2020-08-01"));
         System.out.println(dateWithMostDeaths + " " + mostDeaths);
-        System.out.println(newDeathsOnDate);
-        System.out.println(datesPerDeathCount.get(1049));
-        System.out.println(totalDeathsPerCounty.get("Los Angeles,California"));
+        // System.out.println(newDeathsOnDate);
+        // System.out.println(datesPerDeathCount.get(1049));
+        // System.out.println(totalDeathsPerCounty.get("Los Angeles,California"));
     }
 }
