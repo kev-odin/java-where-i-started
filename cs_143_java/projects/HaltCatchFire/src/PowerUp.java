@@ -3,20 +3,20 @@ public class PowerUp {
     private int streak;
     private boolean powerUpStatus;
 
-    public PowerUp(int streak, boolean powerUpStatus){
-        this.streak=streak;
-        powerUpStatus=false;
+    public PowerUp(int streak, boolean powerUpStatus) {
+        this.streak = streak;
+        powerUpStatus = false;
     }
 
-    public int countStreak(){
+    public int countStreak() {
         int res = 0;
-        return res+streak;
+        return res + streak;
     }
 
-    public boolean status(){
-        if(powerUpStatus){
+    public boolean status() {
+        if (powerUpStatus) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -12,20 +12,22 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
 
-        prompter.triviaWelcome();
+        System.out.println(prompter);
 
-        while (playGame) {
-            String s = readThis.next();
-            prompter.clearScreen();
-            if (s.contains("y")) {
-                prompter.winSplash();
-                playGame = false;
-            } else if (s.contains("n")) {
-                prompter.gameOverSplash();
-                playGame = false;
-            } else {
-                throw new InputMismatchException("You entered the wrong letter and now mustdie!");
-            }
-        }
+        //prompter.triviaWelcome();
+
+        // while (playGame) {
+        //     String s = readThis.next();
+        //     prompter.clearScreen();
+        //     if (s.contains("y")) {
+        //         prompter.winSplash();
+        //         playGame = false;
+        //     } else if (s.contains("n")) {
+        //         prompter.gameOverSplash();
+        //         playGame = false;
+        //     } else {
+        //         throw new InputMismatchException("You entered the wrong letter and now mustdie!");
+        //     }
+        // }
     }
 }
