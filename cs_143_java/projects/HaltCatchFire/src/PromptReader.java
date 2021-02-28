@@ -62,13 +62,13 @@ public class PromptReader {
     }
     
     private void playPrompt() {
-        String playPrompt = "\nAre you ready to proceed? (Y/n)";
+        String playPrompt = TEXT_BLUE + "\nAre you ready to proceed? (Y/n)" + TEXT_RESET;
         System.out.println(playPrompt);
     }
     
     private void gameOverview() {
-        String gameOverview = "\n";
-        gameOverview += "\tGame Overview: \n";
+        String gameOverview = "\n" + TEXT_BLUE;
+        gameOverview += "\tGame Overview: \n" + TEXT_RESET;
         gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to the next rounds.\n";
         gameOverview += "\tThere are 3 rounds to play and each round will require an increasing amount of money to advance.\n";
         gameOverview += "\tEarned money will be recorded with the player's bank account. After the amount is met, the round will end and the next round begins.\n";
@@ -77,10 +77,10 @@ public class PromptReader {
     }
 
     private void triviaRules() {
-        String triviaRules = "\n";
-        triviaRules += "\tTrivia Selection: \n";
+        String triviaRules = "\n" + TEXT_BLUE;
+        triviaRules += "\tTrivia Selection: \n" + TEXT_RESET;
         triviaRules += "\tEach question is separated by the category and prize money amount. \n";
-        triviaRules += "\tDofficult questions are worth more money. Questions are based on 5th grade subjects and interest.\n";
+        triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interest.\n";
         triviaRules += "\tTo select a question, \n";
         //TODO: (Caleb will need to describe how questions are selected from the GameBoard).
         triviaRules += "\tAfter a question is selected, the player will have 15 seconds to answer the question.";
@@ -89,8 +89,8 @@ public class PromptReader {
     }
 
     private void bankAccountRules() {
-        String bankRules = "\n";
-        bankRules += "\tBank Account: \n";
+        String bankRules = "\n" + TEXT_BLUE;
+        bankRules += "\tBank Account: \n" + TEXT_RESET;
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
         bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account. Negative values are permitted.\n";
         //TODO: (Herrera will need to determine the round limits for each round).
@@ -100,8 +100,8 @@ public class PromptReader {
     }
 
     private void powerUpRules() {
-        String powerRules = "\n";
-        powerRules += "\tPower-ups: \n";
+        String powerRules = "\n" + TEXT_BLUE;
+        powerRules += "\tPower-ups: \n" + TEXT_RESET;
         powerRules += "\tPlayers can earn question streaks after answering consecutive questions correctly.\n";
         powerRules += "\tThese power-ups are persistent through each round.";
        //TODO: (Zhengqi will need to determine what kind of power-ups he wants to implement).
