@@ -69,7 +69,7 @@ public class QuestionList {
     }
 
     private void addToArrayList(Integer readAnswer, String readCategory, String readQuestionString, Integer readPrize,
-            Integer readRound, String[] readChoices) {
+        Integer readRound, String[] readChoices) {
         Question entry = new Question(readChoices, readAnswer, readCategory, readQuestionString, readPrize, readRound);
         triviaList.add(entry);
     }
