@@ -22,6 +22,8 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
 
+        System.out.println(game);
+
         // prompter.triviaWelcome();
         // prompter.clearScreen();
         // prompter.instructPlayer();

@@ -1,20 +1,24 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeSet;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 
 /**
- * This class is going to read in a .csv file to be used as a library 
- * for the trivia game.
+ * This class is going to read in a .csv file to be used as a library for the
+ * trivia game.
  * 
- * Mainly use the ArrayList for the interactions that need to occur within
- * the game.
+ * Mainly use the ArrayList for the interactions that need to occur within the
+ * game.
  * 
- * Question objects are used to encapsulate each individual questions to be
- * used within the game.
+ * Question objects are used to encapsulate each individual questions to be used
+ * within the game.
  * 
  * Written by Kevin Chung for CS143 Group Project. Team Halt and Catch Fire.
+
  */
 
 public class QuestionList {
@@ -23,7 +27,7 @@ public class QuestionList {
     ArrayList<Question> triviaList = new ArrayList<Question>();
 
     public QuestionList(File textFile) {
-        //textFile = new File("src/trivia.csv"); // May need to change the path to where you have the "trivia.csv"; check your own computer.
+        //textFile = new File("trivia.csv"); // May need to change the path to where you have the "trivia.csv"; check your own computer.
         readInFile(textFile);
     }
 
@@ -74,7 +78,24 @@ public class QuestionList {
         triviaList.add(entry);
     }
 
+    public String toString() {
+        TreeSet<String> category = new TreeSet<>();
+        TreeSet<Integer> rounds = new TreeSet<>();
+        TreeSet<Integer> prizes = new TreeSet<>();
+        String questionList = "";
 
+        for (QuestionList.Question element : triviaList) {
+            category.add(element.getCategory());
+            rounds.add(element.getRound());
+            prizes.add(element.getPrize());
+        }
+
+        questionList += "Questions: " + triviaList.size();
+        questionList += "\nCategories: " + category.toString();
+        questionList += "\nRounds: " + rounds.toString();
+        questionList += "\nPrizes: " + prizes.toString();
+        return "\n" + questionList + "\n";
+    }
 
     /**
      * Question objects to store the relevant information.
