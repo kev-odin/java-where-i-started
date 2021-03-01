@@ -87,8 +87,8 @@ public class QuestionList {
             rounds.add(element.getRound());
             prizes.add(element.getPrize());
         }
-
-        questionList += "Questions: " + triviaList.size();
+        questionList += "Your trivia list contains the following: ";
+        questionList += "\nQuestions: " + triviaList.size();
         questionList += "\nCategories: " + category.toString();
         questionList += "\nRounds: " + rounds.toString();
         questionList += "\nPrizes: " + prizes.toString();
