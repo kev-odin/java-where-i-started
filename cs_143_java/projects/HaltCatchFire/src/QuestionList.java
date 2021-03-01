@@ -49,22 +49,32 @@ public class QuestionList {
             while (readThis.hasNextLine()) {
                 String[] readChoices = new String[selectionSize];
                 String[] row = readThis.nextLine().split(",");
-                for (int i = 0; i < selectionSize; i++) {
-                    readChoices[i] = row[i];
-                }
+                extractChoices(selectionSize, readChoices, row);
                 readAnswer = Integer.parseInt(row[4]);
                 readCategory = row[5];
                 readQuestionString = row[6];
                 readPrize = Integer.parseInt(row[7]);
                 readRound = Integer.parseInt(row[8]);
-
-                Question entry = new Question(readChoices, readAnswer, readCategory, readQuestionString, readPrize, readRound);
-                triviaList.add(entry);
+                addToArrayList(readAnswer, readCategory, readQuestionString, readPrize, readRound, readChoices);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Trivia file was not found, please check your project folder structure.");
         }
     }
+
+    private void extractChoices(int selectionSize, String[] readChoices, String[] row) {
+        for (int i = 0; i < selectionSize; i++) {
+            readChoices[i] = row[i];
+        }
+    }
+
+    private void addToArrayList(Integer readAnswer, String readCategory, String readQuestionString, Integer readPrize,
+            Integer readRound, String[] readChoices) {
+        Question entry = new Question(readChoices, readAnswer, readCategory, readQuestionString, readPrize, readRound);
+        triviaList.add(entry);
+    }
+
+
 
     /**
      * Question objects to store the relevant information.
