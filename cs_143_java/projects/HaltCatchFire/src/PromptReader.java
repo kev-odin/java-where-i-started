@@ -7,15 +7,15 @@
  */
 
 public class PromptReader {
-    public static final String TEXT_RESET = "\u001B[0m";
-    public static final String TEXT_BLACK = "\u001B[30m";
-    public static final String TEXT_RED = "\u001B[31m";
-    public static final String TEXT_GREEN = "\u001B[32m";
-    public static final String TEXT_YELLOW = "\u001B[33m";
-    public static final String TEXT_BLUE = "\u001B[34m";
-    public static final String TEXT_PURPLE = "\u001B[35m";
-    public static final String TEXT_CYAN = "\u001B[36m";
-    public static final String TEXT_WHITE = "\u001B[37m";
+    private static final String TEXT_RESET = "\u001B[0m";
+    private static final String TEXT_RED = "\u001B[31m";
+    private static final String TEXT_GREEN = "\u001B[32m";
+    private static final String TEXT_YELLOW = "\u001B[33m";
+    private static final String TEXT_BLUE = "\u001B[34m";
+    private static final String TEXT_PURPLE = "\u001B[35m";
+    private static final String TEXT_CYAN = "\u001B[36m";
+    private static final String TEXT_WHITE = "\u001B[37m";
+    private static final String TEXT_BLACK = "\u001B[30m";
 
     public void triviaWelcome() {
         haltCatchFireSplash();
@@ -71,7 +71,8 @@ public class PromptReader {
         gameOverview += "\tGame Overview: \n" + TEXT_RESET;
         gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to the next rounds.\n";
         gameOverview += "\tThere are 3 rounds to play and each round will require an increasing amount of money to advance.\n";
-        gameOverview += "\tEarned money will be recorded with the player's bank account. After the amount is met, the round will end and the next round begins.\n";
+        gameOverview += "\tEarned money will be recorded with the player's bank account.\n";
+        gameOverview += "\tAfter the amount is met, the round will end and the next round begins.\n";
         gameOverview += "\tIf the player does not reach the required amount to advance, then the player loses and the game ends.";
         System.out.println(gameOverview);
     }
@@ -92,7 +93,8 @@ public class PromptReader {
         String bankRules = "\n" + TEXT_BLUE;
         bankRules += "\tBank Account: \n" + TEXT_RESET;
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
-        bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account. Negative values are permitted.\n";
+        bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n"; 
+        bankRules += "\tNegative values are permitted.\n";
         //TODO: (Herrera will need to determine the round limits for each round).
         bankRules += "\t\tRound 1: $1000\n";
         bankRules += "\t\tRound 2: $10000";

@@ -62,7 +62,7 @@ public class QuestionList {
                 triviaList.add(entry);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("trivia file was not found");
+            System.out.println("Trivia file was not found, please check your project folder structure.");
         }
     }
 

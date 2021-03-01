@@ -2,6 +2,16 @@ import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class is used to run the main trivia game. 
+ * 
+ * List of classes:
+ * - QuestionList: scans a .csv and organizes that data into Question objects.
+ * - PromptReader: provides game prompts that are not included in GameBoard.
+ * 
+ * CS143 Group Project: Halt and Catch Fire - Cool Trivia Game
+ */
+
 public class GameMain {
     private static File textFile;
     private static boolean playGame = true;
@@ -12,7 +22,11 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         Scanner readThis = new Scanner(System.in);
 
-        System.out.println(prompter); 
+        // prompter.triviaWelcome();
+        // prompter.clearScreen();
+        // prompter.instructPlayer();
+        // prompter.gameOverSplash();
+        // prompter.winSplash();
 
         // for (QuestionList.Question element : game.triviaList) {
         //     System.out.print(element + "\n");
