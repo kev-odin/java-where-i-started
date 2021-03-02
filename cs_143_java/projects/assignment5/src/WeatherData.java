@@ -15,6 +15,8 @@ import java.util.Scanner;
  */
 public class WeatherData {
 
+	private Scanner file;
+
 	/**
 	 * Load the data provided by the Scanner into your WeatherData class. The data
 	 * should be loaded one line of text at a time using the Scanner's nextLine
@@ -41,7 +43,7 @@ public class WeatherData {
 	 * @throws FileNotFoundException
 	 */
 	public WeatherData(Scanner file) throws FileNotFoundException {
-		Scanner sc = new Scanner(new File("kent100.csv"));
+		this.file = new Scanner(new File("kent100.csv"));
 		file.nextLine();
 		while (file.hasNextLine()) {
 			String[] data = file.nextLine().split(",");
