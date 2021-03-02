@@ -1,10 +1,10 @@
+// Name: Kevin Chung (CS143 - Winter 2021)
+import java.io.File;
 import java.util.Scanner;
 
 /**
  * A class representing weather data including temperatures, snowfall, and
  * precipitation over a period of time.
- * 
- * TODO: PLEASE PUT YOUR NAME HERE TO INDICATE THAT THIS IS YOUR WORK!
  * 
  * PLEASE DO NOT COPY THIS FILE TO OTHER STUDENTS OR TO WEBSITES LIKE CHEGG,
  * GITHUB, ETC WHERE OTHERS MAY VIEW IT!!! IT IS YOUR WORK AND YOU SHOULD BE
@@ -39,13 +39,16 @@ public class WeatherData {
 	 * @param file Scanner connected to a weather data file
 	 */
 	public WeatherData(Scanner file) {
+		File weather = new File ("kent100.csv");
+		String[] data = file.nextLine().split(",");
+		System.out.println(data.toString());
+
 		// TODO: Save the data into the class. You should not use any static data
 		// members. Remember that only the following methods are used to retrieve data,
 		// so you can save the data using specialized collections for efficiency.
 		// The constructor will probably do the hard work of setting up all the
 		// collections so that the later methods can run efficiently.
 		// Each method will probably have its own collection!
-
 	}
 
 	/**

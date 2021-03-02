@@ -89,9 +89,9 @@ public class QuestionList {
         }
         questionList += "Your trivia list contains the following: ";
         questionList += "\nQuestions: " + triviaList.size();
-        questionList += "\nCategories: " + category.toString();
-        questionList += "\nRounds: " + rounds.toString();
-        questionList += "\nPrizes: " + prizes.toString();
+        questionList += "\nCategories: " + category;
+        questionList += "\nRounds: " + rounds;
+        questionList += "\nPrizes: " + prizes;
         return "\n" + questionList + "\n";
     }
 
