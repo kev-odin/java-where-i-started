@@ -158,8 +158,8 @@ public class CovidData {
             // before we add the new entry to override the previous total, lets use the previous accumulation
             // to determine how many new deaths there were as of this date in this county
             // Problem: what if this is the first time we have seen this county?
-            int previousAccumulatedDeaths = totalDeathsPerCounty.getOrDefault(countyStateDate[0]+","+countyStateDate[1], 0);
-            int difference = accumulatedDeaths - prevAccumulatedDeaths;
+            int previousDeathsInCounty = totalDeathsPerCounty.getOrDefault(countyStateDate[0]+","+countyStateDate[1], 0);
+            int difference = accumulatedDeaths - previousDeathsInCounty;
             // add the difference to our newDeathsPerCountyOnDateMap
             newDeathsPerCountyOnDate.put(countyDate, difference);
             // add the updated total for this date to the entry for this county in our new map
@@ -168,18 +168,18 @@ public class CovidData {
         }
 
 
-    //    System.out.println(rows);
-    //    System.out.println(states);
-    //    System.out.println(states.size());
-    //    System.out.println(counties);
-    //    System.out.println(counties.size());
-        // System.out.println(deathsInCountyAsOfDate.get("King,Washington,2020-11-11"));
-        // System.out.println(newDeathsPerCountyOnDate.get("King,Washington,2020-11-01"));
-        // System.out.println(deathsAsOfDate.get("2020-08-01"));
-        // System.out.println(newDeathsOnDate.get("2020-08-01"));
+//        System.out.println(rows);
+//        System.out.println(states);
+//        System.out.println(states.size());
+//        System.out.println(counties);
+//        System.out.println(counties.size());
+        System.out.println(deathsInCountyAsOfDate.get("King,Washington,2020-11-11"));
+        System.out.println(newDeathsPerCountyOnDate.get("Los Angeles,California,2020-11-11"));
+        System.out.println(deathsAsOfDate.get("2020-11-11"));
+        System.out.println(newDeathsOnDate.get("2020-11-11"));
         System.out.println(dateWithMostDeaths + " " + mostDeaths);
-        // System.out.println(newDeathsOnDate);
-        // System.out.println(datesPerDeathCount.get(1049));
-        // System.out.println(totalDeathsPerCounty.get("Los Angeles,California"));
+        //System.out.println(newDeathsOnDate);
+        System.out.println(datesPerDeathCount.get(1049));
+        System.out.println(totalDeathsPerCounty.get("Los Angeles,California"));
     }
 }
