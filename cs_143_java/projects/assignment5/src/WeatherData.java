@@ -1,5 +1,6 @@
 // Name: Kevin Chung (CS143 - Winter 2021)
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -37,11 +38,14 @@ public class WeatherData {
 	 * digit day).
 	 * 
 	 * @param file Scanner connected to a weather data file
+	 * @throws FileNotFoundException
 	 */
-	public WeatherData(Scanner file) {
-		File weather = new File ("kent100.csv");
-		String[] data = file.nextLine().split(",");
-		System.out.println(data.toString());
+	public WeatherData(Scanner file) throws FileNotFoundException {
+		Scanner sc = new Scanner(new File("kent100.csv"));
+		file.nextLine();
+		while (file.hasNextLine()) {
+			String[] data = file.nextLine().split(",");
+		}
 
 		// TODO: Save the data into the class. You should not use any static data
 		// members. Remember that only the following methods are used to retrieve data,
