@@ -67,7 +67,10 @@ public class PromptReader {
     }
     
     private void playPrompt() {
-        String playPrompt = TEXT_BLUE + "\nAre you ready to proceed? (Y/n)" + TEXT_RESET;
+        String playPrompt = TEXT_BLUE;
+        playPrompt += "\nAre you ready to proceed?";
+        playPrompt += "\t(1)YES or (2)NO";
+        playPrompt += "\nEnter number selection: " + TEXT_RESET; 
         System.out.println(playPrompt);
     }
     
@@ -152,13 +155,5 @@ public class PromptReader {
         instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
         instructSplash += TEXT_RESET;
         System.out.println(instructSplash);
-    }
-
-    public String toString() {
-        triviaWelcome();
-        instructPlayer();
-        winSplash();
-        gameOverSplash();
-        return "";
     }
 }
