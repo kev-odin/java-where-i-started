@@ -56,6 +56,11 @@ public class PromptReader {
         triviaBye();
     }
 
+    public void exitGame() {
+        clearScreen();
+        System.out.println("Program terminated. We hope you will play at another time.");
+    }
+
     public void clearScreen() {
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
@@ -116,7 +121,6 @@ public class PromptReader {
     }
 
     private void haltCatchFireSplash() {
-        clearScreen();
         String hcf = "\n" + TEXT_RED;
         hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
         hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
