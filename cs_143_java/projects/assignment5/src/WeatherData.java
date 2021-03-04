@@ -1,6 +1,8 @@
 
 // Name: Kevin Chung (CS143 - Winter 2021)
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -44,17 +46,32 @@ public class WeatherData {
 	Set<Integer> highTempSet = new HashSet<>();
 	Set<Integer> lowTempSet = new HashSet<>();
 
+	// Method 3 double annualSnow collection
+	Map<Integer, Double> annualSnow = new HashMap<>();
+
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
 		while (file.hasNextLine()) {
 			String[] rawData = file.nextLine().split(",");
-			// Extract high temperature data & low temperature, make sure that the length is long enough. Kent dnoes not have the "" around some of the data.
+			String[] date = rawData[1].substring(1,11).split("-");
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+
+			// Extract high temperature data & low temperature, make sure that the length is long enough.
 			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
 				int lowTemp = Integer.parseInt(rawData[8]. substring(1, rawData[8].length() - 1));
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 			}
+
+			// Extract snowfall data, makes sure the length is long enough
+			if(rawData.length >= 6 && !rawData[5].equals("")){
+                double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
+                annualSnow.put(year, snowfall);
+            }
+
+
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
