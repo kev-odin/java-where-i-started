@@ -1,6 +1,4 @@
 // Name: Kevin Chung (CS143 - Winter 2021)
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -14,8 +12,6 @@ import java.util.Scanner;
  * STUDENTS FOR NONPROFIT EDUCATIONAL PURPOSES.
  */
 public class WeatherData {
-
-	private Scanner file;
 
 	/**
 	 * Load the data provided by the Scanner into your WeatherData class. The data
@@ -40,13 +36,12 @@ public class WeatherData {
 	 * digit day).
 	 * 
 	 * @param file Scanner connected to a weather data file
-	 * @throws FileNotFoundException
 	 */
-	public WeatherData(Scanner file) throws FileNotFoundException {
-		this.file = new Scanner(new File("kent100.csv"));
+	public WeatherData(Scanner file) {
 		file.nextLine();
 		while (file.hasNextLine()) {
-			String[] data = file.nextLine().split(",");
+			String[] rawData = file.nextLine().split(",");
+			System.out.println(rawData[0]);
 		}
 
 		// TODO: Save the data into the class. You should not use any static data

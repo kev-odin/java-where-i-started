@@ -25,8 +25,8 @@ public class CovidData {
         Set<String> counties = new TreeSet<>();
 
         // String (key) is the County,State,Date
-        // and the Integer (value) is the total number of deaths in that County/State as
-        // of that date
+        // and the Integer (value) is the total number of deaths 
+        // in that County/State as of that date
         Map<String, Integer> deathsInCountyAsOfDate = new TreeMap<>();
 
         // String (key) is the Date
@@ -37,8 +37,8 @@ public class CovidData {
         // we wont use next, because next will only get one word, not an entire line
         // while we have not reached the end of the file...
         while (file.hasNext()) {
-            String[] row = file.nextLine().split(","); // Example
-                                                       // {"2020-01-29","Snohomish","Washington","53061","1","0"}
+            String[] row = file.nextLine().split(","); 
+            // Example {"2020-01-29","Snohomish","Washington","53061","1","0"}
             // now row[0] contains the date, row[1] contains the county, row[2] contains the
             // state and so on...
             states.add(row[2]); // add the state to the set of all states
@@ -85,8 +85,8 @@ public class CovidData {
         String dateWithMostDeaths = null; // placeholder value
         // how many new deaths were on the date that had the most deaths?
         int mostDeaths = -1; // placeholder value
-        // use a foreach loop to iterate through the dates (keys) in our deathsAsOfDate
-        // map
+        // use a foreach loop to iterate through the dates (keys) 
+        // in our deathsAsOfDate map
         // and add an entry for each date to our newDeathsOnDate map
         for (String date : deathsAsOfDate.keySet()) {
             // because deathsAsOfDate is a TreeMap, it is sorted by keys
