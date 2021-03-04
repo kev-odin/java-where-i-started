@@ -1,5 +1,8 @@
+
 // Name: Kevin Chung (CS143 - Winter 2021)
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * A class representing weather data including temperatures, snowfall, and
@@ -37,11 +40,21 @@ public class WeatherData {
 	 * 
 	 * @param file Scanner connected to a weather data file
 	 */
+	// Method 1 & 2 boolean highTemp / lowTemp collections
+	Set<Integer> highTempSet = new HashSet<>();
+	Set<Integer> lowTempSet = new HashSet<>();
+
 	public WeatherData(Scanner file) {
-		file.nextLine();
+		file.nextLine(); // Discard header file
 		while (file.hasNextLine()) {
 			String[] rawData = file.nextLine().split(",");
-			System.out.println(rawData[0]);
+			// Extract high temperature data & low temperature, make sure that the length is long enough. Kent dnoes not have the "" around some of the data.
+			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
+				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
+				int lowTemp = Integer.parseInt(rawData[8]. substring(1, rawData[8].length() - 1));
+				highTempSet.add(highTemp);
+				lowTempSet.add(lowTemp);
+			}
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
@@ -63,7 +76,10 @@ public class WeatherData {
 	 * @return true if high temp, false otherwise
 	 */
 	public boolean highTemp(int degrees) {
-		return false; // FIXME: Return whether this is an actual high temperature
+		if (highTempSet.contains(degrees)) {
+			return true;
+		} 
+		return false;
 	}
 
 	/**
@@ -74,7 +90,10 @@ public class WeatherData {
 	 * @return true if low temp, false otherwise
 	 */
 	public boolean lowTemp(int degrees) {
-		return false; // FIXME: Return whether this is an actual low temperature
+		if (lowTempSet.contains(degrees)) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
