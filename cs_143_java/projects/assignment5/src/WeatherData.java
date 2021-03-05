@@ -46,16 +46,18 @@ public class WeatherData {
 	Set<Integer> highTempSet = new HashSet<>();
 	Set<Integer> lowTempSet = new HashSet<>();
 
-	// Method 3 double annualSnow collection
-	Map<Integer, Double> annualSnow = new HashMap<>();
+	// Method 3 double snowfallPerYear collection
+	Map<Integer, Double> snowfallPerYear = new HashMap<>();
 
+	//Method 4 averagePrecipitationForMonth
+	Map<Integer, Double> avgMonthPrecip = new HashMap<>();
+	
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
 		while (file.hasNextLine()) {
 			String[] rawData = file.nextLine().split(",");
 			String[] date = rawData[1].substring(1,11).split("-");
-            int year = Integer.parseInt(date[0]);
-            int month = Integer.parseInt(date[1]);
+			Integer year = Integer.parseInt(date[0]);
 
 			// Extract high temperature data & low temperature, make sure that the length is long enough.
 			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
@@ -65,13 +67,20 @@ public class WeatherData {
 				lowTempSet.add(lowTemp);
 			}
 
-			// Extract snowfall data, makes sure the length is long enough
+			// Extract snowfall data, makes sure the length is long enough.
 			if(rawData.length >= 6 && !rawData[5].equals("")){
                 double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
-                annualSnow.put(year, snowfall);
+				double prevSnowfall = 0.0;
+				Integer currentYear = 0;
+
+				if(currentYear.equals(year)) {
+					snowfall += prevSnowfall + snowfall;
+				} else {
+					currentYear = year;
+					prevSnowfall = snowfall;
+				}
+				snowfallPerYear.put(year, snowfall);
             }
-
-
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
@@ -124,7 +133,7 @@ public class WeatherData {
 	 * @return
 	 */
 	public double totalSnowfallForYear(int year) {
-		return -1; // FIXME: Return actual snowfall for the given year
+		return snowfallPerYear.getOrDefault(year, 0.0);
 	}
 
 	/**
