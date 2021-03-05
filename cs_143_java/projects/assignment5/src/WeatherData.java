@@ -50,7 +50,8 @@ public class WeatherData {
 	Map<Integer, Double> snowfallPerYear = new HashMap<>();
 
 	//Method 4 averagePrecipitationForMonth
-	Map<Integer, Double> avgMonthPrecip = new HashMap<>();
+	Map<String, Double> dailyPrecip = new HashMap<>();
+	Map<String, Double> avgMonthPrecip = new HashMap<>();
 	
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
@@ -60,7 +61,7 @@ public class WeatherData {
 			Integer year = Integer.parseInt(date[0]);
 
 			// Extract high temperature data & low temperature, make sure that the length is long enough.
-			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
+			if(rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
 				int lowTemp = Integer.parseInt(rawData[8]. substring(1, rawData[8].length() - 1));
 				highTempSet.add(highTemp);
@@ -81,6 +82,15 @@ public class WeatherData {
 				}
 				snowfallPerYear.put(year, snowfall);
             }
+
+			// Extract precipitation data, make sure the length is long enough. Some total will be blank because of the multiple days.
+			if(rawData.length >= 5 && !rawData[4].equals("") || rawData.length >= 4 && !rawData[3].equals("")){
+				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
+				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
+				int multiPrecipDays = Integer.parseInt(rawData[2].substring(1, rawData[2].length() - 1));
+				String dateKey = date[0]+"/"+date[1]+"/"+date[2];
+				dailyPrecip.put(dateKey, singlePrecip);			
+			}
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
