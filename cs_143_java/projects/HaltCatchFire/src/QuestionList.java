@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
  * within the game.
  * 
  * Written by Kevin Chung for CS143 Group Project. Team Halt and Catch Fire.
-
+ * 
  */
 
 public class QuestionList {
@@ -25,12 +25,14 @@ public class QuestionList {
     ArrayList<Question> triviaList = new ArrayList<Question>();
 
     public QuestionList(File textFile) {
-        //textFile = new File("trivia.csv"); // May need to change the path to where you have the "trivia.csv"; check your own computer.
+        // textFile = new File("trivia.csv"); // May need to change the path to where
+        // you have the "trivia.csv"; check your own computer.
         readInFile(textFile);
     }
 
     /**
      * This method parses the trivia.csv and organizes the data.
+     * 
      * @param textFile trivia.csv
      */
 
@@ -71,7 +73,7 @@ public class QuestionList {
     }
 
     private void addToArrayList(Integer readAnswer, String readCategory, String readQuestionString, Integer readPrize,
-        Integer readRound, String[] readChoices) {
+            Integer readRound, String[] readChoices) {
         Question entry = new Question(readChoices, readAnswer, readCategory, readQuestionString, readPrize, readRound);
         triviaList.add(entry);
     }
@@ -107,7 +109,8 @@ public class QuestionList {
         private Integer prize;
         private Integer round;
 
-        public Question(String[] playerChoices, Integer answer, String category, String questionString, Integer prize, Integer round) {
+        public Question(String[] playerChoices, Integer answer, String category, String questionString, Integer prize,
+                Integer round) {
             this.playerChoices = playerChoices;
             this.answer = answer;
             this.category = category;
@@ -141,7 +144,7 @@ public class QuestionList {
         }
 
         public String toString() {
-            String s ="";
+            String s = "";
             s = "Category: " + category;
             s += "\nQuestion: " + questionString;
             s += "\nChoices: " + Arrays.toString(playerChoices);
@@ -151,5 +154,5 @@ public class QuestionList {
             return s;
         }
     }
-    
+
 }
