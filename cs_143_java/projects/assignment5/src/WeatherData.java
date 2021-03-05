@@ -74,6 +74,10 @@ public class WeatherData {
 				double prevSnowfall = 0.0;
 				Integer currentYear = 0;
 
+				// Step 1: check if year exists as a key (containsKey) 
+				// Step 2: if step 1 was true, use get(year) to get the previous snowfall total if step 1 was false, put(year, snowfall) 
+				// Step 3: add the new snowfall to previous, put that back in the map 
+
 				if(currentYear.equals(year)) {
 					snowfall += prevSnowfall + snowfall;
 				} else {
