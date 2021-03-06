@@ -72,29 +72,27 @@ public class WeatherData {
 			if(rawData.length >= 6 && !rawData[5].equals("")){
                 double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
 				double prevSnowfall = 0.0;
-				Integer currentYear = 0;
 
 				// Step 1: check if year exists as a key (containsKey) 
+				if(snowfallPerYear.containsKey(year)) {
+					prevSnowfall = snowfallPerYear.get(year);
 				// Step 2: if step 1 was true, use get(year) to get the previous snowfall total if step 1 was false, put(year, snowfall) 
-				// Step 3: add the new snowfall to previous, put that back in the map 
-
-				if(currentYear.equals(year)) {
-					snowfall += prevSnowfall + snowfall;
 				} else {
-					currentYear = year;
-					prevSnowfall = snowfall;
+					snowfallPerYear.put(year, snowfall);
 				}
+				// Step 3: add the new snowfall to previous, put that back in the map
+				snowfall += prevSnowfall;
 				snowfallPerYear.put(year, snowfall);
             }
 
 			// Extract precipitation data, make sure the length is long enough. Some total will be blank because of the multiple days.
-			if(rawData.length >= 5 && !rawData[4].equals("") || rawData.length >= 4 && !rawData[3].equals("")){
-				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
-				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
-				int multiPrecipDays = Integer.parseInt(rawData[2].substring(1, rawData[2].length() - 1));
-				String dateKey = date[0]+"/"+date[1]+"/"+date[2];
-				dailyPrecip.put(dateKey, singlePrecip);			
-			}
+			// if(rawData.length >= 5 && !rawData[4].equals("") || rawData.length >= 4 && !rawData[3].equals("")){
+			// 	double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
+			// 	double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
+			// 	int multiPrecipDays = Integer.parseInt(rawData[2].substring(1, rawData[2].length() - 1));
+			// 	String dateKey = date[0]+"/"+date[1]+"/"+date[2];
+			// 	dailyPrecip.put(dateKey, singlePrecip);			
+			// }
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
