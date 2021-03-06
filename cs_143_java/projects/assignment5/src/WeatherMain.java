@@ -7,8 +7,7 @@ public class WeatherMain {
         String testFile = "brem100.csv";
         Scanner readThis = new Scanner(new File (testFile));
         WeatherData test = new WeatherData(readThis);
-        //System.out.println(test.totalSnowfallForYear(1936));
-        System.out.println(test.dailyPrecip.get("1920/01/01"));
+        System.out.println(test.averagePrecipitationForMonth(1));
         int i = 0;
     }
 }

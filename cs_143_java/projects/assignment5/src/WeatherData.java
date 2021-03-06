@@ -50,15 +50,16 @@ public class WeatherData {
 	Map<Integer, Double> snowfallPerYear = new HashMap<>();
 
 	//Method 4 averagePrecipitationForMonth
-	Map<String, Double> dailyPrecip = new HashMap<>();
-	Map<String, Double> avgMonthPrecip = new HashMap<>();
+	Map<Integer, Double> monthPrecipTotal = new HashMap<>();
+	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 	
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
 		while (file.hasNextLine()) {
 			String[] rawData = file.nextLine().split(",");
 			String[] date = rawData[1].substring(1,11).split("-");
-			Integer year = Integer.parseInt(date[0]);
+			int year = Integer.parseInt(date[0]);
+			int month = Integer.parseInt(date[1]);
 
 			// Extract high temperature data & low temperature, make sure that the length is long enough.
 			if(rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
@@ -85,14 +86,41 @@ public class WeatherData {
 				snowfallPerYear.put(year, snowfall);
             }
 
-			// Extract precipitation data, make sure the length is long enough. Some total will be blank because of the multiple days.
-			// if(rawData.length >= 5 && !rawData[4].equals("") || rawData.length >= 4 && !rawData[3].equals("")){
-			// 	double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
-			// 	double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
-			// 	int multiPrecipDays = Integer.parseInt(rawData[2].substring(1, rawData[2].length() - 1));
-			// 	String dateKey = date[0]+"/"+date[1]+"/"+date[2];
-			// 	dailyPrecip.put(dateKey, singlePrecip);			
-			// }
+			// Extract single day precipitation data, make sure the length is long enough.
+			if(rawData.length >= 5 && !rawData[4].equals("")) {
+				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
+				double prevPrecip = 0.0;
+				
+				// Step 1: check if month exists as a key (containsKey)
+				if(monthPrecipTotal.containsKey(month)) {
+					prevPrecip = monthPrecipTotal.get(month);
+				} else {
+					monthPrecipTotal.put(month, singlePrecip);
+				}
+				singlePrecip += prevPrecip;
+				monthPrecipTotal.put(month, singlePrecip);
+			}
+
+			// Extract multi day precipitation data, make sure the length is long enough.
+			if(rawData.length >= 4 && !rawData[3].equals("")) {
+				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
+				double prevPrecip = 0.0;
+
+				// Step 1: check if month exists as a key (containsKey)
+				if(monthPrecipTotal.containsKey(month)) {
+					prevPrecip = monthPrecipTotal.get(month);
+				} else {
+					monthPrecipTotal.put(month, multiPrecip);
+				}
+				multiPrecip += prevPrecip;
+				monthPrecipTotal.put(month, multiPrecip);
+			}
+
+			for(int months : monthPrecipTotal.keySet()) {
+				month = months; // No idea why I have to do this?
+				double average = monthPrecipTotal.get(month) / 100.0;
+				monthPrecipAverage.put(month, average);
+			}
 		}
 
 		// TODO: Save the data into the class. You should not use any static data
@@ -158,7 +186,7 @@ public class WeatherData {
 	 * @return
 	 */
 	public double averagePrecipitationForMonth(int month) {
-		return -1; // FIXME: Return actual average precipitation
+		return monthPrecipAverage.getOrDefault(month, 0.0);
 	}
 
 	/**
