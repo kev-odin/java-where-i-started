@@ -1,10 +1,10 @@
 
 // Name: Kevin Chung (CS143 - Winter 2021)
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A class representing weather data including temperatures, snowfall, and
@@ -43,15 +43,20 @@ public class WeatherData {
 	 * @param file Scanner connected to a weather data file
 	 */
 	// Method 1 & 2 boolean highTemp / lowTemp collections
-	Set<Integer> highTempSet = new HashSet<>();
-	Set<Integer> lowTempSet = new HashSet<>();
+	Set<Integer> highTempSet = new TreeSet<>();
+	Set<Integer> lowTempSet = new TreeSet<>();
 
 	// Method 3 double snowfallPerYear collection
 	Map<Integer, Double> snowfallPerYear = new HashMap<>();
 
-	//Method 4 averagePrecipitationForMonth
+	// Method 4 averagePrecipitationForMonth collections
 	Map<Integer, Double> monthPrecipTotal = new HashMap<>();
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
+
+	// Method 5 lowestMostCommonHighForMonth collection
+
+	// Method 6 highestHighForLow collection
+
 	
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
@@ -117,9 +122,8 @@ public class WeatherData {
 			}
 
 			for(int months : monthPrecipTotal.keySet()) {
-				month = months; // No idea why I have to do this?
-				double average = monthPrecipTotal.get(month) / 100.0;
-				monthPrecipAverage.put(month, average);
+				double average = monthPrecipTotal.get(months) / 100.0;
+				monthPrecipAverage.put(months, average);
 			}
 		}
 
@@ -177,12 +181,7 @@ public class WeatherData {
 	}
 
 	/**
-	 * Determine the average (mean) total precipitation recorded for the given
-	 * month. Be sure to include multi-day precipitation amounts. (Assume that all
-	 * of the precipitation occurs on the date of the multi-date range - never
-	 * divide it across months.) (20 points)
-	 * 
-	 * @param month
+	 * Determine the average (meanhighestHighForLow
 	 * @return
 	 */
 	public double averagePrecipitationForMonth(int month) {
