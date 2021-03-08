@@ -76,20 +76,20 @@ public class WeatherData {
 				int lowTemp = Integer.parseInt(rawData[8].substring(1, rawData[8].length() - 1));
 				String dateString = month + "/" + day + "/" + year;
 				int prevCount = 0;
-				String monthTempKey = date[1] + " " +rawData[7].substring(1, rawData[7].length() - 1);
+				String monthTempKey = date[1] + " " + rawData[7].substring(1, rawData[7].length() - 1);
 
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 				highTempDate.put(dateString, highTemp);
 
-				// Counting the occurence of high temperatures in the data set
-				// if (highTempTally.containsKey(highTemp)) {
-				// 	prevCount = highTempTally.get(highTemp);
-				// } else {
-				// 	highTempTally.put(highTemp, 1);
-				// }
-				// prevCount += 1;
-				// highTempTally.put(highTemp, prevCount);
+				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
+				if (highTempTally.containsKey(highTemp)) {
+					prevCount = highTempTally.get(highTemp);
+				} else {
+					highTempTally.put(highTemp, 1);
+				}
+				prevCount += 1;
+				highTempTally.put(highTemp, prevCount);
 
 				if (monthTempCount.containsKey(monthTempKey)) {
 					prevCount = monthTempCount.get(monthTempKey);
@@ -98,6 +98,11 @@ public class WeatherData {
 				} 
 				prevCount++;
 				monthTempCount.put(monthTempKey, prevCount);
+
+
+
+
+
 			}
 
 			// Extract snowfall data, the length is long enough.
@@ -123,7 +128,6 @@ public class WeatherData {
 				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
 				double prevPrecip = 0.0;
 
-				// Step 1: check if month exists as a key (containsKey)
 				if (monthPrecipTotal.containsKey(month)) {
 					prevPrecip = monthPrecipTotal.get(month);
 				} else {
@@ -138,7 +142,6 @@ public class WeatherData {
 				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
 				double prevPrecip = 0.0;
 
-				// Step 1: check if month exists as a key (containsKey)
 				if (monthPrecipTotal.containsKey(month)) {
 					prevPrecip = monthPrecipTotal.get(month);
 				} else {
@@ -238,5 +241,4 @@ public class WeatherData {
 	public int highestHighForLow(int degrees) {
 		return 0; // FIXME: Return the highest high temperature seen for the given low temp
 	}
-
 }
