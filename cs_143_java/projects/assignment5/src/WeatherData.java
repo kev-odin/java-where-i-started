@@ -54,6 +54,7 @@ public class WeatherData {
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 
 	// Method 5 lowestMostCommonHighForMonth collection
+	Map<Integer, Integer> highTempTally = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
 
@@ -70,8 +71,18 @@ public class WeatherData {
 			if(rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
 				int lowTemp = Integer.parseInt(rawData[8]. substring(1, rawData[8].length() - 1));
+				int prevCount = 0;
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
+
+			// Counting the occurence of high temperatures in the data set
+				if(highTempTally.containsKey(highTemp)) {
+					prevCount = highTempTally.get(highTemp);
+				} else {
+					highTempTally.put(highTemp, 1);
+				}
+				prevCount += 1;
+				highTempTally.put(highTemp, prevCount);
 			}
 
 			// Extract snowfall data, makes sure the length is long enough.
