@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -55,60 +56,75 @@ public class WeatherData {
 
 	// Method 5 lowestMostCommonHighForMonth collection
 	Map<Integer, Integer> highTempTally = new HashMap<>();
+	Map<String, Integer> highTempDate = new HashMap<>();
+	Map<String, Integer> monthTempCount = new TreeMap<>();
 
 	// Method 6 highestHighForLow collection
 
-	
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
 		while (file.hasNextLine()) {
 			String[] rawData = file.nextLine().split(",");
-			String[] date = rawData[1].substring(1,11).split("-");
+			String[] date = rawData[1].substring(1, 11).split("-");
 			int year = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
+			int day = Integer.parseInt(date[2]);
 
-			// Extract high temperature data & low temperature, make sure that the length is long enough.
-			if(rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")){
+			// Extract high temperature data & low temperature, the length is long enough.
+			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")) {
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
-				int lowTemp = Integer.parseInt(rawData[8]. substring(1, rawData[8].length() - 1));
+				int lowTemp = Integer.parseInt(rawData[8].substring(1, rawData[8].length() - 1));
+				String dateString = month + "/" + day + "/" + year;
 				int prevCount = 0;
+				String monthTempKey = date[1] + " " +rawData[7].substring(1, rawData[7].length() - 1);
+
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
+				highTempDate.put(dateString, highTemp);
 
-			// Counting the occurence of high temperatures in the data set
-				if(highTempTally.containsKey(highTemp)) {
-					prevCount = highTempTally.get(highTemp);
+				// Counting the occurence of high temperatures in the data set
+				// if (highTempTally.containsKey(highTemp)) {
+				// 	prevCount = highTempTally.get(highTemp);
+				// } else {
+				// 	highTempTally.put(highTemp, 1);
+				// }
+				// prevCount += 1;
+				// highTempTally.put(highTemp, prevCount);
+
+				if (monthTempCount.containsKey(monthTempKey)) {
+					prevCount = monthTempCount.get(monthTempKey);
 				} else {
-					highTempTally.put(highTemp, 1);
-				}
-				prevCount += 1;
-				highTempTally.put(highTemp, prevCount);
+					monthTempCount.put(monthTempKey, 1);
+				} 
+				prevCount++;
+				monthTempCount.put(monthTempKey, prevCount);
 			}
 
-			// Extract snowfall data, makes sure the length is long enough.
-			if(rawData.length >= 6 && !rawData[5].equals("")){
-                double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
+			// Extract snowfall data, the length is long enough.
+			if (rawData.length >= 6 && !rawData[5].equals("")) {
+				double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
 				double prevSnowfall = 0.0;
 
-				// Step 1: check if year exists as a key (containsKey) 
-				if(snowfallPerYear.containsKey(year)) {
+				// Step 1: check if year exists as a key (containsKey)
+				if (snowfallPerYear.containsKey(year)) {
 					prevSnowfall = snowfallPerYear.get(year);
-				// Step 2: if step 1 was true, use get(year) to get the previous snowfall total if step 1 was false, put(year, snowfall) 
+					// Step 2: if step 1 was true, use get(year) to get the previous snowfall total
+					// if step 1 was false, put(year, snowfall)
 				} else {
 					snowfallPerYear.put(year, snowfall);
 				}
 				// Step 3: add the new snowfall to previous, put that back in the map
 				snowfall += prevSnowfall;
 				snowfallPerYear.put(year, snowfall);
-            }
+			}
 
 			// Extract single day precipitation data, make sure the length is long enough.
-			if(rawData.length >= 5 && !rawData[4].equals("")) {
+			if (rawData.length >= 5 && !rawData[4].equals("")) {
 				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
 				double prevPrecip = 0.0;
-				
+
 				// Step 1: check if month exists as a key (containsKey)
-				if(monthPrecipTotal.containsKey(month)) {
+				if (monthPrecipTotal.containsKey(month)) {
 					prevPrecip = monthPrecipTotal.get(month);
 				} else {
 					monthPrecipTotal.put(month, singlePrecip);
@@ -118,12 +134,12 @@ public class WeatherData {
 			}
 
 			// Extract multi day precipitation data, make sure the length is long enough.
-			if(rawData.length >= 4 && !rawData[3].equals("")) {
+			if (rawData.length >= 4 && !rawData[3].equals("")) {
 				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
 				double prevPrecip = 0.0;
 
 				// Step 1: check if month exists as a key (containsKey)
-				if(monthPrecipTotal.containsKey(month)) {
+				if (monthPrecipTotal.containsKey(month)) {
 					prevPrecip = monthPrecipTotal.get(month);
 				} else {
 					monthPrecipTotal.put(month, multiPrecip);
@@ -132,7 +148,7 @@ public class WeatherData {
 				monthPrecipTotal.put(month, multiPrecip);
 			}
 
-			for(int months : monthPrecipTotal.keySet()) {
+			for (int months : monthPrecipTotal.keySet()) {
 				double average = monthPrecipTotal.get(months) / 100.0;
 				monthPrecipAverage.put(months, average);
 			}
@@ -159,7 +175,7 @@ public class WeatherData {
 	public boolean highTemp(int degrees) {
 		if (highTempSet.contains(degrees)) {
 			return true;
-		} 
+		}
 		return false;
 	}
 
@@ -193,6 +209,7 @@ public class WeatherData {
 
 	/**
 	 * Determine the average (meanhighestHighForLow
+	 * 
 	 * @return
 	 */
 	public double averagePrecipitationForMonth(int month) {
