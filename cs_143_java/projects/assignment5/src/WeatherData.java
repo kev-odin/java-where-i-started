@@ -61,6 +61,7 @@ public class WeatherData {
 	Map<Integer, Integer> modeTemperature = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
+	Map<Integer, Integer> highestHighLow = new HashMap<>();
 
 	public WeatherData(Scanner file) {
 		file.nextLine(); // Discard header file
@@ -96,6 +97,21 @@ public class WeatherData {
 						modeTemperature.put(month, monthTempCount.get(monthTempKey));
 					}
 				}
+
+				// Step 1: Assign low temperature as key
+				// Step 2: Check if the low temperature is already a key, if so compare high temperature values
+				// Step 2A: If the highTemp is greater, then update value
+				// Step 2B: If the highTemp is less than, get previous value
+				if (highestHighLow.containsKey(lowTemp)) {
+					if (highTemp > highestHighLow.get(lowTemp)) {
+						highestHighLow.put(lowTemp, highTemp);
+					} else {
+						highestHighLow.put(lowTemp, highestHighLow.get(lowTemp));
+					}
+				} else {
+					highestHighLow.put(lowTemp, highTemp);
+				}
+
 				//highTempDate.put(dateString, highTemp);
 				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
 				// if (highTempTally.containsKey(highTemp)) {
@@ -238,6 +254,6 @@ public class WeatherData {
 	 * @return Highest high ever seen for that low temperature
 	 */
 	public int highestHighForLow(int degrees) {
-		return 0; // FIXME: Return the highest high temperature seen for the given low temp
+		return highestHighLow.getOrDefault(degrees, 0);
 	}
 }
