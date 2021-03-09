@@ -1,11 +1,10 @@
-
 // Name: Kevin Chung (CS143 - Winter 2021)
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  * A class representing weather data including temperatures, snowfall, and
@@ -44,8 +43,8 @@ public class WeatherData {
 	 * @param file Scanner connected to a weather data file
 	 */
 	// Method 1 & 2 boolean highTemp / lowTemp collections
-	Set<Integer> highTempSet = new TreeSet<>();
-	Set<Integer> lowTempSet = new TreeSet<>();
+	Set<Integer> highTempSet = new HashSet<>();
+	Set<Integer> lowTempSet = new HashSet<>();
 
 	// Method 3 double snowfallPerYear collection
 	Map<Integer, Double> snowfallPerYear = new HashMap<>();
@@ -82,6 +81,15 @@ public class WeatherData {
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 
+				/*
+				Step 1: Assign month + temperature as key
+				Step 2: Check if the monthTempKey is already a key
+				Step 2A: If the monthTempKey is found, then increment value
+				Step 2B: If the monthTempKey is not found, add to map
+				Step 3: Determine highest occurence from the values
+				Step 4: Seperate the key values(month + temp) and store that in another map?
+				*/
+
 				if (monthTempCount.containsKey(monthTempKey)) {
 					prevCount = monthTempCount.get(monthTempKey);
 				} else {
@@ -90,10 +98,14 @@ public class WeatherData {
 				prevCount++;
 				monthTempCount.put(monthTempKey, prevCount);
 
-				// Step 1: Assign low temperature as key
-				// Step 2: Check if the low temperature is already a key, if so compare high temperature values
-				// Step 2A: If the highTemp is greater, then update value
-				// Step 2B: If the highTemp is less than, get previous value
+				/*
+				Step 1: Assign low temperature as key
+				Step 2: Check if the low temperature is already a key, if so compare high temperature values
+				Step 2A: If the highTemp is greater, then update value
+				Step 2B: If the highTemp is less than, get previous value
+				Step 3: If no low temperature is found as a key, assign low temperature as key, put in map
+				*/
+
 				if (highestHighLow.containsKey(lowTemp)) {
 					if (highTemp > highestHighLow.get(lowTemp)) {
 						highestHighLow.put(lowTemp, highTemp);
@@ -103,7 +115,6 @@ public class WeatherData {
 				} else {
 					highestHighLow.put(lowTemp, highTemp);
 				}
-
 
 				//highTempDate.put(dateString, highTemp);
 				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
@@ -132,7 +143,7 @@ public class WeatherData {
 				snowfall += prevSnowfall;
 				snowfallPerYear.put(year, snowfall);
 			}
-
+			// Obtain single day precipitation
 			if (rawData.length >= 5 && !rawData[4].equals("")) {
 				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
 				double prevPrecip = 0.0;
@@ -145,7 +156,7 @@ public class WeatherData {
 				singlePrecip += prevPrecip;
 				monthPrecipTotal.put(month, singlePrecip);
 			}
-
+			// Obtain multiday precipitation
 			if (rawData.length >= 4 && !rawData[3].equals("")) {
 				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
 				double prevPrecip = 0.0;
@@ -158,19 +169,12 @@ public class WeatherData {
 				multiPrecip += prevPrecip;
 				monthPrecipTotal.put(month, multiPrecip);
 			}
-
+			// Monthly average precipitation
 			for (int months : monthPrecipTotal.keySet()) {
 				double average = monthPrecipTotal.get(months) / 100.0;
 				monthPrecipAverage.put(months, average);
 			}
 		}
-
-		// TODO: Save the data into the class. You should not use any static data
-		// members. Remember that only the following methods are used to retrieve data,
-		// so you can save the data using specialized collections for efficiency.
-		// The constructor will probably do the hard work of setting up all the
-		// collections so that the later methods can run efficiently.
-		// Each method will probably have its own collection!
 	}
 
 	/**
