@@ -90,6 +90,20 @@ public class WeatherData {
 				prevCount++;
 				monthTempCount.put(monthTempKey, prevCount);
 
+				// Step 1: Assign low temperature as key
+				// Step 2: Check if the low temperature is already a key, if so compare high temperature values
+				// Step 2A: If the highTemp is greater, then update value
+				// Step 2B: If the highTemp is less than, get previous value
+				if (highestHighLow.containsKey(lowTemp)) {
+					if (highTemp > highestHighLow.get(lowTemp)) {
+						highestHighLow.put(lowTemp, highTemp);
+					} else {
+						highestHighLow.put(lowTemp, highestHighLow.get(lowTemp));
+					}
+				} else {
+					highestHighLow.put(lowTemp, highTemp);
+				}
+
 
 				//highTempDate.put(dateString, highTemp);
 				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
@@ -224,15 +238,11 @@ public class WeatherData {
 	public int lowestMostCommonHighForMonth(int month) {
 		String maxMode = monthTempCount.keySet().stream().findFirst().get(); //first key, no null values
 		String[] newMode = maxMode.split(" ");
-		
 		for (String monthTemp : monthTempCount.keySet()) {
-
 			if (monthTemp.contains(month + " ")) {
 
 			}
-
 		}
-
 		return 0; // FIXME: Return the most common high temperature for the given month
 	}
 
