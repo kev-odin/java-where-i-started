@@ -58,7 +58,6 @@ public class WeatherData {
 	//Map<Integer, Integer> highTempTally = new HashMap<>();
 	//Map<String, Integer> highTempDate = new HashMap<>();
 	Map<String, Integer> monthTempCount = new TreeMap<>();
-	Map<Integer, Integer> modeTemperature = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
 
@@ -77,7 +76,7 @@ public class WeatherData {
 				int lowTemp = Integer.parseInt(rawData[8].substring(1, rawData[8].length() - 1));
 				//String dateString = month + "/" + day + "/" + year;
 				int prevCount = 0;
-				String monthTempKey = date[1] + "," + rawData[7].substring(1, rawData[7].length() - 1);
+				String monthTempKey = date[1] + " " + rawData[7].substring(1, rawData[7].length() - 1);
 
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
@@ -90,12 +89,7 @@ public class WeatherData {
 				prevCount++;
 				monthTempCount.put(monthTempKey, prevCount);
 
-				for (String monthTemp : monthTempCount.keySet()) {
 
-					if (monthTempKey.contains(date[1] + ",")) {
-						modeTemperature.put(month, monthTempCount.get(monthTempKey));
-					}
-				}
 				//highTempDate.put(dateString, highTemp);
 				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
 				// if (highTempTally.containsKey(highTemp)) {
@@ -227,6 +221,17 @@ public class WeatherData {
 	 * @return highest most common high temperature seen in that month
 	 */
 	public int lowestMostCommonHighForMonth(int month) {
+		String maxMode = monthTempCount.keySet().stream().findFirst().get(); //first key, no null values
+		String[] newMode = maxMode.split(" ");
+		
+		for (String monthTemp : monthTempCount.keySet()) {
+
+			if (monthTemp.contains(month + " ")) {
+
+			}
+
+		}
+
 		return 0; // FIXME: Return the most common high temperature for the given month
 	}
 
