@@ -55,9 +55,10 @@ public class WeatherData {
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 
 	// Method 5 lowestMostCommonHighForMonth collection
-	Map<Integer, Integer> highTempTally = new HashMap<>();
-	Map<String, Integer> highTempDate = new HashMap<>();
+	//Map<Integer, Integer> highTempTally = new HashMap<>();
+	//Map<String, Integer> highTempDate = new HashMap<>();
 	Map<String, Integer> monthTempCount = new TreeMap<>();
+	Map<Integer, Integer> modeTemperature = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
 
@@ -74,22 +75,12 @@ public class WeatherData {
 			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")) {
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
 				int lowTemp = Integer.parseInt(rawData[8].substring(1, rawData[8].length() - 1));
-				String dateString = month + "/" + day + "/" + year;
+				//String dateString = month + "/" + day + "/" + year;
 				int prevCount = 0;
-				String monthTempKey = date[1] + " " + rawData[7].substring(1, rawData[7].length() - 1);
+				String monthTempKey = date[1] + "," + rawData[7].substring(1, rawData[7].length() - 1);
 
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
-				highTempDate.put(dateString, highTemp);
-
-				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
-				if (highTempTally.containsKey(highTemp)) {
-					prevCount = highTempTally.get(highTemp);
-				} else {
-					highTempTally.put(highTemp, 1);
-				}
-				prevCount += 1;
-				highTempTally.put(highTemp, prevCount);
 
 				if (monthTempCount.containsKey(monthTempKey)) {
 					prevCount = monthTempCount.get(monthTempKey);
@@ -99,13 +90,23 @@ public class WeatherData {
 				prevCount++;
 				monthTempCount.put(monthTempKey, prevCount);
 
+				for (String monthTemp : monthTempCount.keySet()) {
 
-
-
-
+					if (monthTempKey.contains(date[1] + ",")) {
+						modeTemperature.put(month, monthTempCount.get(monthTempKey));
+					}
+				}
+				//highTempDate.put(dateString, highTemp);
+				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
+				// if (highTempTally.containsKey(highTemp)) {
+				// 	prevCount = highTempTally.get(highTemp);
+				// } else {
+				// 	highTempTally.put(highTemp, 1);
+				// }
+				// prevCount += 1;
+				// highTempTally.put(highTemp, prevCount);
 			}
 
-			// Extract snowfall data, the length is long enough.
 			if (rawData.length >= 6 && !rawData[5].equals("")) {
 				double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
 				double prevSnowfall = 0.0;
@@ -123,7 +124,6 @@ public class WeatherData {
 				snowfallPerYear.put(year, snowfall);
 			}
 
-			// Extract single day precipitation data, make sure the length is long enough.
 			if (rawData.length >= 5 && !rawData[4].equals("")) {
 				double singlePrecip = Double.parseDouble(rawData[4].substring(1, rawData[4].length() - 1));
 				double prevPrecip = 0.0;
@@ -137,7 +137,6 @@ public class WeatherData {
 				monthPrecipTotal.put(month, singlePrecip);
 			}
 
-			// Extract multi day precipitation data, make sure the length is long enough.
 			if (rawData.length >= 4 && !rawData[3].equals("")) {
 				double multiPrecip = Double.parseDouble(rawData[3].substring(1, rawData[3].length() - 1));
 				double prevPrecip = 0.0;
