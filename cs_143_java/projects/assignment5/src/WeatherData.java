@@ -116,8 +116,8 @@ public class WeatherData {
 					highestHighLow.put(lowTemp, highTemp);
 				}
 
-				//highTempDate.put(dateString, highTemp);
-				// Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
+				//Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
+				// highTempDate.put(dateString, highTemp);
 				// if (highTempTally.containsKey(highTemp)) {
 				// 	prevCount = highTempTally.get(highTemp);
 				// } else {
