@@ -7,7 +7,7 @@ public class WeatherMain {
         String testFile = "brem100.csv";
         Scanner readThis = new Scanner(new File (testFile));
         WeatherData test = new WeatherData(readThis);
-        //System.out.println(test.monthTempCount.keySet().toString().split(","));
+        System.out.println(test.lowestMostCommonHighForMonth(1));
         int i = 0;
     }
 }
