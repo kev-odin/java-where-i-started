@@ -82,23 +82,46 @@ public class WeatherData {
 				Step 3: If month count contains the month key, get the current count for highTemp OR default count is 0
 				Step 4: Update monthCount map, with existing month, new/existing temperature with count + 1
 				*/
-
+				Map<Integer, Integer> tempFreq = new TreeMap<>(); //Inner map for monthCount
 				if (monthCount.containsKey(month)) {
 					int count = monthCount.get(month).getOrDefault(highTemp, 0);
 					monthCount.get(month).put(highTemp, count + 1);
+
+					// modeMap for each month (currently only getting high temperatures)
+					// if (highTemp < modeMap.getOrDefault(month, 0)) {
+					// 	modeMap.put(month, modeMap.getOrDefault(month, 0));
+					// } else {
+					// 	modeMap.put(month, highTemp);
+					// }
+
 				} else {
-					Map<Integer, Integer> tempFreq = new TreeMap<>();
 					tempFreq.put(highTemp, 1);
 					monthCount.put(month, tempFreq);
 				}
 
-				/* Processing the mode for each month
-				Step 1: Iterate through monthCount map (for each month, for each temperature)
-				Step 2: Compare high temperature frequency, use the first one as a reference "43" "3"
-				Step 3: 
+				/* Processing the mode highest temperature for each month (nested for - each loop?)
+				Step 1: Put month and highTemp in modeMap map - first occurence?
+				Step 2: If next highTemp is greater than modeMap.get(month), then check occurence tempFreq.get(highTemp)
+				Step 3: If tempFreq.get(highTemp) > than modeMap.get(month).tempFreq(highTemp), update modeMap with highTemp
+				Step 4: ???
 				*/
+
+				modeMap.put(month, highTemp);
+
+				for(int monthKey : monthCount.keySet()) {
+					for (int temp : tempFreq.keySet()) {
+						int modeTemp = modeMap.getOrDefault(month, 0);
+						int modeCount = monthCount.get(month).get(highTemp);
+
+						if (tempFreq.getOrDefault(highTemp, 0) > tempFreq.getOrDefault(modeTemp, 0)) {
+							modeMap.put(month, highTemp);
+						} else {
+							modeMap.put(month, modeTemp);
+						}
+					}
+				}
 		
-				/*
+				/* Capturing the highest low temperature seen for each month
 				Step 1: Assign low temperature as key
 				Step 2: Check if the low temperature is already a key, if so compare high temperature values
 				Step 2A: If the highTemp is greater, then update value
@@ -230,7 +253,7 @@ public class WeatherData {
 	 * @return highest most common high temperature seen in that month
 	 */
 	public int lowestMostCommonHighForMonth(int month) {
-		return 0; // FIXME: Return the most common high temperature for the given month
+		return modeMap.getOrDefault(month, 0);
 	}
 
 	/**
