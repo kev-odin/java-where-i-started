@@ -55,6 +55,7 @@ public class WeatherData {
 
 	// Method 5 lowestMostCommonHighForMonth collection
 	Map<Integer, Map<Integer,Integer>> monthCount = new TreeMap<>();
+	Map<Integer, Integer> modeMap = new TreeMap<>();
 
 	// Method 6 highestHighForLow collection
 	Map<Integer, Integer> highestHighLow = new HashMap<>();
@@ -74,19 +75,28 @@ public class WeatherData {
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 
-				/*
+				/* Capturing the temperature frequency per month
 				Step 1: Check if monthCount has a month key
-				Step 2: If not, add month to monthCount
+				Step 2: If not, add month to monthCount and create empty tempFreq map
+				Step 2A: Update tempFreq with current highTemp and add 1 to frequency
+				Step 3: If month count contains the month key, get the current count for highTemp OR default count is 0
+				Step 4: Update monthCount map, with existing month, new/existing temperature with count + 1
 				*/
-				Map<Integer, Integer> tempFreq = new TreeMap<>();
 
 				if (monthCount.containsKey(month)) {
 					int count = monthCount.get(month).getOrDefault(highTemp, 0);
 					monthCount.get(month).put(highTemp, count + 1);
 				} else {
+					Map<Integer, Integer> tempFreq = new TreeMap<>();
+					tempFreq.put(highTemp, 1);
 					monthCount.put(month, tempFreq);
-					monthCount.get(month).put(highTemp, 1);
 				}
+
+				/* Processing the mode for each month
+				Step 1: Iterate through monthCount map (for each month, for each temperature)
+				Step 2: Compare high temperature frequency, use the first one as a reference "43" "3"
+				Step 3: 
+				*/
 		
 				/*
 				Step 1: Assign low temperature as key
