@@ -54,9 +54,7 @@ public class WeatherData {
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 
 	// Method 5 lowestMostCommonHighForMonth collection
-	//Map<Integer, Integer> highTempTally = new HashMap<>();
-	//Map<String, Integer> highTempDate = new HashMap<>();
-	Map<String, Integer> monthTempCount = new TreeMap<>();
+	Map<Integer, Map<Integer,Integer>> monthCount = new TreeMap<>();
 
 	// Method 6 highestHighForLow collection
 	Map<Integer, Integer> highestHighLow = new HashMap<>();
@@ -68,36 +66,28 @@ public class WeatherData {
 			String[] date = rawData[1].substring(1, 11).split("-");
 			int year = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
-			int day = Integer.parseInt(date[2]);
 
 			// Extract high temperature data & low temperature, the length is long enough.
 			if (rawData.length >= 9 && !rawData[7].equals("") && !rawData[8].equals("")) {
 				int highTemp = Integer.parseInt(rawData[7].substring(1, rawData[7].length() - 1));
 				int lowTemp = Integer.parseInt(rawData[8].substring(1, rawData[8].length() - 1));
-				//String dateString = month + "/" + day + "/" + year;
-				int prevCount = 0;
-				String monthTempKey = date[1] + " " + rawData[7].substring(1, rawData[7].length() - 1);
-
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 
 				/*
-				Step 1: Assign month + temperature as key
-				Step 2: Check if the monthTempKey is already a key
-				Step 2A: If the monthTempKey is found, then increment value
-				Step 2B: If the monthTempKey is not found, add to map
-				Step 3: Determine highest occurence from the values
-				Step 4: Seperate the key values(month + temp) and store that in another map?
+				Step 1: Check if monthCount has a month key
+				Step 2: If not, add month to monthCount
 				*/
+				Map<Integer, Integer> tempFreq = new TreeMap<>();
 
-				if (monthTempCount.containsKey(monthTempKey)) {
-					prevCount = monthTempCount.get(monthTempKey);
+				if (monthCount.containsKey(month)) {
+					int count = monthCount.get(month).getOrDefault(highTemp, 0);
+					monthCount.get(month).put(highTemp, count + 1);
 				} else {
-					monthTempCount.put(monthTempKey, 1);
-				} 
-				prevCount++;
-				monthTempCount.put(monthTempKey, prevCount);
-
+					monthCount.put(month, tempFreq);
+					monthCount.get(month).put(highTemp, 1);
+				}
+		
 				/*
 				Step 1: Assign low temperature as key
 				Step 2: Check if the low temperature is already a key, if so compare high temperature values
@@ -115,16 +105,6 @@ public class WeatherData {
 				} else {
 					highestHighLow.put(lowTemp, highTemp);
 				}
-
-				//Counting the occurence of high temperatures in the data set & another map with "month temp" as key, values would be occurence
-				// highTempDate.put(dateString, highTemp);
-				// if (highTempTally.containsKey(highTemp)) {
-				// 	prevCount = highTempTally.get(highTemp);
-				// } else {
-				// 	highTempTally.put(highTemp, 1);
-				// }
-				// prevCount += 1;
-				// highTempTally.put(highTemp, prevCount);
 			}
 
 			if (rawData.length >= 6 && !rawData[5].equals("")) {
@@ -240,18 +220,11 @@ public class WeatherData {
 	 * @return highest most common high temperature seen in that month
 	 */
 	public int lowestMostCommonHighForMonth(int month) {
-		String maxMode = monthTempCount.keySet().stream().findFirst().get(); //first key, no null values
-		String[] newMode = maxMode.split(" ");
-		for (String monthTemp : monthTempCount.keySet()) {
-			if (monthTemp.contains(month + " ")) {
-
-			}
-		}
 		return 0; // FIXME: Return the most common high temperature for the given month
 	}
 
 	/**
-	 * For the given low temperature, find the highest high temperature seen with
+	 * For the given low temperature, monthTempCountfind the highest high temperature seen with
 	 * that low. (20 points)
 	 * 
 	 * @param degrees Low temperature
