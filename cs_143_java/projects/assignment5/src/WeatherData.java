@@ -106,17 +106,24 @@ public class WeatherData {
 				Step 4: ???
 				*/
 
-				modeMap.put(month, highTemp);
+				for(int monthKey : monthCount.keySet()) { // Iterating through month keys in monthCount map
+					for (int temp : tempFreq.keySet()) { // Iterating througth temperature keys in tempFreq map
+						if (modeMap.containsKey(month)) { // If mode map contains the month key, lets go into that
+							// Compare highTemp with modeMap.get(month) - current high temp
+							// Case 1: If temperature is higher, check the occurence, if that is more; update modeMap
+							// Case 2: If temperature is lower, do nothing
+							// Case 3: If temperature occurence is the same, choose the lower temperature
+							int modeTemp = modeMap.getOrDefault(month, 0);
+							int modeCount = monthCount.get(month).get(highTemp);
+							int currentOccurence = monthCount.get(month).get(highTemp);
+							if (highTemp > modeTemp && tempFreq.get(highTemp) > tempFreq.get(modeTemp)) {
+								modeMap.put(month, highTemp);
+							} else {
+								modeMap.put(month, modeTemp);
+							}
 
-				for(int monthKey : monthCount.keySet()) {
-					for (int temp : tempFreq.keySet()) {
-						int modeTemp = modeMap.getOrDefault(month, 0);
-						int modeCount = monthCount.get(month).get(highTemp);
-
-						if (tempFreq.getOrDefault(highTemp, 0) > tempFreq.getOrDefault(modeTemp, 0)) {
-							modeMap.put(month, highTemp);
 						} else {
-							modeMap.put(month, modeTemp);
+							modeMap.put(month, highTemp);
 						}
 					}
 				}
