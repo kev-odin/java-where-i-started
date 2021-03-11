@@ -6,7 +6,10 @@ public class WeatherMain {
     public static void main(String[] args) throws FileNotFoundException {
         String testFile = "brem100.csv";
         Scanner readThis = new Scanner(new File (testFile));
+        long start = System.currentTimeMillis();
         WeatherData test = new WeatherData(readThis);
-        int i = 0;
+        System.out.println(test.monthCount.entrySet());
+        long end = System.currentTimeMillis();
+        System.out.println((end - start) / 1000.0 + " second");
     }
 }

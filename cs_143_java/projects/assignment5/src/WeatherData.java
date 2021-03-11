@@ -54,8 +54,8 @@ public class WeatherData {
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 
 	// Method 5 lowestMostCommonHighForMonth collection
-	Map<Integer, Map<Integer,Integer>> monthCount = new TreeMap<>();
-	Map<Integer, Integer> modeMap = new TreeMap<>();
+	Map<Integer, Map<Integer,Integer>> monthCount = new HashMap<>();
+	Map<Integer, Integer> modeMap = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
 	Map<Integer, Integer> highestHighLow = new HashMap<>();
@@ -86,70 +86,35 @@ public class WeatherData {
 				if (monthCount.containsKey(month)) {
 					int count = monthCount.get(month).getOrDefault(highTemp, 0);
 					monthCount.get(month).put(highTemp, count + 1);
-
-					// modeMap for each month (currently only getting high temperatures)
-					// if (highTemp < modeMap.getOrDefault(month, 0)) {
-					// 	modeMap.put(month, modeMap.getOrDefault(month, 0));
-					// } else {
-					// 	modeMap.put(month, highTemp);
-					// }
-
 				} else {
 					tempFreq.put(highTemp, 1);
 					monthCount.put(month, tempFreq);
 				}
 
-				/* Processing the mode highest temperature for each month (nested for - each loop?)
-				Step 1: Put month and highTemp in modeMap map - first occurence?
-				Step 2: If next highTemp is greater than modeMap.get(month), then check occurence tempFreq.get(highTemp)
-				Step 3: If tempFreq.get(highTemp) > than modeMap.get(month).tempFreq(highTemp), update modeMap with highTemp
-				Step 4: ???
+				/* Processing the mode highest temperature for each month
+				Step 1: If modeMap does not have a month key, add month and highTemp
+				Step 2: If highCount > modeCount, add to modeMap
+				Step 3:	If highCount == modeCount, choose the lower temperature
+				Step 4: Hope this works!
 				*/
 
-				if (!modeMap.containsKey(month)) { // No months in the modeMap
+				if (!modeMap.containsKey(month)) {
 					modeMap.put(month, highTemp); 
-				} else { // Month in modeMap
+				} else {
 					int modeTemp = modeMap.get(month);
 					int modeCount = monthCount.get(month).get(modeTemp);
 					int highCount = monthCount.get(month).get(highTemp);
 
 					if (highCount > modeCount) { 
+						modeMap.put(month, highTemp);
+					} else if (highCount == modeCount) {
 						if (highTemp > modeTemp) {
-							modeMap.put(month, highTemp);
-						} else if (modeTemp > highTemp) {
-							modeMap.put(month, highTemp);
+							modeMap.put(month, modeTemp);
 						} else {
 							modeMap.put(month, highTemp);
 						}
 					}
 				}
-
-				// for(int monthKey : monthCount.keySet()) { // Iterating through month keys in monthCount map
-				// 	for (int temp : tempFreq.keySet()) { // Iterating througth temperature keys in tempFreq map
-				// 		if (modeMap.containsKey(month)) { // If mode map contains the month key, lets go into that
-				// 			// Compare highTemp with modeMap.get(month) - current high temp
-				// 			// Case 1: If temperature is higher, check the occurence, if that is more; update modeMap
-				// 			// Case 2: If temperature is lower, do nothing
-				// 			// Case 3: If temperature occurence is the same, choose the lower temperature
-				// 			int modeTemp = modeMap.getOrDefault(month, 0);
-				// 			int modeCount = monthCount.get(month).get(modeTemp);
-				// 			int currentOccurence = monthCount.get(month).get(highTemp);
-				// 			if (highTemp > modeTemp && currentOccurence > modeCount) {
-				// 				modeMap.put(month, highTemp);
-				// 			} else if (tempFreq.get(highTemp).equals(tempFreq.get(modeTemp))) {
-				// 				if (highTemp < modeTemp) {
-				// 					modeMap.put(month, highTemp);
-				// 				} else {
-				// 					modeMap.put(month, modeTemp);
-				// 				}
-				// 			} else {
-				// 				modeMap.put(month, modeTemp);
-				// 			}
-				// 		} else {
-				// 			modeMap.put(month, highTemp);
-				// 		}
-				// 	}
-				// }
 		
 				/* Capturing the highest low temperature seen for each month
 				Step 1: Assign low temperature as key
@@ -169,7 +134,7 @@ public class WeatherData {
 					highestHighLow.put(lowTemp, highTemp);
 				}
 			}
-
+			// Obtain snowfall totals
 			if (rawData.length >= 6 && !rawData[5].equals("")) {
 				double snowfall = Double.parseDouble(rawData[5].substring(1, rawData[5].length() - 1));
 				double prevSnowfall = 0.0;
@@ -178,7 +143,6 @@ public class WeatherData {
 				if (snowfallPerYear.containsKey(year)) {
 					prevSnowfall = snowfallPerYear.get(year);
 					// Step 2: if step 1 was true, use get(year) to get the previous snowfall total
-					// if step 1 was false, put(year, snowfall)
 				} else {
 					snowfallPerYear.put(year, snowfall);
 				}
