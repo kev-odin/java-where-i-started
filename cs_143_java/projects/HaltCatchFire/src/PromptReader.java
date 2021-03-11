@@ -18,7 +18,7 @@ public class PromptReader {
     private static final String TEXT_BLACK = "\u001B[30m";
 
     public void triviaWelcome() {
-        haltCatchFireSplash();
+        //haltCatchFireSplash();
         String triviaWelcome = "\n";
         triviaWelcome += "Welcome! You are about to play a trivia game we built for CS143.\n";
         triviaWelcome += "We wanted to share our hard work and hope you enjoy this program. \n";
@@ -28,7 +28,7 @@ public class PromptReader {
     }
 
     public void instructPlayer() {
-        instructSplash();
+        //instructSplash();
         gameOverview();
         triviaRules();
         bankAccountRules();
