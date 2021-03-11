@@ -20,8 +20,7 @@ public class GameMain {
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoard board = new GameBoard("Cool Trivia Game");
-        GameBoardConstructor round1 = new GameBoardConstructor(1, game); // Hoping this is round 1 & round 2
-                                                                         // respectively
+        GameBoardConstructor round1 = new GameBoardConstructor(1, game); // Hoping this is round 1 & round 2 respectively
         GameBoardConstructor round2 = new GameBoardConstructor(2, game);
         Scanner readThis = new Scanner(System.in);
         int player;
