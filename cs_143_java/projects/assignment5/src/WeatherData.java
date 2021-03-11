@@ -118,10 +118,15 @@ public class WeatherData {
 							int currentOccurence = monthCount.get(month).get(highTemp);
 							if (highTemp > modeTemp && tempFreq.get(highTemp) > tempFreq.get(modeTemp)) {
 								modeMap.put(month, highTemp);
+							} else if (tempFreq.get(highTemp).equals(tempFreq.get(modeTemp))) {
+								if (highTemp < modeTemp) {
+									modeMap.put(month, highTemp);
+								} else {
+									modeMap.put(month, modeTemp);
+								}
 							} else {
 								modeMap.put(month, modeTemp);
 							}
-
 						} else {
 							modeMap.put(month, highTemp);
 						}
