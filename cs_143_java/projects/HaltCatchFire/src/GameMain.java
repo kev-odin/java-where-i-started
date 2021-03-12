@@ -19,38 +19,45 @@ public class GameMain {
         BankAccount bank = new BankAccount(); // Instantiate player bank account
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
-        GameBoard board = new GameBoard("Cool Trivia Game");
-        GameBoardConstructor round1 = new GameBoardConstructor(1, game); // Hoping this is round 1 & round 2 respectively
-        GameBoardConstructor round2 = new GameBoardConstructor(2, game);
+        GameBoardConstructor gc = new GameBoardConstructor(2, game); 
+        GameBoard newGameboard = gc.getGameBoard(0);
+
         Scanner readThis = new Scanner(System.in);
         int player;
-        boolean playGame = false; // For the internal game loop; flagged true when player prompts are registered
-        boolean program = true; // For the overall program
+        boolean playGame = false; // For the internal game loop; flagged true when player prompts are registered.
+        boolean program = true; // For the overall program, will continue running until the game ends.
+
         while (program) {
             prompter.triviaWelcome();
             if (readThis.hasNextInt()) {
                 player = readThis.nextInt();
                 if (player < 0 || player >= 3) {
                     System.out.print("Invalid input, please enter a whole number of either 1 or 2");
-                } else if (player == 2) { // Exit the program.
+                } else if (player == 2) {
                     prompter.exitGame();
                     program = false;
-                } else if (player == 1) { // Selected to read the instructions for the trivia game
+                } else if (player == 1) {
                     prompter.instructPlayer();
                     if (readThis.hasNextInt()) {
                         player = readThis.nextInt();
                         if (player < 0 || player >= 3) {
                             System.out.print("Invalid input, please enter a whole number of either 1 or 2");
-                        } else if (player == 2) { // Exit the program.
+                        } else if (player == 2) {
                             prompter.exitGame();
                             program = false;
-                        } else if (player == 1) { // Player has chosen to play the game!
+                        } else if (player == 1) {
                             playGame = true;
                             program = false;
                             while (playGame) { // Actual game code!
                                 System.out.println("Please see this.");
-                                playGame = false;
-                                program = false;
+                                System.out.print(newGameboard);
+                                if (readThis.hasNextInt()) {
+                                    player = readThis.nextInt();
+                                    newGameboard.askQuestion(player, player);
+                                    System.out.println(newGameboard);
+                                    playGame = false;
+                                    program = false;
+                                }
                             }
                         }
                     }
