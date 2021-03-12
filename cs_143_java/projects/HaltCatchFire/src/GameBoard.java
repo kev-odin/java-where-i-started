@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameBoard {
 
@@ -97,7 +99,7 @@ public class GameBoard {
 		}
 	}
 
-	private static final int size = 5;
+	private static final int size = 4;
 	private Category[] cat;
 	private String title;
 
@@ -140,6 +142,30 @@ public class GameBoard {
 
 		System.out.print("Enter the number corresponding to your question: ");
 
+
+			Timer timer = new Timer();
+			TimerTask x = new TimerTask() {
+				int start = 10;
+
+				public void run() {
+					System.out.println(" ");
+					System.out.println(" ");
+					System.out.println("Seconds remaining to answer the question:");
+					start = start - 1;
+					for (int i = 1; i < 2; i++) {
+						System.out.println(start);
+						if (start <= 0) {
+							System.out.println("Time's up!");
+							System.out.println("The correct answer was: " + q.getChoices()[q.getAnswer()]);
+							timer.cancel();
+							break;
+						}
+					}
+				}
+			};
+			timer.schedule(x,0, 1000);
+
+
 		while (input < 0 || input >= q.getChoices().length) {
 
 			@SuppressWarnings("resource")
@@ -148,8 +174,7 @@ public class GameBoard {
 			if (sc.hasNextInt()) {
 				input = sc.nextInt();
 				if (input < 0 || input >= q.getChoices().length) {
-					System.out
-							.print("Invalid input, please enter a number between 0 and " + (q.getChoices().length - 1));
+					System.out.print("Invalid input, please enter a number between 0 and " + (q.getChoices().length - 1));
 				}
 			} else {
 				System.out.print("Invalid input, please enter the integer corresponding to your answer: ");
@@ -161,11 +186,14 @@ public class GameBoard {
 
 		if (input == q.getAnswer()) {
 			System.out.println("Correct!");
+			timer.cancel();
 			return prize;
 		}
 
 		System.out.println("Incorrect! The correct answer was: " + q.getChoices()[q.getAnswer()]);
+		timer.cancel();
 		return prize * -1;
+
 	}
 
 	public boolean hasBeenAsked(int catIndex, int qIndex) {
@@ -350,3 +378,4 @@ public class GameBoard {
 		return title;
 	}
 }
+

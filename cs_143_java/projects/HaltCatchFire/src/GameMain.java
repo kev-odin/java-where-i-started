@@ -66,7 +66,11 @@ public class GameMain {
                 System.out.print("Invalid input, please enter the integer corresponding to your prompt: ");
             }
         }
-
-        readThis.close();
     }
+
+    public boolean checkInput (int player) {
+        
+        return false;
+    }
+
 }
