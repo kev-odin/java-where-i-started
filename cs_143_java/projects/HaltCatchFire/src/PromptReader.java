@@ -12,10 +12,6 @@ public class PromptReader {
     private static final String TEXT_GREEN = "\u001B[32m";
     private static final String TEXT_YELLOW = "\u001B[33m";
     private static final String TEXT_BLUE = "\u001B[34m";
-    private static final String TEXT_PURPLE = "\u001B[35m";
-    private static final String TEXT_CYAN = "\u001B[36m";
-    private static final String TEXT_WHITE = "\u001B[37m";
-    private static final String TEXT_BLACK = "\u001B[30m";
 
     public void triviaWelcome() {
         //haltCatchFireSplash();

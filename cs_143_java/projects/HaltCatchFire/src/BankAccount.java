@@ -1,9 +1,7 @@
-import java.io.File;
-
 public class BankAccount {
     private int money;
     private int roundOne = 1000;
-    private int roundTwo = 2000;
+    private int roundTwo = 10000;
 
     public int bank() {
         return money;
@@ -18,7 +16,7 @@ public class BankAccount {
         return money;
     }
 
-    public boolean Check() {
+    public boolean check(int currentMoney, int currentRound) {
         if (money >= roundOne) {
             // means that the players money is either greater than or equal to the cut off
             // for round one

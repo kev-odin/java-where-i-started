@@ -150,10 +150,10 @@ public class GameBoard {
 				public void run() {
 					System.out.println(" ");
 					System.out.println(" ");
-					System.out.println("Seconds remaining to answer the question:");
+					System.out.print("Seconds remaining to answer the question:");
 					start = start - 1;
 					for (int i = 1; i < 2; i++) {
-						System.out.println(start);
+						System.out.print(start + " ");
 						if (start <= 0) {
 							System.out.println("Time's up!");
 							System.out.println("The correct answer was: " + q.getChoices()[q.getAnswer()]);

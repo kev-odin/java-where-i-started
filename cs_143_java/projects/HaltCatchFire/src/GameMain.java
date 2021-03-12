@@ -48,15 +48,17 @@ public class GameMain {
                         } else if (player == 1) {
                             playGame = true;
                             program = false;
-                            while (playGame) { // Actual game code!
-                                System.out.println("Please see this.");
+
+                            while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
                                 System.out.print(newGameboard);
                                 if (readThis.hasNextInt()) {
-                                    player = readThis.nextInt();
-                                    newGameboard.askQuestion(player, player);
-                                    System.out.println(newGameboard);
-                                    playGame = false;
-                                    program = false;
+                                    int category = readThis.nextInt();
+                                    int question = readThis.nextInt();
+                                    newGameboard.askQuestion(category, question); // print the selected game board question
+                                } else if (!readThis.hasNextInt()){
+                                    System.out.print(newGameboard);
+                                } else {
+                                    System.out.println("Invalid input, please enter a whole number.");
                                 }
                             }
                         }
