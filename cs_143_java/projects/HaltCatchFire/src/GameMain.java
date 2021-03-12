@@ -16,7 +16,7 @@ public class GameMain {
 
     public static void main(String[] args) {
         textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
-        BankAccount bank = new BankAccount(); // Instantiate player bank account
+        BankAccount bank = new BankAccount(0); // Instantiate player bank account
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game); 
@@ -69,7 +69,7 @@ public class GameMain {
     }
 
     public boolean checkInput (int player) {
-        
+
         return false;
     }
 

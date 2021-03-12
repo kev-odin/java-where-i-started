@@ -9,8 +9,8 @@ public class BankAccount {
         return money;
     }
 
-    public BankAccount() {
-        money = 0;
+    public BankAccount(int initialAmount) {
+        this.money = initialAmount;
     }
 
     public int addPrize(int prizeMoney) {

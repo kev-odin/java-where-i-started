@@ -99,7 +99,7 @@ public class GameBoard {
 		}
 	}
 
-	private static final int size = 4;
+	private static final int size = 5;
 	private Category[] cat;
 	private String title;
 
