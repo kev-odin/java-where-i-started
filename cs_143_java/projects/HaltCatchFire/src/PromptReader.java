@@ -196,7 +196,7 @@ public class PromptReader {
         instructSplash += " #  ##   ## ### ### # # ### ###     ### ##   ## \n";
         instructSplash += " #  # #  #   #  #   # # #    #   #  # # # #  #  \n";
         instructSplash += " #  # # ##   ## #   ### ###  ##  ## ### # # ##  \n";
-        instructSplash += "###                      \n";
+        instructSplash += "###                      ";
         // instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
         // instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
         // instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";

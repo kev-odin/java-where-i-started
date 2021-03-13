@@ -16,9 +16,9 @@ public class GameMain {
 
     public static void main(String[] args) {
         textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
-        BankAccount bank = new BankAccount(0); // Instantiate player bank account
+        BankAccount bank = new BankAccount(0); // Instantiate player bank account: Starting amount: $0, Round 1: $1000, Round 2: $10000;
         QuestionList game = new QuestionList(textFile);
-        PromptReader prompter = new PromptReader();
+        PromptReader prompter = new PromptReader(null, null);
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
 
