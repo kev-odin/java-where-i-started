@@ -19,7 +19,7 @@ public class GameMain {
         BankAccount bank = new BankAccount(0); // Instantiate player bank account
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
-        GameBoardConstructor gc = new GameBoardConstructor(2, game); 
+        GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
 
         Scanner readThis = new Scanner(System.in);
@@ -54,8 +54,8 @@ public class GameMain {
                                 if (readThis.hasNextInt()) {
                                     int category = readThis.nextInt();
                                     int question = readThis.nextInt();
-                                    newGameboard.askQuestion(category, question); // print the selected game board question
-                                } else if (!readThis.hasNextInt()){
+                                    newGameboard.askQuestion(category, question); // print the selected game board
+                                } else if (!readThis.hasNextInt()) {
                                     System.out.print(newGameboard);
                                 } else {
                                     System.out.println("Invalid input, please enter a whole number.");
@@ -70,7 +70,7 @@ public class GameMain {
         }
     }
 
-    public boolean checkInput (int player) {
+    public boolean checkInput(int player) {
 
         return false;
     }
