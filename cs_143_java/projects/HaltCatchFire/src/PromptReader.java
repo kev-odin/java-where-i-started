@@ -1,7 +1,9 @@
+import java.io.IOException;
+
 /**
- * This class is used to store the player prompts for the trivia game. 
- * Also, can be used to clear the previous entries in the terminal window
- * to make player screens look cleaner.
+ * This class is used to store the player prompts for the trivia game. Also, can
+ * be used to clear the previous entries in the terminal window to make player
+ * screens look cleaner.
  * 
  * Written by Kevin Chung for CS143 Group Project. Team Halt and Catch Fire.
  */
@@ -14,7 +16,7 @@ public class PromptReader {
     private static final String TEXT_BLUE = "\u001B[34m";
 
     public void triviaWelcome() {
-        //haltCatchFireSplash();
+        haltCatchFireSplash();
         String triviaWelcome = "\n";
         triviaWelcome += "Welcome! You are about to play a trivia game we built for CS143.\n";
         triviaWelcome += "We wanted to share our hard work and hope you enjoy this program. \n";
@@ -24,7 +26,7 @@ public class PromptReader {
     }
 
     public void instructPlayer() {
-        //instructSplash();
+        instructSplash();
         gameOverview();
         triviaRules();
         bankAccountRules();
@@ -58,18 +60,27 @@ public class PromptReader {
     }
 
     public void clearScreen() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else if (System.getProperty("os.name").contains("Linux")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException ex) {
+        }
     }
-    
+
     private void playPrompt() {
         String playPrompt = TEXT_BLUE;
         playPrompt += "\nAre you ready to proceed?";
         playPrompt += "\t(1)YES or (2)NO";
-        playPrompt += "\nEnter number selection: " + TEXT_RESET; 
+        playPrompt += "\nEnter number selection: " + TEXT_RESET;
         System.out.println(playPrompt);
     }
-    
+
     private void gameOverview() {
         String gameOverview = "\n" + TEXT_BLUE;
         gameOverview += "\tGame Overview: \n" + TEXT_RESET;
@@ -87,9 +98,10 @@ public class PromptReader {
         triviaRules += "\tEach question is separated by the category and prize money amount. \n";
         triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interest.\n";
         triviaRules += "\tTo select a question, \n";
-        //TODO: (Caleb will need to describe how questions are selected from the GameBoard).
+        // TODO: (Caleb will need to describe how questions are selected from the
+        // GameBoard).
         triviaRules += "\tAfter a question is selected, the player will have 15 seconds to answer the question.";
-        //TODO: (Nicole may need to adjust the question timer if needed).
+        // TODO: (Nicole may need to adjust the question timer if needed).
         System.out.println(triviaRules);
     }
 
@@ -97,9 +109,9 @@ public class PromptReader {
         String bankRules = "\n" + TEXT_BLUE;
         bankRules += "\tBank Account: \n" + TEXT_RESET;
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
-        bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n"; 
+        bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n";
         bankRules += "\tNegative values are permitted.\n";
-        //TODO: (Herrera will need to determine the round limits for each round).
+        // TODO: (Herrera will need to determine the round limits for each round).
         bankRules += "\t\tRound 1: $1000\n";
         bankRules += "\t\tRound 2: $10000";
         System.out.println(bankRules);
@@ -110,7 +122,8 @@ public class PromptReader {
         powerRules += "\tPower-ups: \n" + TEXT_RESET;
         powerRules += "\tPlayers can earn question streaks after answering consecutive questions correctly.\n";
         powerRules += "\tThese power-ups are persistent through each round.";
-       //TODO: (Zhengqi will need to determine what kind of power-ups he wants to implement).
+        // TODO: (Zhengqi will need to determine what kind of power-ups he wants to
+        // implement).
         System.out.println(powerRules);
     }
 
@@ -133,7 +146,7 @@ public class PromptReader {
     }
 
     private void teamShoutOut() {
-        String spacer = "\t\t"; //"           "
+        String spacer = "\t\t"; // " "
         String names = "\n" + TEXT_YELLOW;
         names += "Caleb Churness" + spacer;
         names += "Kevin Chung" + spacer;
