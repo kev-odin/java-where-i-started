@@ -9,14 +9,29 @@ import java.io.IOException;
  */
 
 public class PromptReader {
-    private static final String TEXT_RESET = "\u001B[0m";
-    private static final String TEXT_RED = "\u001B[31m";
-    private static final String TEXT_GREEN = "\u001B[32m";
-    private static final String TEXT_YELLOW = "\u001B[33m";
-    private static final String TEXT_BLUE = "\u001B[34m";
+    // private static final String TEXT_RESET = "\u001B[0m";
+    // private static final String TEXT_RED = "\u001B[31m";
+    // private static final String TEXT_GREEN = "\u001B[32m";
+    // private static final String TEXT_YELLOW = "\u001B[33m";
+    // private static final String TEXT_BLUE = "\u001B[34m";
+
+    // public PromptReader(String category, int prize) {
+    
+    //     //System.out.println("Bank Account: " + bank);
+    // }
+
+    public PromptReader(GameBoard.Category category, Integer integer) {
+        System.out.println("You have chosen the category: " + category);
+        System.out.println("You have chosen the prize amount: " + integer);
+    }
+
+    public PromptReader() {
+
+    }
 
     public void triviaWelcome() {
-        haltCatchFireSplash();
+        // haltCatchFireSplash();
+        teamShoutOut();
         String triviaWelcome = "\n";
         triviaWelcome += "Welcome! You are about to play a trivia game we built for CS143.\n";
         triviaWelcome += "We wanted to share our hard work and hope you enjoy this program. \n";
@@ -35,21 +50,21 @@ public class PromptReader {
     }
 
     public void winSplash() {
-        String youWin = "\n" + TEXT_GREEN;
+        String youWin = "\n";
         youWin += "░█░█░█▀█░█░█░░░█░█░▀█▀░█▀█░█\n";
         youWin += "░░█░░█░█░█░█░░░█▄█░░█░░█░█░▀\n";
         youWin += "░░▀░░▀▀▀░▀▀▀░░░▀░▀░▀▀▀░▀░▀░▀\n";
-        youWin += TEXT_RESET;
+        // youWin += TEXT_RESET;
         System.out.println(youWin);
         triviaBye();
     }
 
     public void gameOverSplash() {
-        String gameOver = "\n" + TEXT_RED;
+        String gameOver = "\n";
         gameOver += "░█▀▀░█▀█░█▄█░█▀▀░░░█▀█░█░█░█▀▀░█▀▄\n";
         gameOver += "░█░█░█▀█░█░█░█▀▀░░░█░█░▀▄▀░█▀▀░█▀▄\n";
         gameOver += "░▀▀▀░▀░▀░▀░▀░▀▀▀░░░▀▀▀░░▀░░▀▀▀░▀░▀\n";
-        gameOver += TEXT_RESET;
+        // gameOver += TEXT_RESET;
         System.out.println(gameOver);
         triviaBye();
     }
@@ -74,16 +89,16 @@ public class PromptReader {
     }
 
     private void playPrompt() {
-        String playPrompt = TEXT_BLUE;
+        String playPrompt = "";
         playPrompt += "\nAre you ready to proceed?";
         playPrompt += "\t(1)YES or (2)NO";
-        playPrompt += "\nEnter number selection: " + TEXT_RESET;
+        playPrompt += "\nEnter number selection: ";
         System.out.println(playPrompt);
     }
 
     private void gameOverview() {
-        String gameOverview = "\n" + TEXT_BLUE;
-        gameOverview += "\tGame Overview: \n" + TEXT_RESET;
+        String gameOverview = "\n";
+        gameOverview += "\tGame Overview: \n";
         gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to the next rounds.\n";
         gameOverview += "\tThere are 3 rounds to play and each round will require an increasing amount of money to advance.\n";
         gameOverview += "\tEarned money will be recorded with the player's bank account.\n";
@@ -93,8 +108,8 @@ public class PromptReader {
     }
 
     private void triviaRules() {
-        String triviaRules = "\n" + TEXT_BLUE;
-        triviaRules += "\tTrivia Selection: \n" + TEXT_RESET;
+        String triviaRules = "\n";
+        triviaRules += "\tTrivia Selection: \n";
         triviaRules += "\tEach question is separated by the category and prize money amount. \n";
         triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interest.\n";
         triviaRules += "\tTo select a question, \n";
@@ -106,8 +121,8 @@ public class PromptReader {
     }
 
     private void bankAccountRules() {
-        String bankRules = "\n" + TEXT_BLUE;
-        bankRules += "\tBank Account: \n" + TEXT_RESET;
+        String bankRules = "\n";
+        bankRules += "\tBank Account: \n";
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
         bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n";
         bankRules += "\tNegative values are permitted.\n";
@@ -118,8 +133,8 @@ public class PromptReader {
     }
 
     private void powerUpRules() {
-        String powerRules = "\n" + TEXT_BLUE;
-        powerRules += "\tPower-ups: \n" + TEXT_RESET;
+        String powerRules = "\n";
+        powerRules += "\tPower-ups: \n";
         powerRules += "\tPlayers can earn question streaks after answering consecutive questions correctly.\n";
         powerRules += "\tThese power-ups are persistent through each round.";
         // TODO: (Zhengqi will need to determine what kind of power-ups he wants to
@@ -133,36 +148,36 @@ public class PromptReader {
     }
 
     private void haltCatchFireSplash() {
-        String hcf = "\n" + TEXT_RED;
+        String hcf = "\n";
         hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
         hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
         hcf += "███████ ███████ ██      ██        ██      ███████    ██    ██      ███████     █████   ██ ██████  █████   \n";
         hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
         hcf += "██   ██ ██   ██ ███████ ██         ██████ ██   ██    ██     ██████ ██   ██     ██      ██ ██   ██ ███████ \n";
         hcf += "=========================================================================================================";
-        hcf += TEXT_RESET;
+        // hcf += TEXT_RESET;
         System.out.println(hcf);
         teamShoutOut();
     }
 
     private void teamShoutOut() {
         String spacer = "\t\t"; // " "
-        String names = "\n" + TEXT_YELLOW;
+        String names = "\n";
         names += "Caleb Churness" + spacer;
         names += "Kevin Chung" + spacer;
         names += "Nicole Gouhin" + spacer;
         names += "Herrera Wray" + spacer;
         names += "Zhengqi Yang" + spacer;
-        names += TEXT_RESET;
+        // names += TEXT_RESET;
         System.out.print(names + "\n");
     }
 
     private void instructSplash() {
-        String instructSplash = "\n" + TEXT_YELLOW;
+        String instructSplash = "\n";// + TEXT_YELLOW;
         instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
         instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
         instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
-        instructSplash += TEXT_RESET;
+        // instructSplash += TEXT_RESET;
         System.out.println(instructSplash);
     }
 }

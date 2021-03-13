@@ -28,7 +28,6 @@ public class GameMain {
         boolean program = true; // For the overall program, will continue running until the game ends.
 
         while (program) {
-            prompter.clearScreen();
             prompter.triviaWelcome();
             if (readThis.hasNextInt()) {
                 player = readThis.nextInt();
@@ -38,7 +37,6 @@ public class GameMain {
                     prompter.exitGame();
                     program = false;
                 } else if (player == 1) {
-                    prompter.clearScreen();
                     prompter.instructPlayer();
                     if (readThis.hasNextInt()) {
                         player = readThis.nextInt();
@@ -52,11 +50,11 @@ public class GameMain {
                             program = false;
 
                             while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
-                                prompter.clearScreen();
                                 System.out.print(newGameboard);
                                 if (readThis.hasNextInt()) {
                                     int category = readThis.nextInt();
                                     int question = readThis.nextInt();
+                                    PromptReader headsUpDisplay = new PromptReader(newGameboard.getCategory(category), newGameboard.getCategory(category).getQuestion(question).getValue());
                                     newGameboard.askQuestion(category, question); // print the selected game board
                                 } else if (!readThis.hasNextInt()) {
                                     System.out.print(newGameboard);

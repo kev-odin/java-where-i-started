@@ -17,12 +17,8 @@ public class BankAccount {
     }
 
     public boolean check(int currentMoney, int currentRound) {
-        if (money >= roundOne) {
-            // means that the players money is either greater than or equal to the cut off
-            // for round one
-            return true; // player makes it to round 2
-        } else
-            return false;
+        if (money >= roundOne) return true; 
+        return false;
     }
 
 }
