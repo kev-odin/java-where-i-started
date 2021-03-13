@@ -16,9 +16,9 @@ public class GameMain {
 
     public static void main(String[] args) {
         textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
-        BankAccount bank = new BankAccount(0); // Instantiate player bank account: Starting amount: $0, Round 1: $1000, Round 2: $10000;
+        BankAccount bank = new BankAccount(0, 1000, 10000); // Instantiate player bank account: Starting amount: $0, Round 1: $1000, Round 2: $10000;
         QuestionList game = new QuestionList(textFile);
-        PromptReader prompter = new PromptReader(null, null);
+        PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
 
@@ -53,13 +53,15 @@ public class GameMain {
                             playGame = true;
                             program = false;
 
-                            while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
+                            while (playGame && !newGameboard.allQuestionsAsked() && !bank.enoughMoney(bank.getMoney(), bank.getRoundOne())) { // Actual game code!
                                 prompter.clearScreen();
                                 System.out.print(newGameboard);
+                                prompter.gameInfo(bank.getMoney(), bank.getRoundOne());
+
                                 if (readThis.hasNextInt()) {
                                     int category = readThis.nextInt();
                                     int question = readThis.nextInt();
-                                    newGameboard.askQuestion(category, question); // print the selected game board
+                                    bank.setMoney(newGameboard.askQuestion(category, question)); // bank adds/deduct prize money
                                 } 
                                 else {
                                     System.out.println("Invalid input, please enter a whole number.");

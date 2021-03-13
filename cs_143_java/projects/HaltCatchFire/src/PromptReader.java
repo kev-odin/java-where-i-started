@@ -15,16 +15,6 @@ public class PromptReader {
     // private static final String TEXT_YELLOW = "\u001B[33m";
     // private static final String TEXT_BLUE = "\u001B[34m";
 
-    // public PromptReader(String category, int prize) {
-    
-    //     //System.out.println("Bank Account: " + bank);
-    // }
-
-    public PromptReader(GameBoard.Category category, Integer integer) {
-        System.out.println("Category: " + category + "\t");
-        System.out.print("Prize: " + integer);
-    }
-
     public PromptReader() {
     }
 
@@ -99,6 +89,14 @@ public class PromptReader {
         //     }
         // } catch (IOException | InterruptedException ex) {
         // }
+    }
+
+    public void gameInfo(int playerMoney, int roundInfo) {
+        String headsUpDisplay = "\n";
+        headsUpDisplay += "Player Money: " + playerMoney + "\t\t";
+        headsUpDisplay += "Amount needed to advance: " + (roundInfo - playerMoney) + "\n";
+
+        System.out.println (headsUpDisplay);
     }
 
     private void playPrompt() {
