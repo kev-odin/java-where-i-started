@@ -142,13 +142,12 @@ public class GameBoard {
 
 		System.out.print("Enter the number corresponding to your question: ");
 
-
 			Timer timer = new Timer();
 			TimerTask x = new TimerTask() {
 				int start = 10;
 
 				public void run() {
-					System.out.println(" ");
+					//System.out.println(" ");
 					System.out.println(" ");
 					System.out.print("Seconds remaining to answer the question:");
 					start = start - 1;
@@ -163,7 +162,7 @@ public class GameBoard {
 					}
 				}
 			};
-			timer.schedule(x,0, 1000);
+			timer.schedule(x, 0, 1000);
 
 
 		while (input < 0 || input >= q.getChoices().length) {

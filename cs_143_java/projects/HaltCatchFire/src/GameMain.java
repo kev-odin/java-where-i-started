@@ -27,20 +27,24 @@ public class GameMain {
         boolean playGame = false; // For the internal game loop; flagged true when player prompts are registered.
         boolean program = true; // For the overall program, will continue running until the game ends.
 
+        prompter.clearScreen();
+        prompter.triviaWelcome();
+
         while (program) {
-            prompter.triviaWelcome();
             if (readThis.hasNextInt()) {
                 player = readThis.nextInt();
-                if (player < 0 || player >= 3) {
+                if (checkInput(player, 0, 3)) {
                     System.out.print("Invalid input, please enter a whole number of either 1 or 2");
                 } else if (player == 2) {
                     prompter.exitGame();
                     program = false;
                 } else if (player == 1) {
+                    prompter.clearScreen();
                     prompter.instructPlayer();
+                    readThis.nextLine();
                     if (readThis.hasNextInt()) {
                         player = readThis.nextInt();
-                        if (player < 0 || player >= 3) {
+                        if (checkInput(player, 0, 3)) {
                             System.out.print("Invalid input, please enter a whole number of either 1 or 2");
                         } else if (player == 2) {
                             prompter.exitGame();
@@ -50,30 +54,30 @@ public class GameMain {
                             program = false;
 
                             while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
+                                prompter.clearScreen();
                                 System.out.print(newGameboard);
                                 if (readThis.hasNextInt()) {
                                     int category = readThis.nextInt();
                                     int question = readThis.nextInt();
-                                    PromptReader headsUpDisplay = new PromptReader(newGameboard.getCategory(category), newGameboard.getCategory(category).getQuestion(question).getValue());
                                     newGameboard.askQuestion(category, question); // print the selected game board
-                                } else if (!readThis.hasNextInt()) {
-                                    System.out.print(newGameboard);
-                                } else {
+                                } 
+                                else {
                                     System.out.println("Invalid input, please enter a whole number.");
+                                    System.out.print(newGameboard);
                                 }
                             }
                         }
                     }
                 }
             } else {
-                System.out.print("Invalid input, please enter the integer corresponding to your prompt: ");
+                readThis.nextLine();
+                System.out.print("Invalid input, please enter the integer corresponding to the previous prompt: ");
             }
         }
+        readThis.close();
     }
 
-    public boolean checkInput(int player) {
-
-        return false;
+    public static boolean checkInput(int input, int min, int max) {
+        return (input < min || input >= max);
     }
-
 }

@@ -21,17 +21,15 @@ public class PromptReader {
     // }
 
     public PromptReader(GameBoard.Category category, Integer integer) {
-        System.out.println("You have chosen the category: " + category);
-        System.out.println("You have chosen the prize amount: " + integer);
+        System.out.println("Category: " + category + "\t");
+        System.out.print("Prize: " + integer);
     }
 
     public PromptReader() {
-
     }
 
     public void triviaWelcome() {
-        // haltCatchFireSplash();
-        teamShoutOut();
+        haltCatchFireSplash();
         String triviaWelcome = "\n";
         triviaWelcome += "Welcome! You are about to play a trivia game we built for CS143.\n";
         triviaWelcome += "We wanted to share our hard work and hope you enjoy this program. \n";
@@ -51,9 +49,14 @@ public class PromptReader {
 
     public void winSplash() {
         String youWin = "\n";
-        youWin += "░█░█░█▀█░█░█░░░█░█░▀█▀░█▀█░█\n";
-        youWin += "░░█░░█░█░█░█░░░█▄█░░█░░█░█░▀\n";
-        youWin += "░░▀░░▀▀▀░▀▀▀░░░▀░▀░▀▀▀░▀░▀░▀\n";
+        youWin += "# #             # #  #       #  ";
+        youWin += "# # ### # #     # #     ##   #  ";
+        youWin += " #  # # # #     ###  #  # #  #  ";
+        youWin += " #  ### ###     ###  ## # #     ";
+        youWin += " #              # #          #  ";
+        // youWin += "░█░█░█▀█░█░█░░░█░█░▀█▀░█▀█░█\n";
+        // youWin += "░░█░░█░█░█░█░░░█▄█░░█░░█░█░▀\n";
+        // youWin += "░░▀░░▀▀▀░▀▀▀░░░▀░▀░▀▀▀░▀░▀░▀\n";
         // youWin += TEXT_RESET;
         System.out.println(youWin);
         triviaBye();
@@ -61,9 +64,14 @@ public class PromptReader {
 
     public void gameOverSplash() {
         String gameOver = "\n";
-        gameOver += "░█▀▀░█▀█░█▄█░█▀▀░░░█▀█░█░█░█▀▀░█▀▄\n";
-        gameOver += "░█░█░█▀█░█░█░█▀▀░░░█░█░▀▄▀░█▀▀░█▀▄\n";
-        gameOver += "░▀▀▀░▀░▀░▀░▀░▀▀▀░░░▀▀▀░░▀░░▀▀▀░▀░▀\n";
+        gameOver += "##                  #              ";
+        gameOver += "#    ## ### ###     # # # # ### ### ";
+        gameOver += "# # # # ### ##      # # # # ##  #   ";
+        gameOver += "# # ### # # ###     # #  #  ### #   ";
+        gameOver += "##                  #              ";
+        // gameOver += "░█▀▀░█▀█░█▄█░█▀▀░░░█▀█░█░█░█▀▀░█▀▄\n";
+        // gameOver += "░█░█░█▀█░█░█░█▀▀░░░█░█░▀▄▀░█▀▀░█▀▄\n";
+        // gameOver += "░▀▀▀░▀░▀░▀░▀░▀▀▀░░░▀▀▀░░▀░░▀▀▀░▀░▀\n";
         // gameOver += TEXT_RESET;
         System.out.println(gameOver);
         triviaBye();
@@ -75,17 +83,22 @@ public class PromptReader {
     }
 
     public void clearScreen() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else if (System.getProperty("os.name").contains("Linux")) {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (IOException | InterruptedException ex) {
+        int numRowsInConsole = 60;
+        for (int i = 0; i < numRowsInConsole; i++) {
+            // scroll down one line
+            System.out.println("");
         }
+        // try {
+        //     if (System.getProperty("os.name").contains("Windows")) {
+        //         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        //     } else if (System.getProperty("os.name").contains("Linux")) {
+        //         System.out.print("\033[H\033[2J");
+        //         System.out.flush();
+        //     } else {
+        //         Runtime.getRuntime().exec("clear");
+        //     }
+        // } catch (IOException | InterruptedException ex) {
+        // }
     }
 
     private void playPrompt() {
@@ -149,11 +162,16 @@ public class PromptReader {
 
     private void haltCatchFireSplash() {
         String hcf = "\n";
-        hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
-        hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
-        hcf += "███████ ███████ ██      ██        ██      ███████    ██    ██      ███████     █████   ██ ██████  █████   \n";
-        hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
-        hcf += "██   ██ ██   ██ ███████ ██         ██████ ██   ██    ██     ██████ ██   ██     ██      ██ ██   ██ ███████ \n";
+        // hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
+        // hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
+        // hcf += "███████ ███████ ██      ██        ██      ███████    ██    ██      ███████     █████   ██ ██████  █████   \n";
+        // hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
+        // hcf += "██   ██ ██   ██ ███████ ██         ██████ ██   ██    ██     ██████ ██   ██     ██      ██ ██   ██ ███████ \n";
+        hcf += "# #      #   #       ##      #      #       ###  #          \n";
+        hcf += "# #  ##  #  ###     #    ## ### ### ###     #       ### ### \n";
+        hcf += "### # #  #   #      #   # #  #  #   # #     ##   #  #   ##  \n";
+        hcf += "# # ###  ##  ##     #   ###  ## ### # #     #    ## #   ### \n";
+        hcf += "# #                  ##                     #               \n";
         hcf += "=========================================================================================================";
         // hcf += TEXT_RESET;
         System.out.println(hcf);
@@ -174,9 +192,14 @@ public class PromptReader {
 
     private void instructSplash() {
         String instructSplash = "\n";// + TEXT_YELLOW;
-        instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
-        instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
-        instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
+        instructSplash += "###          #               #   #          \n";
+        instructSplash += " #  ##   ## ### ### # # ### ###     ### ##   ## \n";
+        instructSplash += " #  # #  #   #  #   # # #    #   #  # # # #  #  \n";
+        instructSplash += " #  # # ##   ## #   ### ###  ##  ## ### # # ##  \n";
+        instructSplash += "###                      \n";
+        // instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
+        // instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
+        // instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
         // instructSplash += TEXT_RESET;
         System.out.println(instructSplash);
     }

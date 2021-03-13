@@ -1,4 +1,3 @@
-
 /*
  * Takes in question list from main method to separate questions into two game boards
  * for however many rounds there may be
