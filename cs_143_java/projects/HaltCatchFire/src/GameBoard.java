@@ -149,7 +149,7 @@ public class GameBoard {
 				public void run() {
 					//System.out.println(" ");
 					System.out.println(" ");
-					System.out.print("Seconds remaining to answer the question:");
+					System.out.print("Seconds remaining to answer the question: ");
 					start = start - 1;
 					for (int i = 1; i < 2; i++) {
 						System.out.print(start + " ");
