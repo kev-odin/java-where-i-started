@@ -15,8 +15,11 @@ public class GameMain {
     private static File textFile;
 
     public static void main(String[] args) {
-        textFile = new File("trivia.csv"); // May need to change the path to the "trivia.csv"; check your own computer.
-        BankAccount bank = new BankAccount(0, 1000, 10000); // Instantiate player bank account: Starting amount: $0, Round 1: $1000, Round 2: $10000;
+        // May need to change the path to the "trivia.csv"; check your own computer.
+        textFile = new File("trivia.csv");
+        // Instantiate player bank account: Starting amount: $0 || Round 1: $1000 ||
+        // Round 2: $10000;
+        BankAccount bank = new BankAccount(0, 1000, 1100);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
@@ -53,19 +56,43 @@ public class GameMain {
                             playGame = true;
                             program = false;
 
-                            while (playGame && !newGameboard.allQuestionsAsked() && !bank.enoughMoney(bank.getMoney(), bank.getRoundOne())) { // Actual game code!
-                                prompter.clearScreen();
-                                System.out.print(newGameboard);
-                                prompter.gameInfo(bank.getMoney(), bank.getRoundOne());
+                            while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
 
-                                if (readThis.hasNextInt()) {
-                                    int category = readThis.nextInt();
-                                    int question = readThis.nextInt();
-                                    bank.setMoney(newGameboard.askQuestion(category, question)); // bank adds/deduct prize money
-                                } 
-                                else {
-                                    System.out.println("Invalid input, please enter a whole number.");
+                                if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne())) { // First round
+                                    prompter.clearScreen();
                                     System.out.print(newGameboard);
+                                    prompter.gameInfo(bank.getMoney(), bank.getRoundOne());
+
+                                    if (readThis.hasNextInt()) {
+                                        int category = readThis.nextInt();
+                                        int question = readThis.nextInt();
+                                        // bank adds/deduct prize money
+                                        bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
+                                    } else {
+                                        System.out.println("Invalid input, please enter a whole number.");
+                                        System.out.print(newGameboard);
+                                    }
+                                    
+                                } else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
+
+                                    newGameboard = gc.getGameBoard(1); // Second round, new GameBoard (with round 2 questions)
+                                    prompter.clearScreen();
+                                    System.out.print(newGameboard);
+                                    prompter.gameInfo(bank.getMoney(), bank.getRoundTwo());
+
+                                    if (readThis.hasNextInt()) {
+                                        int category = readThis.nextInt();
+                                        int question = readThis.nextInt();
+                                        // bank adds/deduct prize money
+                                        bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
+                                    } else {
+                                        System.out.println("Invalid input, please enter a whole number.");
+                                        System.out.print(newGameboard);
+                                    }
+                                } else { // Player has won the game by making it to the end
+                                    prompter.clearScreen();
+                                    prompter.winSplash();
+                                    playGame = false;
                                 }
                             }
                         }

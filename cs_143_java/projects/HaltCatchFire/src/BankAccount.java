@@ -13,8 +13,12 @@ public class BankAccount {
         return (playerMoney >= roundAmount);
     }
 
-    public void setMoney(int prizeMoney) {
+    public void updatePrizeMoney(int prizeMoney) {
         this.money += prizeMoney;
+    }
+
+    public void resetMoney() {
+        money = 0;
     }
 
     public int getMoney() {

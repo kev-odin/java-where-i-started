@@ -39,11 +39,11 @@ public class PromptReader {
 
     public void winSplash() {
         String youWin = "\n";
-        youWin += "# #             # #  #       #  ";
-        youWin += "# # ### # #     # #     ##   #  ";
-        youWin += " #  # # # #     ###  #  # #  #  ";
-        youWin += " #  ### ###     ###  ## # #     ";
-        youWin += " #              # #          #  ";
+        youWin += "# #             # #  #       #  \n";
+        youWin += "# # ### # #     # #     ##   #  \n";
+        youWin += " #  # # # #     ###  #  # #  #  \n";
+        youWin += " #  ### ###     ###  ## # #     \n";
+        youWin += " #              # #          #  \n";
         // youWin += "░█░█░█▀█░█░█░░░█░█░▀█▀░█▀█░█\n";
         // youWin += "░░█░░█░█░█░█░░░█▄█░░█░░█░█░▀\n";
         // youWin += "░░▀░░▀▀▀░▀▀▀░░░▀░▀░▀▀▀░▀░▀░▀\n";
