@@ -17,8 +17,8 @@ public class GameMain {
     public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
-        // Instantiate player bank account: Starting amount: $0 || Round 1: $1000 ||
-        // Round 2: $10000;
+        // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2:
+        // $1100;
         BankAccount bank = new BankAccount(0, 1000, 1100);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
@@ -69,13 +69,13 @@ public class GameMain {
                                         // bank adds/deduct prize money
                                         bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
                                     } else {
+                                        readThis.nextLine();
                                         System.out.println("Invalid input, please enter a whole number.");
-                                        System.out.print(newGameboard);
                                     }
-                                    
+
                                 } else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
 
-                                    newGameboard = gc.getGameBoard(1); // Second round, new GameBoard (with round 2 questions)
+                                    newGameboard = gc.getGameBoard(1); // Second round, new GameBoard questions
                                     prompter.clearScreen();
                                     System.out.print(newGameboard);
                                     prompter.gameInfo(bank.getMoney(), bank.getRoundTwo());
@@ -86,9 +86,10 @@ public class GameMain {
                                         // bank adds/deduct prize money
                                         bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
                                     } else {
+                                        readThis.nextLine();
                                         System.out.println("Invalid input, please enter a whole number.");
-                                        System.out.print(newGameboard);
                                     }
+
                                 } else { // Player has won the game by making it to the end
                                     prompter.clearScreen();
                                     prompter.winSplash();
