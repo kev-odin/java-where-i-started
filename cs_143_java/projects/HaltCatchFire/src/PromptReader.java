@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * This class is used to store the player prompts for the trivia game. Also, can
  * be used to clear the previous entries in the terminal window to make player
@@ -14,9 +12,6 @@ public class PromptReader {
     // private static final String TEXT_GREEN = "\u001B[32m";
     // private static final String TEXT_YELLOW = "\u001B[33m";
     // private static final String TEXT_BLUE = "\u001B[34m";
-
-    public PromptReader() {
-    }
 
     public void triviaWelcome() {
         haltCatchFireSplash();
@@ -122,12 +117,9 @@ public class PromptReader {
         String triviaRules = "\n";
         triviaRules += "\tTrivia Selection: \n";
         triviaRules += "\tEach question is separated by the category and prize money amount. \n";
-        triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interest.\n";
-        triviaRules += "\tTo select a question, \n";
-        // TODO: (Caleb will need to describe how questions are selected from the
-        // GameBoard).
-        triviaRules += "\tAfter a question is selected, the player will have 15 seconds to answer the question.";
-        // TODO: (Nicole may need to adjust the question timer if needed).
+        triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interests.\n";
+        triviaRules += "\tTo select a question, enter the category selection, followed by the 'Enter' key \n";
+        triviaRules += "\tAfter a question is selected, the player will have 10 seconds to answer the question.";
         System.out.println(triviaRules);
     }
 
@@ -137,7 +129,6 @@ public class PromptReader {
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
         bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n";
         bankRules += "\tNegative values are permitted.\n";
-        // TODO: (Herrera will need to determine the round limits for each round).
         bankRules += "\t\tRound 1: $1000\n";
         bankRules += "\t\tRound 2: $10000";
         System.out.println(bankRules);
@@ -148,8 +139,7 @@ public class PromptReader {
         powerRules += "\tPower-ups: \n";
         powerRules += "\tPlayers can earn question streaks after answering consecutive questions correctly.\n";
         powerRules += "\tThese power-ups are persistent through each round.";
-        // TODO: (Zhengqi will need to determine what kind of power-ups he wants to
-        // implement).
+        // TODO: (Zhengqi will need to determine what kind of power-ups he wants to implement).
         System.out.println(powerRules);
     }
 
@@ -172,14 +162,13 @@ public class PromptReader {
     }
 
     private void teamShoutOut() {
-        String spacer = "\t\t"; // " "
+        String spacer = "\t\t";
         String names = "\n";
         names += "Caleb Churness" + spacer;
         names += "Kevin Chung" + spacer;
         names += "Nicole Gouhin" + spacer;
         names += "Herrera Wray" + spacer;
         names += "Zhengqi Yang" + spacer;
-        // names += TEXT_RESET;
         System.out.print(names + "\n");
     }
 
@@ -190,10 +179,6 @@ public class PromptReader {
         instructSplash += " #  # #  #   #  #   # # #    #   #  # # # #  #  \n";
         instructSplash += " #  # # ##   ## #   ### ###  ##  ## ### # # ##  \n";
         instructSplash += "###                      ";
-        // instructSplash += "░▀█▀░█▀█░█▀▀░▀█▀░█▀▄░█░█░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀\n";
-        // instructSplash += "░░█░░█░█░▀▀█░░█░░█▀▄░█░█░█░░░░█░░░█░░█░█░█░█░▀▀█\n";
-        // instructSplash += "░▀▀▀░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀";
-        // instructSplash += TEXT_RESET;
         System.out.println(instructSplash);
     }
 }
