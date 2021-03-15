@@ -59,12 +59,16 @@ public class GameBoard {
 		private String[] choices;
 		private int answer;
 		private int value;
+		private int playerResponse;
+		private boolean timeRanOut;
 
 		public Question(String qString, String[] qChoices, int answer, int value) {
 			question = qString;
 			choices = qChoices;
 			this.answer = answer;
 			this.value = value;
+			playerResponse = -1;
+			timeRanOut = false;
 		}
 
 		public String getQuestion() {
@@ -85,6 +89,22 @@ public class GameBoard {
 
 		public void setValue(int value) {
 			this.value = value;
+		}
+
+		public void setPlayerResponse(int r) {
+			playerResponse = r;
+		}
+
+		public int getPlayerResponse() {
+			return playerResponse;
+		}
+
+		public void setTimeRanOut(boolean b) {
+			timeRanOut = b;
+		}
+
+		public boolean getTimeRanOut() {
+			return timeRanOut;
 		}
 
 		public String toString() {
@@ -110,29 +130,31 @@ public class GameBoard {
 
 	/*
 	 * Print out selected question Print out choices Use scanner to ask for input
-	 * 
+	 *
 	 * ==================================================================== Ex:
 	 * [Question] 0 [choice at index 0] 1 [Choice at index 1] 2 [Choice at index 2]
 	 * 3 [Choice at index 3] Enter the number corresponding to your question:
 	 * [player response]
 	 * ====================================================================
-	 * 
+	 *
 	 * If player response doesn't work say: Invalid answer, please select the
 	 * question using the corresponding index: [player response]
-	 * 
+	 *
 	 * If player answers correctly, return and remove value from question If player
 	 * answers incorrectly, remove value from question and return 0
-	 * 
+	 *
 	 * @param catIndex Category index
-	 * 
+	 *
 	 * @param qIndex Question index
-	 * 
+	 *
 	 * @return value Amount of winnings
 	 */
 	public int askQuestion(int catIndex, int qIndex) {
 
 		Question q = cat[catIndex].getQuestion(qIndex);
 
+		System.out.println();
+		System.out.println(cat[catIndex].getCategory() + " for $" + q.getValue());
 		System.out.println(q.getQuestion());
 		for (int i = 0; i < q.getChoices().length; i++) {
 			System.out.println(i + ") " + q.getChoices()[i]);
@@ -140,29 +162,30 @@ public class GameBoard {
 
 		int input = -1;
 
-		System.out.print("Enter the number corresponding to your question: ");
+		System.out.println("Enter the number corresponding to your question: ");
 
-			Timer timer = new Timer();
-			TimerTask x = new TimerTask() {
-				int start = 10;
 
-				public void run() {
-					//System.out.println(" ");
-					System.out.println(" ");
-					System.out.print("Seconds remaining to answer the question: ");
-					start = start - 1;
-					for (int i = 1; i < 2; i++) {
-						System.out.print(start + " ");
-						if (start <= 0) {
-							System.out.println("Time's up!");
-							System.out.println("The correct answer was: " + q.getChoices()[q.getAnswer()]);
-							timer.cancel();
-							break;
-						}
-					}
+		System.out.print("Seconds remaining to answer the question: ");
+		Timer timer = new Timer();
+		TimerTask x = new TimerTask() {
+			int start = 10;
+
+			public void run() {
+				//System.out.println(" ");
+//					System.out.println(" ");
+//					System.out.print("Seconds remaining to answer the question: ");
+				System.out.print(start + " ");
+				start = start - 1;
+				if (start < 0) {
+					System.out.println("\nTime's up!");
+					System.out.print("Give us Your final answer (Even if you are correct, you will still lose points): ");
+					q.setValue(q.getValue() * -1);
+					q.setTimeRanOut(true);
+					timer.cancel();
 				}
-			};
-			timer.schedule(x, 0, 1000);
+			}
+		};
+		timer.schedule(x, 0, 1000);
 
 
 		while (input < 0 || input >= q.getChoices().length) {
@@ -172,6 +195,7 @@ public class GameBoard {
 
 			if (sc.hasNextInt()) {
 				input = sc.nextInt();
+				q.setPlayerResponse(input);
 				if (input < 0 || input >= q.getChoices().length) {
 					System.out.print("Invalid input, please enter a number between 0 and " + (q.getChoices().length - 1));
 				}
@@ -183,13 +207,16 @@ public class GameBoard {
 		int prize = q.getValue();
 		q.setValue(0);
 
-		if (input == q.getAnswer()) {
-			System.out.println("Correct!");
+		if(prize < 0) {
 			timer.cancel();
 			return prize;
 		}
 
-		System.out.println("Incorrect! The correct answer was: " + q.getChoices()[q.getAnswer()]);
+		if (input == q.getAnswer()) {
+			timer.cancel();
+			return prize;
+		}
+
 		timer.cancel();
 		return prize * -1;
 
@@ -234,23 +261,23 @@ public class GameBoard {
 		/*
 		 * Create colWidth variable and set it to largest category name use "-" and "+"
 		 * to create borders
-		 * 
+		 *
 		 * row separators should begin and end with + should contain (colWidth + 1) *
 		 * size - 1
-		 * 
+		 *
 		 * Game board title will be at the top of the trivia game enclosed in a large
 		 * box
-		 * 
+		 *
 		 * Use "|" to separate columns
-		 * 
+		 *
 		 * when creating rows print row then row separator for loop will begin once
 		 * categories are written
-		 * 
+		 *
 		 * for this comment, stringSize will refer to whatever is being printed in a
 		 * cell there should be colWidth - stringSize # of spaces in each cell If there
 		 * are an odd number of spaces, #ofspaces/2 will be at start
 		 * Math.ceil(#ofspaces/2) will be at end
-		 * 
+		 *
 		 * \n will be used to print different rows in one string
 		 */
 
@@ -298,7 +325,7 @@ public class GameBoard {
 			// fence post loop through cols
 			gameTable += "|";
 			for (int j = 0; j < GameBoard.size; j++) {
-				if (cat[j].questions[i].value == 0) {
+				if (cat[j].questions[i].getPlayerResponse() != -1) {
 					gameTable += makeWithSpace("><", colWidth);
 				} else {
 					gameTable += makeWithSpace("$" + cat[j].questions[i].value, colWidth);
@@ -331,13 +358,13 @@ public class GameBoard {
 
 	/*
 	 * Returns string that puts space before and after text depending on size
-	 * 
+	 *
 	 * @param text to convert
-	 * 
+	 *
 	 * @param size that is less than text.length
-	 * 
+	 *
 	 * @param gameBoardLength
-	 * 
+	 *
 	 * @return new text that combines text with spaces
 	 */
 	public String makeWithSpace(String text, int size) {

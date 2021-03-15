@@ -104,7 +104,7 @@ public class PromptReader {
         playPrompt += "\nAre you ready to proceed?";
         playPrompt += "\t(1)YES or (2)NO";
         playPrompt += "\nEnter number selection: ";
-        System.out.println(playPrompt);
+        System.out.print(playPrompt);
     }
 
     private void gameOverview() {
@@ -160,11 +160,6 @@ public class PromptReader {
 
     private void haltCatchFireSplash() {
         String hcf = "\n";
-        // hcf += "██   ██  █████  ██   ████████      ██████  █████  ████████  ██████ ██   ██     ███████ ██ ██████  ███████ \n";
-        // hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
-        // hcf += "███████ ███████ ██      ██        ██      ███████    ██    ██      ███████     █████   ██ ██████  █████   \n";
-        // hcf += "██   ██ ██   ██ ██      ██        ██      ██   ██    ██    ██      ██   ██     ██      ██ ██   ██ ██      \n";
-        // hcf += "██   ██ ██   ██ ███████ ██         ██████ ██   ██    ██     ██████ ██   ██     ██      ██ ██   ██ ███████ \n";
         hcf += "# #      #   #       ##      #      #       ###  #          \n";
         hcf += "# #  ##  #  ###     #    ## ### ### ###     #       ### ### \n";
         hcf += "### # #  #   #      #   # #  #  #   # #     ##   #  #   ##  \n";
