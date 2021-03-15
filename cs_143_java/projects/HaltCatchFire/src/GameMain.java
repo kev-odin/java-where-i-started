@@ -36,7 +36,8 @@ public class GameMain {
             if (readThis.hasNextInt()) {
                 player = readThis.nextInt();
                 if (checkInput(player, 0, 3)) {
-                    System.out.print("Invalid input, please enter a whole number of either 1 or 2");
+                    readThis.nextLine();
+                    System.out.print("Invalid input, please enter a whole number of either 1 or 2: ");
                 } else if (player == 2) {
                     prompter.exitGame();
                     program = false;
@@ -47,7 +48,8 @@ public class GameMain {
                     if (readThis.hasNextInt()) {
                         player = readThis.nextInt();
                         if (checkInput(player, 0, 3)) {
-                            System.out.print("Invalid input, please enter a whole number of either 1 or 2");
+                            readThis.nextLine();
+                            System.out.print("Invalid input, please enter a whole number of either 1 or 2: ");
                         } else if (player == 2) {
                             prompter.exitGame();
                             program = false;
@@ -99,13 +101,13 @@ public class GameMain {
                                                         }
                                                     } else {
                                                         System.out
-                                                                .println("Yo, that was invalid! Get it together man!");
+                                                                .println("Yo, that was invalid! Get it together man!\n");
                                                     }
                                                 } else {
-                                                    System.out.println("Yo, that was invalid! Get it together man!");
+                                                    System.out.println("Yo, that was invalid! Get it together man!\n");
                                                 }
                                             } else {
-                                                System.out.println("Yo, that was invalid! Get it together man!");
+                                                System.out.println("Yo, that was invalid! Get it together man!\n");
                                             }
                                         } else {
                                             System.out.println("Yo, that was invalid! Get it together man!");
@@ -177,16 +179,16 @@ public class GameMain {
                                                         }
                                                     } else {
                                                         System.out
-                                                                .println("Yo, that was invalid! Get it together man!");
+                                                                .println("Yo, that was invalid! Get it together man!\n");
                                                     }
                                                 } else {
-                                                    System.out.println("Yo, that was invalid! Get it together man!");
+                                                    System.out.println("Yo, that was invalid! Get it together man!\n");
                                                 }
                                             } else {
-                                                System.out.println("Yo, that was invalid! Get it together man!");
+                                                System.out.println("Yo, that was invalid! Get it together man!\n");
                                             }
                                         } else {
-                                            System.out.println("Yo, that was invalid! Get it together man!");
+                                            System.out.println("Yo, that was invalid! Get it together man!\n");
                                         }
                                     }
 
@@ -231,6 +233,9 @@ public class GameMain {
                                     }
                                 }
                             }
+                        } else {
+                            readThis.nextLine();
+                            System.out.print("Invalid input, please enter the integer corresponding to the previous prompt: ");
                         }
                     }
                 } else {
@@ -243,6 +248,6 @@ public class GameMain {
     }
 
     public static boolean checkInput(int input, int min, int max) {
-        return (input < min || input >= max);
+        return (input <= min || input >= max);
     }
 }
