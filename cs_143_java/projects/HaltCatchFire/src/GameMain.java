@@ -17,8 +17,9 @@ public class GameMain {
     public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
-        // Instantiate player bank account: Starting: $0 || Round 1: $900 || Round 2: $1500;
-        BankAccount bank = new BankAccount(0, 500, 1500);
+        // Instantiate player bank account: Starting: $0 || Round 1: $100 || Round 2:
+        // $300;
+        BankAccount bank = new BankAccount(0, 100, 300);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
@@ -27,6 +28,8 @@ public class GameMain {
 
         Scanner readThis = new Scanner(System.in);
         int player;
+        int round = -1;
+        int roundMoney = -1;
         boolean playGame = false; // For internal game loop; flagged true when player prompts are registered.
         boolean program = true; // For overall program, will continue running until the beginning prompts ends.
 
@@ -55,132 +58,65 @@ public class GameMain {
                             prompter.exitGame();
                             program = false;
                         } else if (player == 1) {
+                            round = 1;
                             playGame = true;
                             program = false;
 
                             String questionAnswerResponse = "";
                             while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
 
-                                if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne())) { // First round
+                                // Game round conditions, check bank money, round information
+                                if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
+                                    roundMoney = bank.getRoundOne();
+                                } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
+                                    // Second round, new GameBoard questions
+                                    newGameboard = gc.getGameBoard(1);
+                                    roundMoney = bank.getRoundTwo();
+                                    round = 2;
+                                } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
+                                    // Player has won the game by making it to the end
                                     prompter.clearScreen();
+                                    prompter.winSplash();
+                                    playGame = false;
+                                    break;
+                                }
 
-                                    if (!questionAnswerResponse.equalsIgnoreCase("")) {
-                                        System.out.println(questionAnswerResponse);
-                                        questionAnswerResponse = "";
+                                prompter.clearScreen();
+
+                                if (!questionAnswerResponse.equalsIgnoreCase("")) {
+                                    System.out.println(questionAnswerResponse);
+                                    questionAnswerResponse = "";
+                                }
+
+                                System.out.print(newGameboard);
+                                prompter.gameInfo(bank.getMoney(), roundMoney);
+
+                                int category = -1;
+                                int question = -1;
+                                // While the question - category input is invalid
+                                while (!(0 <= category && category < GameBoard.getSize())
+                                        || !(0 <= question && question < GameBoard.Category.size)) {
+
+                                    readThis.nextLine();
+
+                                    // Print out category options
+                                    for (int i = 0; i < GameBoard.getSize(); i++) {
+                                        System.out.println("(" + i + ") " + newGameboard.getCategory(i).getCategory());
                                     }
+                                    System.out.print("\nSelect a Category: ");
 
-                                    System.out.print(newGameboard);
-                                    prompter.gameInfo(bank.getMoney(), bank.getRoundOne());
-
-                                    int category = -1;
-                                    int question = -1;
-                                    // While the question - category input is invalid
-                                    while (!(0 <= category && category < GameBoard.getSize())
-                                            || !(0 <= question && question < GameBoard.Category.size)) {
-
-                                        readThis.nextLine();
-
-                                        // Print out category options
-                                        for (int i = 0; i < GameBoard.getSize(); i++) {
-                                            System.out.println(
-                                                    "(" + i + ") " + newGameboard.getCategory(i).getCategory());
-                                        }
-                                        System.out.print("Select a Category: ");
-
-                                        if (readThis.hasNextInt()) {
-                                            int cat = readThis.nextInt();
-                                            if (cat >= 0 && cat < GameBoard.getSize()) {
-                                                prompter.questionSelectOptions();
-                                                if (readThis.hasNextInt()) {
-                                                    int q = readThis.nextInt();
-                                                    if (q >= 0 && q < GameBoard.Category.size) {
-                                                        if (newGameboard.hasBeenAsked(cat, q)) {
-                                                            System.out.println("That question has already been asked!\n");
-                                                        } else {
-                                                            category = cat;
-                                                            question = q;
-                                                        }
+                                    if (readThis.hasNextInt()) {
+                                        int cat = readThis.nextInt();
+                                        if (cat >= 0 && cat < GameBoard.getSize()) {
+                                            prompter.questionSelectOptions();
+                                            if (readThis.hasNextInt()) {
+                                                int q = readThis.nextInt();
+                                                if (q >= 0 && q < GameBoard.Category.size) {
+                                                    if (newGameboard.hasBeenAsked(cat, q)) {
+                                                        System.out.println("That question has already been asked!\n");
                                                     } else {
-                                                        System.out
-                                                                .println("Yo, that was invalid! Get it together man!\n");
-                                                    }
-                                                } else {
-                                                    System.out.println("Yo, that was invalid! Get it together man!\n");
-                                                }
-                                            } else {
-                                                System.out.println("Yo, that was invalid! Get it together man!\n");
-                                            }
-                                        } else {
-                                            System.out.println("Yo, that was invalid! Get it together man!");
-                                        }
-                                    }
-
-                                    // bank adds/deduct prize money
-                                    bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
-
-                                    String stillLost = "!";
-                                    String wrongOrRight = "";
-                                    boolean ranOutOfTime = newGameboard.getCategory(category).getQuestion(question)
-                                            .getTimeRanOut();
-                                    int playerAnswer = newGameboard.getCategory(category).getQuestion(question)
-                                            .getPlayerResponse();
-                                    int answer = newGameboard.getCategory(category).getQuestion(question).getAnswer();
-
-                                    if (playerAnswer == answer) {
-                                        wrongOrRight = "right";
-                                    } else {
-                                        wrongOrRight = "wrong";
-                                    }
-
-                                    if (playerAnswer == answer && ranOutOfTime) {
-                                        stillLost = ", but you still lost money because you were slow!";
-                                    }
-
-                                    // This is a mess but it sets it's response to how you answered the last
-                                    // question
-                                    questionAnswerResponse = "You were " + wrongOrRight + "! The correct answer was "
-                                            + newGameboard.getCategory(category).getQuestion(question)
-                                                    .getChoices()[newGameboard.getCategory(category)
-                                                            .getQuestion(question).getAnswer()]
-                                            + stillLost;
-
-                                } else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
-
-                                    newGameboard = gc.getGameBoard(1); // Second round, new GameBoard questions
-                                    prompter.clearScreen();
-                                    System.out.print(newGameboard);
-                                    prompter.gameInfo(bank.getMoney(), bank.getRoundTwo());
-
-                                    int category = -1;
-                                    int question = -1;
-                                    // While the question - category input is invalid
-                                    while (!(0 <= category && category < GameBoard.getSize())
-                                            || !(0 <= question && question < GameBoard.Category.size)) {
-
-                                        readThis.nextLine();
-                                        // Print out category options
-                                        for (int i = 0; i < GameBoard.getSize(); i++) {
-                                            System.out.println(
-                                                    "(" + i + ") " + newGameboard.getCategory(i).getCategory());
-                                        }
-                                        System.out.print("Select a Category: ");
-                                        // If hasNextInt
-                                        if (readThis.hasNextInt()) {
-                                            int cat = readThis.nextInt();
-                                            if (cat >= 0 && cat < GameBoard.getSize()) {
-                                                prompter.questionSelectOptions();
-                                                if (readThis.hasNextInt()) {
-                                                    int q = readThis.nextInt();
-                                                    if (q >= 0 && q < GameBoard.Category.size) {
-                                                        if (newGameboard.hasBeenAsked(cat, q)) {
-                                                            System.out.println("That question has already been asked!\n");
-                                                        } else {
-                                                            category = cat;
-                                                            question = q;
-                                                        }
-                                                    } else {
-                                                        System.out
-                                                                .println("Yo, that was invalid! Get it together man!\n");
+                                                        category = cat;
+                                                        question = q;
                                                     }
                                                 } else {
                                                     System.out.println("Yo, that was invalid! Get it together man!\n");
@@ -191,52 +127,44 @@ public class GameMain {
                                         } else {
                                             System.out.println("Yo, that was invalid! Get it together man!\n");
                                         }
-                                    }
-
-                                    // bank adds/deduct prize money
-                                    bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
-
-                                    String stillLost = "!";
-                                    String wrongOrRight = "";
-                                    if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne())) { // First round
-                                        prompter.clearScreen();
-
-                                        boolean ranOutOfTime = newGameboard.getCategory(category).getQuestion(question)
-                                                .getTimeRanOut();
-                                        int playerAnswer = newGameboard.getCategory(category).getQuestion(question)
-                                                .getPlayerResponse();
-                                        int answer = newGameboard.getCategory(category).getQuestion(question)
-                                                .getAnswer();
-
-                                        if (playerAnswer == answer) {
-                                            wrongOrRight = "right";
-                                        } else {
-                                            wrongOrRight = "wrong";
-                                        }
-
-                                        if (playerAnswer == answer && ranOutOfTime) {
-                                            stillLost = ", but you still lost money because you were slow!";
-                                        }
-
-                                        // This is a mess but it sets it's response to how you answered the last
-                                        // question
-                                        questionAnswerResponse = "You were " + wrongOrRight
-                                                + "! The correct answer was "
-                                                + newGameboard.getCategory(category).getQuestion(question)
-                                                        .getChoices()[newGameboard.getCategory(category)
-                                                                .getQuestion(question).getAnswer()]
-                                                + stillLost;
-
-                                    } else { // Player has won the game by making it to the end
-                                        prompter.clearScreen();
-                                        prompter.winSplash();
-                                        playGame = false;
+                                    } else {
+                                        System.out.println("Yo, that was invalid! Get it together man!");
                                     }
                                 }
+                                // bank adds/deduct prize money
+                                bank.updatePrizeMoney(newGameboard.askQuestion(category, question));
+
+                                String stillLost = "!";
+                                String wrongOrRight = "";
+                                boolean ranOutOfTime = newGameboard.getCategory(category).getQuestion(question)
+                                        .getTimeRanOut();
+                                int playerAnswer = newGameboard.getCategory(category).getQuestion(question)
+                                        .getPlayerResponse();
+                                int answer = newGameboard.getCategory(category).getQuestion(question).getAnswer();
+
+                                if (playerAnswer == answer) {
+                                    wrongOrRight = "right";
+                                } else {
+                                    wrongOrRight = "wrong";
+                                }
+
+                                if (playerAnswer == answer && ranOutOfTime) {
+                                    stillLost = ", but you still lost money because you were slow!";
+                                }
+
+                                // This is a mess but it sets it's response to how you answered the last
+                                // question
+                                questionAnswerResponse = "You were " + wrongOrRight + "! The correct answer was "
+                                        + newGameboard.getCategory(category).getQuestion(question)
+                                                .getChoices()[newGameboard.getCategory(category).getQuestion(question)
+                                                        .getAnswer()]
+                                        + stillLost;
+
                             }
                         } else {
                             readThis.nextLine();
-                            System.out.print("Invalid input, please enter the integer corresponding to the previous prompt: ");
+                            System.out.print(
+                                    "Invalid input, please enter the integer corresponding to the previous prompt: ");
                         }
                     }
                 } else {

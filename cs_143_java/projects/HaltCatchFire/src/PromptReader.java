@@ -30,7 +30,7 @@ public class PromptReader {
         System.out.println("(2) $300");
         System.out.println("(3) $400");
         System.out.println("(4) $500");
-        System.out.print("Select a Question: ");
+        System.out.print("\nSelect a Question: ");
     }
 
     public void instructPlayer() {
