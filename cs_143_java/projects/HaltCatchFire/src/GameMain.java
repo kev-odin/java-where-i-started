@@ -18,7 +18,7 @@ public class GameMain {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
         // Instantiate player bank account: Starting: $0 || Round 1: $900 || Round 2: $1400;
-        BankAccount bank = new BankAccount(0, 900, 1400);
+        BankAccount bank = new BankAccount(0, 500, 1500);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
@@ -78,7 +78,7 @@ public class GameMain {
 										
 										readThis.nextLine();
 										
-										System.out.println();
+										// System.out.println();
 										// Print out category options
 										for (int i = 0; i < GameBoard.getSize(); i++) {
 											System.out.println("(" + i + ") " + newGameboard.getCategory(i).getCategory());
@@ -161,7 +161,7 @@ public class GameMain {
 										
 										readThis.nextLine();
 										
-										System.out.println();
+										// System.out.println();
 										// Print out category options
 										for (int i = 0; i < GameBoard.getSize(); i++) {
 											System.out.println("(" + i + ") " + newGameboard.getCategory(i).getCategory());
