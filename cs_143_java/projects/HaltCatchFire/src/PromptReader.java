@@ -23,6 +23,16 @@ public class PromptReader {
         playPrompt();
     }
 
+    public void questionSelectOptions() {
+        System.out.println();
+        System.out.println("(0) $100");
+        System.out.println("(1) $200");
+        System.out.println("(2) $300");
+        System.out.println("(3) $400");
+        System.out.println("(4) $500");
+        System.out.print("Select a Question: ");
+    }
+
     public void instructPlayer() {
         instructSplash();
         gameOverview();
@@ -105,8 +115,8 @@ public class PromptReader {
     private void gameOverview() {
         String gameOverview = "\n";
         gameOverview += "\tGame Overview: \n";
-        gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to the next rounds.\n";
-        gameOverview += "\tThere are 3 rounds to play and each round will require an increasing amount of money to advance.\n";
+        gameOverview += "\tThe objective of this trivia game is to earn enough money to advance to subsequent rounds.\n";
+        gameOverview += "\tThere are 2 rounds to play and each round will require an increasing amount of money to advance.\n";
         gameOverview += "\tEarned money will be recorded with the player's bank account.\n";
         gameOverview += "\tAfter the amount is met, the round will end and the next round begins.\n";
         gameOverview += "\tIf the player does not reach the required amount to advance, then the player loses and the game ends.";
@@ -118,7 +128,7 @@ public class PromptReader {
         triviaRules += "\tTrivia Selection: \n";
         triviaRules += "\tEach question is separated by the category and prize money amount. \n";
         triviaRules += "\tDifficult questions are worth more money. Questions are based on 5th grade subjects and interests.\n";
-        triviaRules += "\tTo select a question, enter the category selection, followed by the 'Enter' key \n";
+        triviaRules += "\tTo select a question, follow the screen prompt and press the 'Enter' key. \n";
         triviaRules += "\tAfter a question is selected, the player will have 10 seconds to answer the question.";
         System.out.println(triviaRules);
     }
