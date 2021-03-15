@@ -23,6 +23,7 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
+        GameSound.startMidi("love.mid");
 
         Scanner readThis = new Scanner(System.in);
         int player;

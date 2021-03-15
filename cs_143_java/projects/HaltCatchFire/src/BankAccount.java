@@ -57,8 +57,6 @@ public boolean lowMoney(){
         return true;
 }
 
-
-
     public int getRoundTwo() {
         return roundTwo;
     }
