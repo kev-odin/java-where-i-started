@@ -17,16 +17,14 @@ public class GameMain {
     public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
-        // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2:
-        // $1500;
+        // Instantiate player bank account: Starting: $0 || Round 1: $100 || Round 2:
+        // $300;
         BankAccount bank = new BankAccount(0, 100, 300);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
-        GameSound sound = new GameSound();
-
-        System.out.println(game);
+        //GameSound.startMidi("love.mid");
 
         Scanner readThis = new Scanner(System.in);
         int player;
@@ -59,7 +57,6 @@ public class GameMain {
                         } else if (player == 2) {
                             prompter.exitGame();
                             program = false;
-                            
                         } else if (player == 1) {
                             round = 1;
                             playGame = true;
@@ -131,7 +128,7 @@ public class GameMain {
                                             System.out.println("Yo, that was invalid! Get it together man!\n");
                                         }
                                     } else {
-                                        System.out.println("Yo, that was invalid! Get it together man!\n");
+                                        System.out.println("Yo, that was invalid! Get it together man!");
                                     }
                                 }
                                 // bank adds/deduct prize money
@@ -164,7 +161,6 @@ public class GameMain {
                                         + stillLost;
 
                             }
-
                         } else {
                             readThis.nextLine();
                             System.out.print(
