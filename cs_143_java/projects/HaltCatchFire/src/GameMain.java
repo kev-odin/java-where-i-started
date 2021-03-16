@@ -19,11 +19,14 @@ public class GameMain {
         textFile = new File("trivia.csv");
         // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2:
         // $1500;
-        BankAccount bank = new BankAccount(0, 1000, 1500);
+        BankAccount bank = new BankAccount(0, 100, 300);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
+        GameSound sound = new GameSound();
+
+        System.out.println(game);
 
         Scanner readThis = new Scanner(System.in);
         int player;
@@ -42,7 +45,6 @@ public class GameMain {
                     readThis.nextLine();
                     System.out.print("Invalid input, please enter a whole number of either 1 or 2: ");
                 } else if (player == 2) {
-                    GameSound.midiPlayer.close();
                     prompter.exitGame();
                     program = false;
                 } else if (player == 1) {
@@ -55,12 +57,10 @@ public class GameMain {
                             readThis.nextLine();
                             System.out.print("Invalid input, please enter a whole number of either 1 or 2: ");
                         } else if (player == 2) {
-                            GameSound.midiPlayer.close();
                             prompter.exitGame();
                             program = false;
                             
                         } else if (player == 1) {
-                            GameSound.loopMusic("gametrack.mid");
                             round = 1;
                             playGame = true;
                             program = false;
@@ -78,7 +78,6 @@ public class GameMain {
                                     round = 2;
                                 } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
                                     // Player has won the game by making it to the end
-                                    GameSound.midiPlayer.close();
                                     prompter.clearScreen();
                                     prompter.winSplash();
                                     playGame = false;
@@ -132,7 +131,7 @@ public class GameMain {
                                             System.out.println("Yo, that was invalid! Get it together man!\n");
                                         }
                                     } else {
-                                        System.out.println("Yo, that was invalid! Get it together man!");
+                                        System.out.println("Yo, that was invalid! Get it together man!\n");
                                     }
                                 }
                                 // bank adds/deduct prize money
@@ -148,10 +147,8 @@ public class GameMain {
 
                                 if (playerAnswer == answer) {
                                     wrongOrRight = "right";
-                                    GameSound.playOnce("correct.mid");
                                 } else {
                                     wrongOrRight = "wrong";
-                                    GameSound.playOnce("incorrect.mid");
                                 }
 
                                 if (playerAnswer == answer && ranOutOfTime) {
@@ -167,6 +164,7 @@ public class GameMain {
                                         + stillLost;
 
                             }
+
                         } else {
                             readThis.nextLine();
                             System.out.print(
