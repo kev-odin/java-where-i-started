@@ -10,10 +10,6 @@ import javax.sound.midi.*;
 
 public class GameSound {
     public static Sequencer midiPlayer;
-
-    public GameSound() {
-
-    }
     
     public static void loopMusic(String midFilename) {
         try {

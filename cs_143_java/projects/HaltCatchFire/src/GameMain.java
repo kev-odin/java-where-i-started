@@ -17,14 +17,13 @@ public class GameMain {
     public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
-        // Instantiate player bank account: Starting: $0 || Round 1: $100 || Round 2:
-        // $300;
-        BankAccount bank = new BankAccount(0, 100, 300);
+        // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2: $6000;
+        BankAccount bank = new BankAccount(0, 100, 600);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
-        //GameSound.startMidi("love.mid");
+        GameSound.loopMusic("gametrack.mid"); // Comment out line 26 and line xxx to cancel music
 
         Scanner readThis = new Scanner(System.in);
         int player;
@@ -173,6 +172,7 @@ public class GameMain {
                 }
             }
         }
+        GameSound.midiPlayer.close();
         readThis.close();
     }
 

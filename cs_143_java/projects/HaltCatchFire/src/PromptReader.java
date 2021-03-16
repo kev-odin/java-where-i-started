@@ -98,8 +98,8 @@ public class PromptReader {
 
     public void gameInfo(int playerMoney, int roundInfo) {
         String headsUpDisplay = "\n";
-        headsUpDisplay += "Player Money: " + playerMoney + "\t\t";
-        headsUpDisplay += "Amount needed to advance: " + (roundInfo - playerMoney) + "\n";
+        headsUpDisplay += "Player Money: $" + playerMoney + "\t\t";
+        headsUpDisplay += "Amount needed to advance: $" + (roundInfo - playerMoney) + "\n";
 
         System.out.println (headsUpDisplay);
     }
@@ -140,7 +140,7 @@ public class PromptReader {
         bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n";
         bankRules += "\tNegative values are permitted.\n";
         bankRules += "\t\tRound 1: $1000\n";
-        bankRules += "\t\tRound 2: $10000";
+        bankRules += "\t\tRound 2: $5000";
         System.out.println(bankRules);
     }
 
