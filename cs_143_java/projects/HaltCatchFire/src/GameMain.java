@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class GameMain {
     private static File textFile;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
         // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2:
@@ -148,6 +148,7 @@ public class GameMain {
 
                                 if (playerAnswer == answer) {
                                     wrongOrRight = "right";
+                                    GameSound.playOnce("correct.mid");
                                 } else {
                                     wrongOrRight = "wrong";
                                     GameSound.playOnce("incorrect.mid");
