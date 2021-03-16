@@ -9,9 +9,13 @@ import java.io.*;
 import javax.sound.midi.*;
 
 public class GameSound {
-    private static Sequencer midiPlayer;
+    public static Sequencer midiPlayer;
+
+    public GameSound() {
+
+    }
     
-    public static void startMidi(String midFilename) {
+    public static void loopMusic(String midFilename) {
         try {
             File midiFile = new File(midFilename);
             Sequence song = MidiSystem.getSequence(midiFile);
@@ -19,6 +23,24 @@ public class GameSound {
             midiPlayer.open();
             midiPlayer.setSequence(song);
             midiPlayer.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
+            midiPlayer.start();
+        } catch (MidiUnavailableException e) {
+            e.printStackTrace();
+        } catch (InvalidMidiDataException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playOnce(String midFilename) {
+        try {
+            File midiFile = new File(midFilename);
+            Sequence song = MidiSystem.getSequence(midiFile);
+            midiPlayer = MidiSystem.getSequencer();
+            midiPlayer.open();
+            midiPlayer.setSequence(song);
+            midiPlayer.setLoopCount(0);
             midiPlayer.start();
         } catch (MidiUnavailableException e) {
             e.printStackTrace();

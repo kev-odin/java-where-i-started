@@ -1,3 +1,4 @@
+
 // Name: Kevin Chung (CS143 - Winter 2021)
 import java.util.HashMap;
 import java.util.HashSet;
@@ -54,7 +55,7 @@ public class WeatherData {
 	Map<Integer, Double> monthPrecipAverage = new HashMap<>();
 
 	// Method 5 lowestMostCommonHighForMonth collection
-	Map<Integer, Map<Integer,Integer>> monthCount = new HashMap<>();
+	Map<Integer, Map<Integer, Integer>> monthCount = new HashMap<>();
 	Map<Integer, Integer> modeMap = new HashMap<>();
 
 	// Method 6 highestHighForLow collection
@@ -75,14 +76,15 @@ public class WeatherData {
 				highTempSet.add(highTemp);
 				lowTempSet.add(lowTemp);
 
-				/* Capturing the temperature frequency per month
-				Step 1: Check if monthCount has a month key
-				Step 2: If not, add month to monthCount and create empty tempFreq map
-				Step 2A: Update tempFreq with current highTemp and add 1 to frequency
-				Step 3: If month count contains the month key, get the current count for highTemp OR default count is 0
-				Step 4: Update monthCount map, with existing month, new/existing temperature with count + 1
-				*/
-				Map<Integer, Integer> tempFreq = new TreeMap<>(); //Inner map for monthCount
+				/*
+				 * Capturing the temperature frequency per month Step 1: Check if monthCount has
+				 * a month key Step 2: If not, add month to monthCount and create empty tempFreq
+				 * map Step 2A: Update tempFreq with current highTemp and add 1 to frequency
+				 * Step 3: If month count contains the month key, get the current count for
+				 * highTemp OR default count is 0 Step 4: Update monthCount map, with existing
+				 * month, new/existing temperature with count + 1
+				 */
+				Map<Integer, Integer> tempFreq = new TreeMap<>(); // Inner map for monthCount
 				if (monthCount.containsKey(month)) {
 					int count = monthCount.get(month).getOrDefault(highTemp, 0);
 					monthCount.get(month).put(highTemp, count + 1);
@@ -91,21 +93,21 @@ public class WeatherData {
 					monthCount.put(month, tempFreq);
 				}
 
-				/* Processing the mode highest temperature for each month
-				Step 1: If modeMap does not have a month key, add month and highTemp
-				Step 2: If highCount > modeCount, add to modeMap
-				Step 3:	If highCount == modeCount, choose the lower temperature
-				Step 4: Hope this works!
-				*/
+				/*
+				 * Processing the mode highest temperature for each month Step 1: If modeMap
+				 * does not have a month key, add month and highTemp Step 2: If highCount >
+				 * modeCount, add to modeMap Step 3: If highCount == modeCount, choose the lower
+				 * temperature Step 4: Hope this works!
+				 */
 
 				if (!modeMap.containsKey(month)) {
-					modeMap.put(month, highTemp); 
+					modeMap.put(month, highTemp);
 				} else {
 					int modeTemp = modeMap.get(month);
 					int modeCount = monthCount.get(month).get(modeTemp);
 					int highCount = monthCount.get(month).get(highTemp);
 
-					if (highCount > modeCount) { 
+					if (highCount > modeCount) {
 						modeMap.put(month, highTemp);
 					} else if (highCount == modeCount) {
 						if (highTemp > modeTemp) {
@@ -115,14 +117,15 @@ public class WeatherData {
 						}
 					}
 				}
-		
-				/* Capturing the highest low temperature seen for each month
-				Step 1: Assign low temperature as key
-				Step 2: Check if the low temperature is already a key, if so compare high temperature values
-				Step 2A: If the highTemp is greater, then update value
-				Step 2B: If the highTemp is less than, get previous value
-				Step 3: If no low temperature is found as a key, assign low temperature as key, put in map
-				*/
+
+				/*
+				 * Capturing the highest low temperature seen for each month Step 1: Assign low
+				 * temperature as key Step 2: Check if the low temperature is already a key, if
+				 * so compare high temperature values Step 2A: If the highTemp is greater, then
+				 * update value Step 2B: If the highTemp is less than, get previous value Step
+				 * 3: If no low temperature is found as a key, assign low temperature as key,
+				 * put in map
+				 */
 
 				if (highestHighLow.containsKey(lowTemp)) {
 					if (highTemp > highestHighLow.get(lowTemp)) {
@@ -251,8 +254,8 @@ public class WeatherData {
 	}
 
 	/**
-	 * For the given low temperature, monthTempCountfind the highest high temperature seen with
-	 * that low. (20 points)
+	 * For the given low temperature, monthTempCountfind the highest high
+	 * temperature seen with that low. (20 points)
 	 * 
 	 * @param degrees Low temperature
 	 * @return Highest high ever seen for that low temperature
