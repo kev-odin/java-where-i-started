@@ -65,7 +65,17 @@ public class GameMain {
                             while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
 
                                 // Game round conditions, check bank money, round information
-                                if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
+                                if (bank.getMoney() < 0 || newGameboard.allQuestionsAsked()) {
+                                    prompter.clearScreen();
+                                    if (bank.getMoney() < 0) {
+                                        System.out.println("You went negative and lost." );
+                                    } else if (newGameboard.allQuestionsAsked()) {
+                                        System.out.println("Not enough questions were available to advance.");
+                                    }
+                                    prompter.gameOverSplash();
+                                    playGame = false;
+                                    break;
+                                }else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
                                     roundMoney = bank.getRoundOne();
                                 } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
                                     // Second round, new GameBoard questions
@@ -75,6 +85,7 @@ public class GameMain {
                                 } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
                                     // Player has won the game by making it to the end
                                     prompter.clearScreen();
+                                    System.out.println("Amount won: $" + bank.getMoney());
                                     prompter.winSplash();
                                     playGame = false;
                                     break;

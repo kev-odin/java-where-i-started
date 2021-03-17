@@ -59,11 +59,11 @@ public class PromptReader {
 
     public void gameOverSplash() {
         String gameOver = "\n";
-        gameOver += "##                  #              ";
-        gameOver += "#    ## ### ###     # # # # ### ### ";
-        gameOver += "# # # # ### ##      # # # # ##  #   ";
-        gameOver += "# # ### # # ###     # #  #  ### #   ";
-        gameOver += "##                  #              ";
+        gameOver += " ##                  #              \n";
+        gameOver += "#    ## ### ###     # # # # ### ### \n";
+        gameOver += "# # # # ### ##      # # # # ##  #   \n";
+        gameOver += "# # ### # # ###     # #  #  ### #   \n";
+        gameOver += " ##                  #              \n";
         // gameOver += "░█▀▀░█▀█░█▄█░█▀▀░░░█▀█░█░█░█▀▀░█▀▄\n";
         // gameOver += "░█░█░█▀█░█░█░█▀▀░░░█░█░▀▄▀░█▀▀░█▀▄\n";
         // gameOver += "░▀▀▀░▀░▀░▀░▀░▀▀▀░░░▀▀▀░░▀░░▀▀▀░▀░▀\n";
