@@ -23,7 +23,7 @@ public class GameMain {
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
-        GameSound.loopMusic("gametrack.mid"); // Comment out line 26 and line 190 to cancel music
+        GameSound.loopMusic("gametrack.mid"); // Comment out line 26 and line 191 to cancel music
 
         Scanner readThis = new Scanner(System.in);
         int player;
@@ -187,7 +187,7 @@ public class GameMain {
                 }
             }
         }
-        // Comment out line 26 and line 190 to cancel music
+        // Comment out line 26 and line 191 to cancel music
         GameSound.midiPlayer.close(); 
         readThis.close();
     }
