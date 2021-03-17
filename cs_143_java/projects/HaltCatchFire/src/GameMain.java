@@ -17,13 +17,13 @@ public class GameMain {
     public static void main(String[] args) {
         // May need to change the path to the "trivia.csv"; check your own computer.
         textFile = new File("trivia.csv");
-        // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2: $6000;
-        BankAccount bank = new BankAccount(0, 100, 600);
+        // Instantiate player bank account: Starting: $0 || Round 1: $1000 || Round 2: $3000 || Losing: -$1200
+        BankAccount bank = new BankAccount(0, 1000, 4000, -1200);
         QuestionList game = new QuestionList(textFile);
         PromptReader prompter = new PromptReader();
         GameBoardConstructor gc = new GameBoardConstructor(2, game);
         GameBoard newGameboard = gc.getGameBoard(0);
-        GameSound.loopMusic("gametrack.mid"); // Comment out line 26 and line 175 to cancel music
+        GameSound.loopMusic("gametrack.mid"); // Comment out line 26 and line 190 to cancel music
 
         Scanner readThis = new Scanner(System.in);
         int player;
@@ -65,18 +65,22 @@ public class GameMain {
                             while (playGame && !newGameboard.allQuestionsAsked()) { // Actual game code!
 
                                 // Game round conditions, check bank money, round information
-                                if (bank.getMoney() < 0 || newGameboard.allQuestionsAsked()) {
+                                if (newGameboard.allQuestionsAsked() || bank.getMoney() <= bank.getLowCeil()) {
                                     prompter.clearScreen();
-                                    if (bank.getMoney() < 0) {
-                                        System.out.println("You went negative and lost." );
-                                    } else if (newGameboard.allQuestionsAsked()) {
-                                        System.out.println("Not enough questions were available to advance.");
+                                    if (newGameboard.allQuestionsAsked()) {
+                                        System.out.println("No more questions are availiable. You lose.");
+                                    } else {
+                                        System.out.println("Losing amount: $" + bank.getMoney());
+                                        System.out.println("Your money is too low to continue.");
+                                        System.out.println("Better luck next time.");
                                     }
                                     prompter.gameOverSplash();
                                     playGame = false;
                                     break;
-                                }else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
+
+                                } else if (!bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
                                     roundMoney = bank.getRoundOne();
+
                                 } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundOne()) && round == 1) {
                                     // Second round, new GameBoard questions
                                     newGameboard = gc.getGameBoard(1);
@@ -85,7 +89,7 @@ public class GameMain {
                                 } else if (bank.enoughMoney(bank.getMoney(), bank.getRoundTwo())) {
                                     // Player has won the game by making it to the end
                                     prompter.clearScreen();
-                                    System.out.println("Amount won: $" + bank.getMoney());
+                                    System.out.println("Winning amount: $" + bank.getMoney());
                                     prompter.winSplash();
                                     playGame = false;
                                     break;
@@ -138,7 +142,7 @@ public class GameMain {
                                             System.out.println("Yo, that was invalid! Get it together man!\n");
                                         }
                                     } else {
-                                        System.out.println("Yo, that was invalid! Get it together man!");
+                                        System.out.println("Yo, that was invalid! Get it together man!\n");
                                     }
                                 }
                                 // bank adds/deduct prize money
@@ -183,7 +187,8 @@ public class GameMain {
                 }
             }
         }
-        GameSound.midiPlayer.close();
+        // Comment out line 26 and line 190 to cancel music
+        GameSound.midiPlayer.close(); 
         readThis.close();
     }
 

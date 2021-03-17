@@ -1,8 +1,6 @@
 /**
  * This class is used to play the in game music. Files need to be a .mid
  * to work properly. .mid files need to be in the overall project folders.
- * 
- * Written by Kevin Chung for CS143 Group Project. Team Halt and Catch Fire.
  */
 
 import java.io.*;

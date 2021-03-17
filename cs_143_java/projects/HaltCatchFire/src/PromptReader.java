@@ -38,7 +38,7 @@ public class PromptReader {
         gameOverview();
         triviaRules();
         bankAccountRules();
-        powerUpRules();
+        //powerUpRules();
         playPrompt();
     }
 
@@ -138,9 +138,9 @@ public class PromptReader {
         bankRules += "\tBank Account: \n";
         bankRules += "\tCorrect responses to questions will add the prize amount to the player's bank account.\n";
         bankRules += "\tIncorrect responses to questions will deduct the prize amount from the player's bank account.\n";
-        bankRules += "\tNegative values are permitted.\n";
+        bankRules += "\tYou lose if you accrue -$1200 from multiple wrong answers.\n";
         bankRules += "\t\tRound 1: $1000\n";
-        bankRules += "\t\tRound 2: $5000";
+        bankRules += "\t\tRound 2: $3000";
         System.out.println(bankRules);
     }
 
