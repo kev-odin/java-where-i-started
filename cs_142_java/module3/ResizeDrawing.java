@@ -27,7 +27,7 @@ public class ResizeDrawing {
 				g.setBackground(Color.WHITE);
 				g.setColor(Color.BLACK);
 
-				draw(g, width, height);
+				//draw(g, width, height);
 			}
 		};
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
