@@ -19,6 +19,29 @@ def pi_term(x):
 def pi_sum(n):
     return summation(n, pi_term)
 
-print(sum_naturals(10))
-print(summation(10, square))
-print(pi_sum(1e6))
+for x in range(0, 10):
+    if x % 2 == 0:
+        print(x)
+    else:
+        print("haha")
+
+class Iterable(object):
+
+    def __init__(self, values):
+        self.values = values
+        self.location = 0
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.location == len(self.values):
+            raise StopIteration
+        value = self.values[self.location]
+        self.location += 1
+        return value
+
+def main():
+    print("Hello World")
+
+main()
